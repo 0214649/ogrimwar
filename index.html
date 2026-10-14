@@ -29,15 +29,16 @@
   </aside>
   <main id="main" class="main" tabindex="-1">
     <section id="achView" class="achview" hidden></section>
-    <section id="ctx" class="ctx" hidden></section>
+    <header id="stepHead" class="stephead"></header>
     <section id="achPanel" class="achpanel" hidden></section>
+    <section id="ctx" class="ctx" hidden></section>
     <article id="card" class="card"><p class="loading">Chargement…</p></article>
     <section id="links" class="links" hidden></section>
   </main>
 </div>
 <nav class="pager" aria-label="Navigation">
   <button class="btn" id="prev">← Précédent</button>
-  <span class="pos num" id="pos"></span>
+  <span class="pos"><span class="num" id="pos"></span><br><span class="keys"><kbd>A</kbd> précédent · <kbd>D</kbd> suivant</span></span>
   <button class="btn primary" id="next">Suivant →</button>
 </nav>
 <dialog id="saveDlg">

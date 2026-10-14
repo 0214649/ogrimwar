@@ -26,7 +26,8 @@ parentcats = W('Achievements')['parentCategories']
 ills = {}
 for n in ('Quests_ILLs', 'Dungeons_ILLs', 'Monsters_ILLs'):
     ills[n.split('_')[0]] = W(n)['ills']
-fr2en = {k: {norm(v.get('fr', '')): en for en, v in t.items() if isinstance(v, dict) and v.get('fr')} for k, t in ills.items()}
+fr2en = {k: {norm(v.get('fr', '')): en for en, v in sorted(t.items(), key=lambda kv: '(summon' in kv[0] or '(monster summon' in kv[0], reverse=True)
+             if isinstance(v, dict) and v.get('fr')} for k, t in ills.items()}
 en2fr = lambda kind, en: (ills[kind].get(en) or {}).get('fr') if isinstance(ills[kind].get(en), dict) else None
 # quest ILL keys sometimes carry a "(quest)" suffix
 for en in list(ills['Quests']):
@@ -66,6 +67,16 @@ for p, (key, h) in enumerate(items):
         qlast[en] = p
         if status == 'end': qend[en] = p
 qpos = {**qlast, **qend}
+plain = [' ' + norm(re.sub(r'<[^>]+>', ' ', h or '')) + ' ' for _, h in items]
+_text_memo = {}
+def text_pos(fr):
+    """First route item whose text names `fr` (whole words), or None."""
+    if not fr: return None
+    n = ' ' + norm(fr) + ' '
+    if len(n) < 7: return None                       # too short to be safe
+    if n not in _text_memo:
+        _text_memo[n] = next((p for p, t in enumerate(plain) if n in t), None)
+    return _text_memo[n]
 
 # ---------- boss -> dungeon, from the dungeon's own achievement ("Royal Gobball's Court": defeat Royal Gobball)
 crit = lambda v: [c for ob in (v.get('objectives') or []) if isinstance(ob, dict) for c in (ob.get('criteria') or []) if isinstance(c, dict)]
@@ -93,13 +104,15 @@ def boss_dungeon(b):
 def where(c, cond):
     """Route position for one criterion, or None."""
     t, v = c.get('type'), c.get('value')
-    if t == 'Quest': return qpos.get(v)
+    if t == 'Quest': return qpos[v] if v in qpos else text_pos(en2fr('Quests', v))
     if t in ('Defeat monster', 'Complete challenges against monster'):
         d = boss_dungeon(v)
-        return dpos[d] if d in dpos else mpos.get(v)
+        if d in dpos: return dpos[d]
+        return mpos[v] if v in mpos else text_pos(en2fr('Monsters', v))
     if t == 'Complete challenge':
         d = boss_dungeon(cond)
-        return dpos[d] if d in dpos else mpos.get(cond)
+        if d in dpos: return dpos[d]
+        return mpos[cond] if cond in mpos else text_pos(en2fr('Monsters', cond))
     return None
 
 memo = {}
@@ -137,6 +150,43 @@ def obj_label(c, cond):
     if t in ('Defeat monster', 'Complete challenges against monster'): return ('Vaincre ' if t == 'Defeat monster' else 'Challenge contre ') + (en2fr('Monsters', v) or v)
     return cond or str(v)
 
+# ---------- "from here on" suggestion for achievements with no exact step (zone monsters, exploration, ...)
+LEVEL_STEPS = [(1, 4), (40, 23), (60, 41), (100, 60), (120, 79), (150, 91), (180, 106), (200, 127)]   # GP0 equipment brackets
+ZONE_GUIDES = {
+    'Incarnam': 2, 'Astrub': 2, 'Amakna': 375, 'Kingdom of Amakna': 375, 'Bonta': 308, 'Brakmar': 308, 'Bonta and Brakmar': 308,
+    'Otomai': 183, 'Otomai Island': 183, 'Moon Island': 30, 'Wabbit Island': 24, 'Wabbit Islands': 24, 'Cawwot Island': 24,
+    'Cania': 305, 'Cania Plains': 305, 'Sidimote': 306, 'Sidimote Moors': 306, 'Koalak Mountain': 309, 'Ohwymi': 65,
+    'Frigost': 98, 'Frigost Island': 98, 'Pandala': 428, 'Pandala Island': 428, 'Sufokia': 310, 'Depths of Sufokia': 310,
+    'Sufokia Bay': 310, 'Archipelago of Valonia': 25, 'Evil Forest': 606, 'Srambad': 480, 'Xelorium': 434, 'Ecaflipus': 538,
+    'Enurado': 431, 'Eliocalypse': 1714, 'Atoll of the Possessed': 2044, "Destroyers' Nightmare": 2022, 'Nimaltopia': 354,
+    'Bwork and Goblin Camps': 28, 'Vigilantes': 430, 'Alignment': 516, 'Krosmoz': 374, 'Almanax': 484, 'Main Quests': 374,
+    'Towers of the Brotherhood of the Forgotten': 427, 'Divine Dimensions': 434, 'Dimensions': 434, "The Horsemen's Dimension": 2010,
+}
+SEASONAL = {'Kwismas Island', 'Al Howin', 'Fleaster Island', 'Vulkanian Archipelago', 'Archipelago of Vulkania', 'Trool Fair'}
+gp0_first = {}
+for p_, (key, _) in enumerate(items):
+    gp0_first.setdefault(int(key.split('/')[0]), p_)
+guide_first = {}
+for p_, (key, _) in enumerate(items):
+    parts = key.split('/')
+    if len(parts) == 3: guide_first.setdefault(int(parts[1]), p_)
+monsters = {}
+for f in ('Monsters_Stats_A-K', 'Monsters_Stats_L-Z'):
+    if os.path.exists(f'{HERE}/wiki/{f}.lua'): monsters.update(W(f)['monsters'])
+def level_pos(lvl):
+    step = max(s_ for l_, s_ in LEVEL_STEPS if l_ <= (lvl or 1))
+    return gp0_first.get(step)
+def suggest(name, v):
+    zones = {v.get('category')}
+    for c in crit(v):
+        if c.get('type') in ('Complete challenges against monster', 'Defeat monster'):
+            zones.update((monsters.get(c.get('value')) or {}).get('areas') or [])
+    if zones & SEASONAL: return None
+    zp = [guide_first[ZONE_GUIDES[z]] for z in zones if z in ZONE_GUIDES and ZONE_GUIDES[z] in guide_first]
+    lp = level_pos(v.get('level'))
+    cand = ([min(zp)] if zp else []) + ([lp] if lp is not None else [])
+    return max(cand) if cand else None
+
 out, keyof = [], lambda p: items[p][0] if p is not None else None
 stats = collections.Counter()
 for name, v in ach.items():
@@ -151,8 +201,10 @@ for name, v in ach.items():
         objs.append([obj_label(cs[0], ob.get('condition')), keyof(max(pos)) if all(p is not None for p in pos) else None])
     d = done_at(name)
     stats['placed' if d is not None else ('partial' if any(o[1] for o in objs) else 'outside')] += 1
-    out.append({'n': fr_name(name), 'en': name, 'cat': cat, 'top': tp, 'lvl': v.get('level'),
-                'd': html.unescape(v.get('description') or ''), 'done': keyof(d), 'o': objs,
+    sug = keyof(suggest(name, v)) if d is None and (tp not in ('Events',) and cat not in SEASONAL) else None
+    if sug: stats['suggested'] += 1
+    out.append({'sug': sug, 'seasonal': cat in SEASONAL or tp == 'Events', 'n': fr_name(name), 'en': name, 'cat': cat, 'top': tp, 'lvl': v.get('level'),
+                'd': re.sub(r'\[challenge,\d+\] ?', '', html.unescape(v.get('description') or '')), 'done': keyof(d), 'o': objs,
                 'duo': name.endswith('(Duo)'), 'solo': name.endswith('(Solitary)') or name.endswith('(Lone Wolf)')})
 json.dump({'built': '2026-10-15', 'source': 'DofusWiki (dofuswiki.fandom.com), CC-BY-SA', 'ach': out},
           open(f'{ROOT}/ach.json', 'w'), ensure_ascii=False, separators=(',', ':'))

@@ -121,7 +121,7 @@ function renderSide() {
   const cur = items[idx].i;
   $('stepList').innerHTML = gp0.steps.map((_, i) => {
     const b = isBonus(i);
-    const n = (doneByStep.get(i) || []).length;
+    const n = (doneByStep.get(i) || []).length + (sugByStep.get(i) || []).length;
     return `<li data-step="${i}" class="${i < cur ? 'past' : ''}${i === cur ? ' cur' : ''}${b ? ' bonus' : ''}"${b && S.skipBonus ? ' hidden' : ''}><span class="num">${i + 1}</span><span>${esc(stepTitle(i))}</span>${n ? `<span class="ac">${n} succès</span>` : ''}</li>`;
   }).join('');
   $('stepList').querySelector('.cur')?.scrollIntoView({ block: 'nearest' });
@@ -148,8 +148,8 @@ async function render() {
     ctx.hidden = true;
     $('crumb').textContent = `Guide principal · étape ${it.i + 1}`;
     const segs = (R.steps[it.i] || []);
-    card.innerHTML = `<div class="head"><span class="lbl">Guide principal · étape ${it.i + 1}</span><h2>${esc(stepTitle(it.i))}</h2></div>
-      <div class="gc">${enrich(gp0.steps[it.i].web_text, `${GP0}:${it.i}`)}</div>`;
+    $('stepHead').innerHTML = `<div class="head"><span class="eyebrow">Guide principal · étape ${it.i + 1} sur ${gp0.steps.length}</span><h2>${esc(stepTitle(it.i))}</h2></div>${summary(it)}`;
+    card.innerHTML = `<div class="gc">${enrich(gp0.steps[it.i].web_text, `${GP0}:${it.i}`)}</div>`;
     links.hidden = !segs.length;
     links.innerHTML = segs.length ? `<span class="lbl">Dans cette étape</span>` + segs.map(([g, a, b]) => {
       const first = items.find(x => x.i === it.i && x.g === g);
@@ -161,21 +161,38 @@ async function render() {
     ctx.hidden = false;
     ctx.innerHTML = `<details><summary><span class="lbl">Consigne du guide principal</span><span>Étape ${it.i + 1} · ${esc(stepTitle(it.i))}</span></summary><div class="body gc">${enrich(gp0.steps[it.i].web_text, `${GP0}:${it.i}`)}</div></details>`;
     card.innerHTML = `<p class="loading">Chargement de ${esc(name)}…</p>`;
+    $('stepHead').innerHTML = `<div class="head"><span class="eyebrow">${esc(name)} · étape ${it.k + 1}</span><h2>${esc(stepTitle(it.i))}</h2></div>`;
     let g;
     try { g = await guide(it.g); } catch (e) { card.innerHTML = `<p class="empty">Impossible de charger ${esc(name)} : ${esc(e.message)}. Réessaie dans un instant.</p>`; return; }
     if (items[idx] !== it) return;               // user moved on while loading
     const st = g.steps[it.k];
     const { n, of, seg } = segInfo(it);
     if (!st) { it.gone = true; step(lastDir); return; }     // guide got shorter since route.json was built
-    const where = st.map ? `<div class="where"><span class="map">${esc(st.map)}</span><button type="button" class="travel" data-travel="${st.pos_x},${st.pos_y}" title="Copier /travel ${st.pos_x},${st.pos_y}">[${st.pos_x},${st.pos_y}]</button></div>` : '';
-    card.innerHTML = `<div class="head"><span class="lbl">${esc(name)} · étape ${it.k + 1}/${g.steps.length}</span>${st.name ? `<h2>${esc(st.name)}</h2>` : ''}</div>
-      ${where}<div class="gc">${enrich(st.web_text, `${it.g}:${it.k}`)}</div>`;
+    $('stepHead').innerHTML = `<div class="head"><span class="eyebrow">${esc(name)} · étape ${it.k + 1} sur ${g.steps.length}</span><h2>${esc(st.name || stepTitle(it.i))}</h2></div>${summary(it, st)}`;
+    card.innerHTML = `<div class="gc">${enrich(st.web_text, `${it.g}:${it.k}`)}</div>`;
     links.hidden = false;
     links.innerHTML = `<span class="lbl">Plage du GP0</span><span class="num">ét. ${seg ? seg[1] + 1 : '?'}→${seg ? seg[2] : '?'} · ${n}/${of}</span>`;
   }
   // warm the next guide so the next click is instant
   const nx = items.slice(idx + 1).find(x => x.g !== undefined && x.g !== it.g);
   if (nx) setTimeout(() => guide(nx.g).catch(() => {}), 800);
+}
+function summary(it, st) {
+  const pills = [];
+  if (st && st.map) pills.push(`<button type="button" class="pill where travel" data-travel="${st.pos_x},${st.pos_y}" title="Copier /travel ${st.pos_x},${st.pos_y}">${esc(st.map)} [${st.pos_x},${st.pos_y}] · copier /travel</button>`);
+  if (it.g === undefined) {
+    const d = (doneByStep.get(it.i) || []).length, g = (sugByStep.get(it.i) || []).length;
+    if (d) pills.push(`<span class="pill done"><b>${d}</b> succès terminés dans cette étape</span>`);
+    if (g) pills.push(`<span class="pill sug"><b>${g}</b> faisables à partir d'ici</span>`);
+  } else {
+    const d = (doneIn.get(idx) || []).length;
+    const p = new Set((touch.get(idx) || []).map(([ai]) => ai).filter(ai => ACH[ai].di !== idx && ACH[ai].o.length > 1)).size;
+    const g = (sugIn.get(idx) || []).length;
+    if (d) pills.push(`<span class="pill done"><b>${d}</b> succès terminé${d > 1 ? 's' : ''} ici</span>`);
+    if (p) pills.push(`<span class="pill prog"><b>${p}</b> avance${p > 1 ? 'nt' : ''}</span>`);
+    if (g) pills.push(`<span class="pill sug"><b>${g}</b> faisable${g > 1 ? 's' : ''} dès maintenant</span>`);
+  }
+  return pills.length ? `<div class="summary">${pills.join('')}</div>` : '';
 }
 function go(to) {
   if (to < 0 || to >= items.length) return;
@@ -184,7 +201,7 @@ function go(to) {
 const step = d => { lastDir = d; let j = idx + d; while (items[j] && !visible(items[j])) j += d; if (items[j]) go(j); };
 
 // ---------- achievements (DofusWiki, placed on the route by tools/build_ach.py) ----------
-let ACH = [], posOf = new Map(), touch = new Map(), doneIn = new Map(), doneByStep = new Map();
+let ACH = [], posOf = new Map(), touch = new Map(), doneIn = new Map(), doneByStep = new Map(), sugIn = new Map(), sugByStep = new Map();
 const TOP_FR = { Dungeons: 'Donjons', Quests: 'Quêtes', Monsters: 'Monstres', 'Temporal Anomalies': 'Anomalies temporelles', Events: 'Événements',
   Exploration: 'Exploration', Sidekicks: 'Compagnons', Breeding: 'Élevage', 'Infinite Dreams': 'Songes infinis', Guilds: 'Guilde', Professions: 'Métiers', General: 'Général' };
 const catFr = c => c.replace(/^Levels (\d+) - (\d+)$/, 'Niveaux $1 à $2');
@@ -196,6 +213,11 @@ function indexAch(data) {
     a.di = a.done != null && posOf.has(a.done) ? posOf.get(a.done) : -1;
     a.oi = a.o.map(([, k]) => (k != null && posOf.has(k) ? posOf.get(k) : -1));
     a.oi.forEach((p, oj) => { if (p >= 0) (touch.get(p) || touch.set(p, []).get(p)).push([ai, oj]); });
+    a.si = a.di < 0 && a.sug != null && posOf.has(a.sug) ? posOf.get(a.sug) : -1;
+    if (a.si >= 0) {
+      (sugIn.get(a.si) || sugIn.set(a.si, []).get(a.si)).push(ai);
+      const s = gp0Of(a.sug); (sugByStep.get(s) || sugByStep.set(s, []).get(s)).push(ai);
+    }
     if (a.di >= 0) {
       (doneIn.get(a.di) || doneIn.set(a.di, []).get(a.di)).push(ai);
       const s = gp0Of(a.done); (doneByStep.get(s) || doneByStep.set(s, []).get(s)).push(ai);
@@ -227,16 +249,20 @@ function renderAchPanel(it) {
   if (!ACH.length) { panel.hidden = true; return; }
   let h = '';
   if (it.g === undefined) {
-    const xs = doneByStep.get(it.i) || [];
-    if (xs.length) {
-      const open = ui.more === it.key;
-      h += `<div class="agroup done"><span class="lbl">Cette étape termine ${xs.length} succès</span><ul class="al">${(open ? xs : xs.slice(0, 8)).map(ai => achLi(ai)).join('')}</ul>${xs.length > 8 && !open ? `<button class="more" data-more="${it.key}">Voir les ${xs.length}</button>` : ''}</div>`;
-    }
+    const xs = doneByStep.get(it.i) || [], ss = sugByStep.get(it.i) || [];
+    const block = (arr, cls, label, tag) => {
+      const open = ui.more === it.key + tag;
+      return `<div class="agroup ${cls}"><span class="lbl">${label}</span><ul class="al">${(open ? arr : arr.slice(0, 8)).map(ai => achLi(ai)).join('')}</ul>${arr.length > 8 && !open ? `<button class="more" data-more="${it.key + tag}">Voir les ${arr.length}</button>` : ''}</div>`;
+    };
+    if (xs.length) h += block(xs, 'done', `Cette étape termine ${xs.length} succès`, 'd');
+    if (ss.length) h += block(ss, 'sug', `${ss.length} succès faisables à partir de cette étape (zone et niveau)`, 's');
   } else {
     const done = doneIn.get(idx) || [];
     const prog = (touch.get(idx) || []).map(([ai]) => ai).filter((ai, n, arr) => arr.indexOf(ai) === n && ACH[ai].di !== idx && !(ACH[ai].o.length === 1));
     if (done.length) h += `<div class="agroup done"><span class="lbl">Succès terminé${done.length > 1 ? 's' : ''} ici</span><ul class="al">${done.map(ai => achLi(ai, idx)).join('')}</ul></div>`;
     if (prog.length) h += `<div class="agroup prog"><span class="lbl">Avance, à finir plus tard</span><ul class="al">${prog.map(ai => achLi(ai, idx)).join('')}</ul></div>`;
+    const sug = sugIn.get(idx) || [];
+    if (sug.length) h += `<div class="agroup sug"><span class="lbl">Faisable à partir d'ici : zone et niveau atteints</span><ul class="al">${sug.map(ai => achLi(ai)).join('')}</ul></div>`;
   }
   panel.innerHTML = h; panel.hidden = !h;
 }
@@ -250,11 +276,11 @@ function renderAchView() {
     if (ui.outOnly && a.di >= 0) return false;
     return !q || a.n.toLowerCase().includes(q) || a.en.toLowerCase().includes(q) || a.d.toLowerCase().includes(q);
   });
-  const total = ACH.length, nGot = ACH.filter(got).length, onRoute = ACH.filter(a => a.di >= 0).length;
-  let h = `<div class="big"><div><b>${nGot}/${total}</b><span>succès cochés par la team</span></div><div><b>${onRoute}</b><span>terminés dans le parcours</span></div><div><b>${total - onRoute}</b><span>à faire hors parcours ou en partie</span></div></div>
+  const total = ACH.length, nGot = ACH.filter(got).length, onRoute = ACH.filter(a => a.di >= 0).length, sugg = ACH.filter(a => a.si >= 0).length;
+  let h = `<div class="big"><div><b>${nGot}/${total}</b><span>succès cochés par la team</span></div><div><b>${onRoute}</b><span>terminés à une étape précise</span></div><div><b>${sugg}</b><span>placés selon la zone et le niveau</span></div><div><b>${total - onRoute - sugg}</b><span>événements saisonniers</span></div></div>
     <div class="tools"><input type="search" id="achQ" placeholder="Chercher un succès…" value="${esc(ui.q)}" aria-label="Chercher un succès">
     <label><input type="checkbox" id="hideGot"${ui.hideGot ? ' checked' : ''}> Masquer les cochés</label>
-    <label><input type="checkbox" id="outOnly"${ui.outOnly ? ' checked' : ''}> Hors parcours seulement</label></div>`;
+    <label><input type="checkbox" id="outOnly"${ui.outOnly ? ' checked' : ''}> Sans étape précise</label></div>`;
   const tops = new Map();
   for (const ai of xs) { const a = ACH[ai]; const t = TOP_FR[a.top] || a.top; (tops.get(t) || tops.set(t, new Map()).get(t)); const m = tops.get(t); (m.get(a.cat) || m.set(a.cat, []).get(a.cat)).push(ai); }
   for (const [t, cats] of [...tops].sort((x, y) => [...y[1].values()].flat().length - [...x[1].values()].flat().length)) {
@@ -263,7 +289,7 @@ function renderAchView() {
     for (const [c, ais] of [...cats].sort()) {
       const gg = ais.filter(ai => got(ACH[ai])).length;
       ais.sort((x, y) => (ACH[x].di < 0) - (ACH[y].di < 0) || ACH[x].di - ACH[y].di);
-      h += `<details${q ? ' open' : ''}><summary><span>${esc(catFr(c))}</span><span class="cntc${gg === ais.length ? ' full' : ''}">${gg}/${ais.length}</span></summary><ul class="al">${ais.map(ai => achLi(ai).replace('</li>', `<span class="ad">${ACH[ai].di >= 0 ? 'Terminé à l\'' + where(ACH[ai].di) : ACH[ai].oi.some(p => p >= 0) ? 'Commencé dans le parcours, fin ' + where(-1) : where(-1)}</span></li>`)).join('')}</ul></details>`;
+      h += `<details${q ? ' open' : ''}><summary><span>${esc(catFr(c))}</span><span class="cntc${gg === ais.length ? ' full' : ''}">${gg}/${ais.length}</span></summary><ul class="al">${ais.map(ai => achLi(ai).replace('</li>', `<span class="ad">${ACH[ai].di >= 0 ? 'Terminé à l\'' + where(ACH[ai].di) : ACH[ai].si >= 0 ? 'Faisable à partir de l\'' + where(ACH[ai].si) : ACH[ai].seasonal ? 'Événement saisonnier' : where(-1)}</span></li>`)).join('')}</ul></details>`;
     }
     h += '</div></details>';
   }
@@ -274,7 +300,7 @@ function setView(view) {
   ui.view = view;
   document.querySelectorAll('.view').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === view));
   const route = view === 'route';
-  for (const id of ['ctx', 'achPanel', 'card', 'links']) $(id).style.display = route ? '' : 'none';
+  for (const id of ['stepHead', 'ctx', 'achPanel', 'card', 'links']) $(id).style.display = route ? '' : 'none';
   $('achView').hidden = route; document.querySelector('.pager').style.display = route ? '' : 'none';
   if (route) render(); else renderAchView();
   scrollTo(0, 0);
@@ -291,8 +317,10 @@ $('prev').onclick = () => step(-1);
 $('next').onclick = () => step(1);
 document.addEventListener('keydown', e => {
   if (e.target.closest('textarea,input[type=text],input[type=search],dialog') || ui.view !== 'route') return;
-  if (e.key === 'ArrowRight' || e.key === 'j') { e.preventDefault(); step(1); }
-  if (e.key === 'ArrowLeft' || e.key === 'k') { e.preventDefault(); step(-1); }
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  if (k === 'arrowright' || k === 'd') { e.preventDefault(); step(1); }
+  if (k === 'arrowleft' || k === 'a' || k === 'q') { e.preventDefault(); step(-1); }
 });
 document.addEventListener('click', e => {
   const tr = e.target.closest('[data-travel]'); if (tr) { copy(`/travel ${tr.dataset.travel}`); return; }
@@ -315,7 +343,8 @@ document.addEventListener('change', e => {
   if (b.name === 'align') { S.align = b.value; save(); if (!visible(items[idx])) step(1); else render(); return; }
   if (b.id === 'skipBonus') { S.skipBonus = b.checked; save(); if (!visible(items[idx])) step(1); else render(); }
 });
-$('menuBtn').onclick = () => { const o = $('side').classList.toggle('open'); $('menuBtn').setAttribute('aria-expanded', o); };
+$('menuBtn').onclick = e => { e.stopPropagation(); const o = $('side').classList.toggle('open'); $('menuBtn').setAttribute('aria-expanded', o); };
+document.addEventListener('pointerdown', e => { if ($('side').classList.contains('open') && !e.target.closest('#side,#menuBtn')) { $('side').classList.remove('open'); $('menuBtn').setAttribute('aria-expanded', false); } });
 $('saveBtn').onclick = () => { $('code').value = encode(); $('importErr').hidden = true; $('saveDlg').showModal(); };
 $('copyCode').onclick = () => { $('code').select(); copy(encode()).then(() => {}); };
 $('doImport').onclick = () => {
