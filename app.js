@@ -59,7 +59,7 @@ function guide(id) {
 // ---------- route ----------
 let R, gp0, items = [], idx = 0;
 const txt = h => { const d = document.createElement('div'); d.innerHTML = h || ''; return d.textContent.replace(/\s+/g, ' ').trim(); };
-const isBonus = i => /Étape bonus/.test(txt(gp0.steps[i]?.web_text));
+const isBonus = i => /^[^A-Za-zÀ-ÿ]*Étape bonus/.test(txt(gp0.steps[i]?.web_text));
 function stepTitle(i) {
   const t = txt(gp0.steps[i]?.web_text);
   if (/Étape bonus/.test(t)) return t.replace(/.*?Étape bonus\s*👈?\s*/, '').slice(0, 70) || 'Étape bonus';
@@ -76,7 +76,8 @@ function buildItems() {
     }
   });
 }
-const visible = it => !(S.skipBonus && it.g === undefined && isBonus(it.i)) && it.g !== ALIGN[S.align === 'bonta' ? 'brak' : 'bonta'] && !it.gone;
+const isIntro = i => !/^Objectifs?\s*:/.test(txt(gp0.steps[i]?.web_text)) && !isBonus(i);
+const visible = it => !(it.g === undefined && isIntro(it.i)) && !(S.skipBonus && it.g === undefined && isBonus(it.i)) && it.g !== ALIGN[S.align === 'bonta' ? 'brak' : 'bonta'] && !it.gone;
 let lastDir = 1;
 
 // ---------- sanitising + enriching Ganymède HTML ----------
@@ -122,7 +123,8 @@ function renderSide() {
   $('stepList').innerHTML = gp0.steps.map((_, i) => {
     const b = isBonus(i);
     const n = (doneByStep.get(i) || []).length + (sugByStep.get(i) || []).length;
-    return `<li data-step="${i}" class="${i < cur ? 'past' : ''}${i === cur ? ' cur' : ''}${b ? ' bonus' : ''}"${b && S.skipBonus ? ' hidden' : ''}><span class="num">${i + 1}</span><span>${esc(stepTitle(i))}</span>${n ? `<span class="ac">${n} succès</span>` : ''}</li>`;
+    if (isIntro(i)) return '';
+    return `<li data-step="${i}" class=""${i < cur ? 'past' : ''}${i === cur ? ' cur' : ''}${b ? ' bonus' : ''}"${b && S.skipBonus ? ' hidden' : ''}><span class="num">${i + 1}</span><span>${esc(stepTitle(i))}</span>${n ? `<span class="ac">${n} succès</span>` : ''}</li>`;
   }).join('');
   $('stepList').querySelector('.cur')?.scrollIntoView({ block: 'nearest' });
 }
@@ -148,7 +150,7 @@ async function render() {
     ctx.hidden = true;
     $('crumb').textContent = `Guide principal · étape ${it.i + 1}`;
     const segs = (R.steps[it.i] || []);
-    $('stepHead').innerHTML = `<div class="head"><span class="eyebrow">Guide principal · étape ${it.i + 1} sur ${gp0.steps.length}</span><h2>${esc(stepTitle(it.i))}</h2></div>${summary(it)}`;
+    $('stepHead').innerHTML = `<div class="bignum">${it.i + 1}</div><span class="eyebrow">Guide principal · étape ${it.i + 1} sur ${gp0.steps.length}</span><h2>${esc(stepTitle(it.i))}</h2>${summary(it)}`;
     card.innerHTML = `<div class="gc">${enrich(gp0.steps[it.i].web_text, `${GP0}:${it.i}`)}</div>`;
     links.hidden = !segs.length;
     links.innerHTML = segs.length ? `<span class="lbl">Dans cette étape</span>` + segs.map(([g, a, b]) => {
@@ -161,14 +163,14 @@ async function render() {
     ctx.hidden = false;
     ctx.innerHTML = `<details><summary><span class="lbl">Consigne du guide principal</span><span>Étape ${it.i + 1} · ${esc(stepTitle(it.i))}</span></summary><div class="body gc">${enrich(gp0.steps[it.i].web_text, `${GP0}:${it.i}`)}</div></details>`;
     card.innerHTML = `<p class="loading">Chargement de ${esc(name)}…</p>`;
-    $('stepHead').innerHTML = `<div class="head"><span class="eyebrow">${esc(name)} · étape ${it.k + 1}</span><h2>${esc(stepTitle(it.i))}</h2></div>`;
+    $('stepHead').innerHTML = `<div class="bignum">${it.i + 1}</div><span class="eyebrow">${esc(name)} · étape ${it.k + 1}</span><h2>${esc(stepTitle(it.i))}</h2>`;
     let g;
     try { g = await guide(it.g); } catch (e) { card.innerHTML = `<p class="empty">Impossible de charger ${esc(name)} : ${esc(e.message)}. Réessaie dans un instant.</p>`; return; }
     if (items[idx] !== it) return;               // user moved on while loading
     const st = g.steps[it.k];
     const { n, of, seg } = segInfo(it);
     if (!st) { it.gone = true; step(lastDir); return; }     // guide got shorter since route.json was built
-    $('stepHead').innerHTML = `<div class="head"><span class="eyebrow">${esc(name)} · étape ${it.k + 1} sur ${g.steps.length}</span><h2>${esc(st.name || stepTitle(it.i))}</h2></div>${summary(it, st)}`;
+    $('stepHead').innerHTML = `<div class="bignum">${it.i + 1}</div><span class="eyebrow">${esc(name)} · étape ${it.k + 1} sur ${g.steps.length}</span><h2>${esc(st.name || stepTitle(it.i))}</h2>${summary(it, st)}`;
     card.innerHTML = `<div class="gc">${enrich(st.web_text, `${it.g}:${it.k}`)}</div>`;
     links.hidden = false;
     links.innerHTML = `<span class="lbl">Plage du GP0</span><span class="num">ét. ${seg ? seg[1] + 1 : '?'}→${seg ? seg[2] : '?'} · ${n}/${of}</span>`;
@@ -179,7 +181,7 @@ async function render() {
 }
 function summary(it, st) {
   const pills = [];
-  if (st && st.map) pills.push(`<button type="button" class="pill where travel" data-travel="${st.pos_x},${st.pos_y}" title="Copier /travel ${st.pos_x},${st.pos_y}">${esc(st.map)} [${st.pos_x},${st.pos_y}] · copier /travel</button>`);
+  if (st && st.map) pills.push(`<button type="button" class="pill where" data-travel="${st.pos_x},${st.pos_y}" title="Copier /travel ${st.pos_x},${st.pos_y}"><span class="ico">➜</span> ${esc(st.map)} <span class="num">[${st.pos_x},${st.pos_y}]</span> · copier /travel</button>`);
   if (it.g === undefined) {
     const d = (doneByStep.get(it.i) || []).length, g = (sugByStep.get(it.i) || []).length;
     if (d) pills.push(`<span class="pill done"><b>${d}</b> succès terminés dans cette étape</span>`);
@@ -196,6 +198,8 @@ function summary(it, st) {
 }
 function go(to) {
   if (to < 0 || to >= items.length) return;
+  const st = $('stage'); st.classList.remove('turn-next', 'turn-prev'); void st.offsetWidth;
+  st.classList.add(to >= idx ? 'turn-next' : 'turn-prev');
   idx = to; render(); $('main').focus({ preventScroll: true }); scrollTo(0, 0);
 }
 const step = d => { lastDir = d; let j = idx + d; while (items[j] && !visible(items[j])) j += d; if (items[j]) go(j); };
@@ -264,7 +268,7 @@ function renderAchPanel(it) {
     const sug = sugIn.get(idx) || [];
     if (sug.length) h += `<div class="agroup sug"><span class="lbl">Faisable à partir d'ici : zone et niveau atteints</span><ul class="al">${sug.map(ai => achLi(ai)).join('')}</ul></div>`;
   }
-  panel.innerHTML = h; panel.hidden = !h;
+  panel.innerHTML = h; panel.hidden = !h; $('cols').classList.toggle('solo', !h);
 }
 const ui = { more: null, q: '', hideGot: false, outOnly: false, view: 'route' };
 function renderAchView() {
@@ -300,7 +304,7 @@ function setView(view) {
   ui.view = view;
   document.querySelectorAll('.view').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === view));
   const route = view === 'route';
-  for (const id of ['stepHead', 'ctx', 'achPanel', 'card', 'links']) $(id).style.display = route ? '' : 'none';
+  $('stage').hidden = !route;
   $('achView').hidden = route; document.querySelector('.pager').style.display = route ? '' : 'none';
   if (route) render(); else renderAchView();
   scrollTo(0, 0);
@@ -337,7 +341,10 @@ document.addEventListener('click', e => {
 });
 document.addEventListener('change', e => {
   const b = e.target;
-  if (b.dataset.ach) { if (b.checked) S.a[b.dataset.ach] = 1; else delete S.a[b.dataset.ach]; save(); b.closest('li')?.classList.toggle('got', b.checked); return; }
+  if (b.dataset.ach) {
+    if (b.checked) { S.a[b.dataset.ach] = 1; burst(b); toast('Succès coché pour la team !'); } else delete S.a[b.dataset.ach];
+    save(); b.closest('li')?.classList.toggle('got', b.checked); return;
+  }
   if (b.id === 'hideGot' || b.id === 'outOnly') { ui[b.id] = b.checked; renderAchView(); return; }
   if (b.dataset.task) { if (b.checked) S.t[b.dataset.task] = 1; else delete S.t[b.dataset.task]; save(); b.closest('li')?.classList.toggle('checked', b.checked); }
   if (b.name === 'align') { S.align = b.value; save(); if (!visible(items[idx])) step(1); else render(); return; }
@@ -357,6 +364,39 @@ $('doImport').onclick = () => {
   } catch { $('importErr').textContent = 'Ce code n\'est pas reconnu. Copie-le en entier depuis l\'autre PC.'; $('importErr').hidden = false; }
 };
 
+// ---------- life: a little burst on success, slow amber motes in the background ----------
+function burst(el) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const r = el.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  const colors = ['#86d17a', '#f0b44c', '#ffe2a8', '#7cc4ff'];
+  for (let n = 0; n < 14; n++) {
+    const d = document.createElement('i'); d.className = 'burst';
+    const a = (n / 14) * Math.PI * 2, dist = 30 + Math.random() * 40;
+    d.style.cssText = `left:${cx - 4}px;top:${cy - 4}px;background:${colors[n % 4]};--dx:${Math.cos(a) * dist}px;--dy:${Math.sin(a) * dist}px`;
+    document.body.append(d); setTimeout(() => d.remove(), 800);
+  }
+}
+(function motes() {
+  const c = $('motes'), ctx = c.getContext('2d');
+  if (!ctx || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let w, h, dots;
+  const size = () => { w = c.width = innerWidth; h = c.height = innerHeight; dots = Array.from({ length: Math.round(w * h / 38000) }, () => ({ x: Math.random() * w, y: Math.random() * h, r: .6 + Math.random() * 1.8, v: .12 + Math.random() * .35, p: Math.random() * 6.28 })); };
+  size(); addEventListener('resize', size);
+  (function frame(t) {
+    if (!document.hidden) {
+      ctx.clearRect(0, 0, w, h);
+      for (const d of dots) {
+        d.y -= d.v; d.x += Math.sin(t / 2400 + d.p) * .25;
+        if (d.y < -10) { d.y = h + 10; d.x = Math.random() * w; }
+        const a = .25 + .25 * Math.sin(t / 900 + d.p);
+        ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 6.283);
+        ctx.fillStyle = `rgba(240,180,76,${a})`; ctx.shadowColor = '#f0b44c'; ctx.shadowBlur = 8; ctx.fill();
+      }
+    }
+    requestAnimationFrame(frame);
+  })(0);
+})();
+
 // ---------- boot ----------
 (async () => {
   try {
@@ -368,6 +408,7 @@ $('doImport').onclick = () => {
   idx = Math.max(0, items.findIndex(x => x.key === S.pos));
   $('skipBonus').checked = S.skipBonus;
   document.querySelector(`input[name=align][value=${S.align}]`).checked = true;
+  if (!visible(items[idx])) { const j = items.findIndex((x, n) => n > idx && visible(x)); if (j >= 0) idx = j; }
   if (gp0.updated_at !== R.gp0_updated) console.info('GP0 modifié depuis la préparation du parcours :', gp0.updated_at, '≠', R.gp0_updated);
   render();
 })();
