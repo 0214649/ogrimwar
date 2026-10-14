@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Carnet de la Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bar">
+  <button class="iconbtn" id="menuBtn" aria-label="Liste des étapes" aria-expanded="false">☰</button>
+  <div class="brand"><h1>Carnet de la Team</h1><span class="sub" id="crumb">Chargement du guide…</span></div>
+  <nav class="views" aria-label="Vue">
+    <button class="view" data-view="route" aria-pressed="true">Parcours</button>
+    <button class="view" data-view="ach" aria-pressed="false">Succès</button>
+  </nav>
+  <div class="meter" title="Avancement dans le GP0"><div class="track"><div class="fill" id="fill"></div></div><span class="num" id="meter"></span></div>
+  <button class="iconbtn" id="saveBtn" aria-label="Sauvegarde et transfert">⇅</button>
+</header>
+<div class="layout">
+  <aside id="side" class="side" aria-label="Étapes du GP0">
+    <label class="opt"><input type="checkbox" id="skipBonus"> Passer les étapes bonus</label>
+    <div class="opt" role="radiogroup" aria-label="Alignement">Alignement :
+      <label><input type="radio" name="align" value="bonta"> Bonta</label>
+      <label><input type="radio" name="align" value="brak"> Brâkmar</label></div>
+    <ol id="stepList"></ol>
+  </aside>
+  <main id="main" class="main" tabindex="-1">
+    <section id="achView" class="achview" hidden></section>
+    <section id="ctx" class="ctx" hidden></section>
+    <section id="achPanel" class="achpanel" hidden></section>
+    <article id="card" class="card"><p class="loading">Chargement…</p></article>
+    <section id="links" class="links" hidden></section>
+  </main>
+</div>
+<nav class="pager" aria-label="Navigation">
+  <button class="btn" id="prev">← Précédent</button>
+  <span class="pos num" id="pos"></span>
+  <button class="btn primary" id="next">Suivant →</button>
+</nav>
+<dialog id="saveDlg">
+  <form method="dialog" class="dlg">
+    <h2>Sauvegarde</h2>
+    <p>Ta progression est gardée dans ce navigateur. Pour la reprendre sur un autre PC, copie ce code ici puis colle-le là-bas.</p>
+    <textarea id="code" rows="4" readonly></textarea>
+    <div class="row"><button type="button" class="btn" id="copyCode">Copier le code</button></div>
+    <label for="importCode">Coller un code venu d'un autre PC</label>
+    <textarea id="importCode" rows="3"></textarea>
+    <p class="err" id="importErr" hidden></p>
+    <div class="row"><button type="button" class="btn primary" id="doImport">Charger ce code</button><button class="btn">Fermer</button></div>
+  </form>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<footer class="credit">Guides <a href="https://ganymede-app.com" target="_blank" rel="noopener">Ganymède</a>, chargés en direct depuis leur site. Succès et objectifs d'après le <a href="https://dofuswiki.fandom.com" target="_blank" rel="noopener">DofusWiki</a> (CC-BY-SA). Site non officiel, Dofus © Ankama.</footer>
+<script src="app.js"></script>
+</body>
+</html>

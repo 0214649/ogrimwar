@@ -1,0 +1,154 @@
+/* Dark-first on purpose: Ganymède's guide text uses bright yellow / red / blue meant for a dark page.
+   Layout: sticky bar, step index on the left, one guide step at a time in the reading column, pager at the bottom. */
+:root{
+  --bg:#12171a; --panel:#1a2125; --panel-2:#222b30; --ink:#e6ece9; --muted:#8fa09a; --line:#2d383d;
+  --accent:#e2a24f; --accent-ink:#1a1206; --good:#6cc391; --start:#62acff; --end:#6cc391;
+  --f-display:"Alegreya SC",Georgia,serif; --f-body:"Alegreya Sans",system-ui,sans-serif; --f-num:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:17px/1.5 var(--f-body);padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+a{color:var(--start)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums;font-size:.8rem}
+
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top,0px));background:var(--bg);border-bottom:1px solid var(--line)}
+.brand{flex:1;min-width:0}
+h1{font:700 1.25rem/1.1 var(--f-display);margin:0;letter-spacing:.03em}
+.sub{display:block;color:var(--muted);font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meter{display:flex;align-items:center;gap:8px;width:min(220px,30vw)}
+.track{flex:1;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.fill{height:100%;width:0;background:var(--accent);transition:width .3s}
+.iconbtn{background:var(--panel);border:1px solid var(--line);border-radius:6px;width:36px;height:36px;cursor:pointer;flex:none}
+#menuBtn{display:none}
+
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);max-width:1240px;margin:0 auto}
+.side{position:sticky;top:58px;align-self:start;height:calc(100vh - 58px - 64px);overflow:auto;border-right:1px solid var(--line);padding:12px 8px 24px 16px}
+.opt{display:flex;flex-wrap:wrap;gap:6px;align-items:center;color:var(--muted);font-size:.85rem;padding:0 4px 8px;cursor:pointer}
+#stepList{list-style:none;margin:0;padding:0;font-size:.9rem}
+#stepList li{display:grid;grid-template-columns:2.2rem 1fr;gap:6px;padding:5px 6px;border-radius:5px;cursor:pointer;color:var(--ink)}
+#stepList li .num{color:var(--muted);padding-top:2px}
+#stepList li.past{color:var(--muted)}
+#stepList li.past .num::after{content:" ✓";color:var(--good)}
+#stepList li.bonus{color:var(--muted);font-style:italic}
+#stepList li.cur{background:var(--panel-2);color:var(--ink);box-shadow:inset 3px 0 0 var(--accent)}
+#stepList li:hover{background:var(--panel)}
+#stepList li[hidden]{display:none}
+
+.main{padding:20px 16px 40px 28px;min-width:0;outline:none}
+.ctx{border:1px solid var(--line);border-radius:8px;background:var(--panel);margin-bottom:16px}
+.ctx summary{cursor:pointer;padding:10px 14px;display:flex;gap:10px;align-items:baseline}
+.ctx summary .lbl{flex:none}
+.ctx .body{padding:0 14px 12px}
+.lbl{font:700 .7rem var(--f-body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.card{max-width:72ch}
+.head{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;margin-bottom:12px}
+.head h2{font:700 1.5rem/1.2 var(--f-display);margin:0;text-wrap:balance}
+.where{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.travel{display:inline-flex;align-items:center;gap:6px;background:var(--panel-2);border:1px solid var(--line);border-radius:5px;padding:1px 8px;cursor:pointer;font:500 .85rem var(--f-num);color:var(--start);vertical-align:baseline}
+.travel:hover{border-color:var(--start)}
+.map{color:var(--muted);font-size:.9rem}
+.loading,.empty{color:var(--muted)}
+
+/* views + achievements */
+.views{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:3px}
+.view{background:none;border:0;border-radius:6px;padding:4px 12px;cursor:pointer;color:var(--muted);font-weight:500}
+.view[aria-pressed=true]{background:var(--panel-2);color:var(--ink)}
+.achpanel{max-width:72ch;display:grid;gap:10px;margin-bottom:18px}
+.agroup{border-radius:8px;padding:8px 12px 10px;background:var(--panel);border:1px solid var(--line)}
+.agroup.done{border-color:color-mix(in srgb,var(--good) 55%,var(--line));background:color-mix(in srgb,var(--good) 9%,var(--panel))}
+.agroup.prog{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));background:color-mix(in srgb,var(--accent) 7%,var(--panel))}
+.agroup>.lbl{display:block;margin-bottom:4px}
+.agroup.done>.lbl{color:var(--good)}
+.agroup.prog>.lbl{color:var(--accent)}
+ul.al{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.al li{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:4px 4px;border-radius:6px}
+.al li input{width:17px;height:17px;margin-top:3px;accent-color:var(--good);cursor:pointer}
+.al li.got .an{text-decoration:line-through;text-decoration-color:var(--good);color:var(--muted)}
+.an{font-weight:700}
+.ad{grid-column:2;color:var(--muted);font-size:.86rem}
+.ob{grid-column:2;font-size:.86rem;display:flex;flex-wrap:wrap;gap:4px 12px}
+.ob .ok{color:var(--good)}
+.ob .todo{color:var(--muted)}
+.ob .here{color:var(--accent);font-weight:700}
+.chip{font:700 .64rem var(--f-body);letter-spacing:.07em;text-transform:uppercase;padding:1px 6px;border-radius:3px;margin-left:6px;vertical-align:2px}
+.chip.duo{background:#24344a;color:#8db6ec}
+.chip.solo{background:#3a2740;color:#cf9ae0}
+.jump{background:none;border:0;padding:0;color:var(--start);cursor:pointer;text-decoration:underline;text-underline-offset:2px;font:inherit}
+.more{background:none;border:0;color:var(--muted);cursor:pointer;padding:2px 4px;font-size:.85rem;text-decoration:underline}
+.achview{max-width:80ch}
+.achview .tools{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-bottom:12px;color:var(--muted);font-size:.9rem}
+.achview input[type=search]{flex:1;min-width:0;max-width:320px;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font:inherit}
+.achview label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.achview details{border-bottom:1px solid var(--line)}
+.achview summary{cursor:pointer;padding:10px 2px;display:flex;justify-content:space-between;gap:10px;font-weight:700}
+.achview details details summary{font-weight:500;padding-left:14px}
+.achview .inner{padding:0 0 10px 14px}
+.achview .big{display:flex;flex-wrap:wrap;gap:18px;margin:4px 0 16px}
+.achview .big div{display:grid}
+.achview .big b{font:700 1.4rem var(--f-num)}
+.achview .big span{color:var(--muted);font-size:.8rem}
+.cntc{font:500 .8rem var(--f-num);color:var(--muted)}
+.cntc.full{color:var(--good)}
+#stepList li .ac{grid-column:2;font:500 .7rem var(--f-num);color:var(--good)}
+
+/* Ganymède content */
+.gc p{margin:.35em 0}
+.gc p:empty{display:none}
+.gc img{max-width:100%;height:auto;border-radius:6px}
+.gc img.img-large{display:block;margin:10px 0}
+.gc ul[data-type=taskList]{list-style:none;padding:0;margin:.4em 0}
+.gc li[data-type=taskItem]{display:flex;gap:10px;align-items:flex-start;padding:4px 8px;border-radius:6px}
+.gc li[data-type=taskItem]:hover{background:var(--panel)}
+.gc li[data-type=taskItem]>label{flex:none;padding-top:3px}
+.gc li[data-type=taskItem]>div{flex:1;min-width:0}
+.gc li[data-type=taskItem] input{width:17px;height:17px;accent-color:var(--good);cursor:pointer}
+.gc li.checked>div{opacity:.45;text-decoration:line-through;text-decoration-color:var(--good)}
+.gc .quest-block{border-left:3px solid var(--start);background:var(--panel);border-radius:0 8px 8px 0;padding:6px 12px 6px 14px;margin:10px 0;position:relative}
+.gc .quest-block[status=end]{border-left-color:var(--end)}
+.gc .quest-block::before{content:"Lancer la quête";display:block;font:700 .68rem var(--f-body);letter-spacing:.09em;text-transform:uppercase;color:var(--start);margin-bottom:2px}
+.gc .quest-block[status=end]::before{content:"Terminer la quête";color:var(--end)}
+.gc .quest-block[status=progress]::before{content:"Avancer la quête";color:var(--accent)}
+.gc .tag-item,.gc .tag-quest,.gc [data-type=custom-tag]{display:inline-flex;align-items:center;gap:4px;padding:0 6px 0 2px;border-radius:4px;background:var(--panel-2);border:1px solid var(--line);vertical-align:baseline;line-height:1.5}
+.gc [data-type=custom-tag] img{width:20px;height:20px;border-radius:3px;margin:0}
+.gc [data-type=custom-tag][type=dungeon]{border-color:var(--accent);color:var(--accent)}
+.gc [data-type=custom-tag][type=quest]{border-color:var(--start)}
+.gc [data-type=custom-tag][type=monster]{border-color:#c46a6a}
+.gc .guide-step{display:inline-flex;align-items:center;gap:4px;color:var(--accent);font-weight:700;cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
+.gc .guide-step img{width:16px;height:16px;margin:0}
+.gc a{word-break:break-word}
+
+.links{max-width:72ch;margin-top:20px;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.9rem}
+.links a{color:var(--muted)}
+
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;justify-content:center;align-items:center;gap:14px;padding:10px 16px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line)}
+.btn{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 14px;cursor:pointer;font-weight:500}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:disabled{opacity:.4;cursor:default}
+.pos{color:var(--muted);min-width:9rem;text-align:center}
+
+dialog{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:10px;max-width:min(520px,calc(100vw - 32px));padding:0}
+dialog::backdrop{background:#0009}
+.dlg{display:grid;gap:10px;padding:18px}
+.dlg h2{font:700 1.2rem var(--f-display);margin:0}
+.dlg p{margin:0;color:var(--muted);font-size:.92rem}
+.dlg textarea{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:8px;font:500 .78rem var(--f-num);resize:vertical}
+.dlg .row{display:flex;gap:8px;flex-wrap:wrap}
+.err{color:#ef8a8a!important}
+.toast{position:fixed;left:50%;bottom:76px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:6px 14px;border-radius:6px;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+.credit{max-width:1240px;margin:0 auto;padding:18px 16px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line)}
+.credit a{color:var(--muted)}
+
+@media (max-width:860px){
+  #menuBtn{display:block}
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .side{position:fixed;inset:58px 0 64px 0;height:auto;z-index:9;background:var(--bg);border-right:0;transform:translateX(-100%);transition:transform .2s;padding-right:16px}
+  .side.open{transform:none}
+  .main{padding-left:16px}
+  .meter{display:none}
+}
+@media (prefers-reduced-motion:reduce){.fill,.side,.toast{transition:none}}

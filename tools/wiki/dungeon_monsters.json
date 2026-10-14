@@ -1,0 +1,1409 @@
+{
+"Ancestral Domain": {
+"monsters": [
+"Ancestral Treechnid",
+"Arachnotron"
+],
+"bosses": [
+"Ancestral Treechnid",
+"Arachnotron",
+"Crobak on a Wire",
+"Tree's a Crowd"
+]
+},
+"Bherb's Gully": {
+"monsters": [
+"Silf the Greater Bherb"
+],
+"bosses": [
+"How to Get Plucked",
+"Silf the Greater Bherb"
+]
+},
+"Black Rat's Moumousetrap": {
+"monsters": [
+"Black Rat",
+"Rat Shio"
+],
+"bosses": [
+"A Hysterical Judge",
+"Black Rat",
+"Rat Shio",
+"Trapped Like A Rat",
+"When Threats Don't Work"
+]
+},
+"Blacksmith Dungeon": {
+"monsters": [
+"Smiths' Chest"
+],
+"bosses": [
+"Simply the Chest",
+"Smiths' Chest"
+]
+},
+"Blop Fields": {
+"monsters": [
+"Royal Coco Blop",
+"Royal Indigo Blop",
+"Royal Morello Cherry Blop",
+"Royal Pippin Blop",
+"Blopshroom",
+"Greedoblop",
+"Trunkiblop"
+],
+"bosses": [
+"Amayiro's Tabi",
+"Blopshroom",
+"Flippin' Pippin Blop",
+"Greedoblop",
+"Indigo-Go Dancer",
+"Morello Cherry Blop Goes the Weasel",
+"Royal Coco Blop",
+"Royal Indigo Blop",
+"Royal Morello Cherry Blop",
+"Royal Pippin Blop",
+"Trunkiblop",
+"Wake Me Up Before You Coco"
+]
+},
+"Bulb Cavern": {
+"monsters": [
+"Bulbig Brotha"
+],
+"bosses": [
+"Bulbig Brotha"
+]
+},
+"Bwork Dungeon": {
+"monsters": [
+"Bworkette"
+],
+"bosses": [
+"Bworkette",
+"Me Squash You",
+"Swimp the Simple"
+]
+},
+"Bworker's Cave": {
+"monsters": [
+"Bworker",
+"Cybwork"
+],
+"bosses": [
+"Bworker",
+"Cybwork"
+]
+},
+"Crackler's Rocky Peaks": {
+"monsters": [
+"Legendary Crackler",
+"Eroded Kirball"
+],
+"bosses": [
+"Eroded Kirball",
+"Free Tax",
+"Holbaid's Fury",
+"The Master's Henchmen"
+]
+},
+"Crocabulia's Lair": {
+"monsters": [
+"Crocabulia",
+"Dragmatic"
+],
+"bosses": [
+"Crocabulia",
+"Dragmatic",
+"Red Dragon"
+]
+},
+"Famished Sunflower's Barn": {
+"monsters": [
+"Famished Sunflower",
+"Country Guardian"
+],
+"bosses": [
+"Country Guardian",
+"Famished Sunflower",
+"The Scythe Girls"
+]
+},
+"Father Kwismas's House": {
+"monsters": [
+"Father Whupper",
+"Stuffed Gobball (monster)",
+"Stuffed Tofu (monster)",
+"Stuffed Wabbit (monster)"
+],
+"bosses": [
+"Father Whupper",
+"Stuffed Gobball (monster)",
+"Stuffed Tofu (monster)",
+"Stuffed Wabbit (monster)",
+"The House Myth"
+]
+},
+"Firefoux Dungeon": {
+"monsters": [
+"Peki Peki",
+"Touchparak",
+"Zilla"
+],
+"bosses": [
+"Peki Peki",
+"Touchparak",
+"Zilla"
+]
+},
+"Grotto Hesque": {
+"monsters": [
+"Great Coralator"
+],
+"bosses": [
+"Great Coralator",
+"The Great Coralator Reef"
+]
+},
+"Hold of Otomai's Ark": {
+"monsters": [
+"Gourlo the Terrible"
+],
+"bosses": [
+"Gourlo the Terrible"
+]
+},
+"Inner Labyrinth of the Minotoror": {
+"monsters": [
+"Minotoror"
+],
+"bosses": []
+},
+"Kardorim's Crypt": {
+"monsters": [
+"Kardorim",
+"Chafer Sergeant"
+],
+"bosses": [
+"By the Hair of Your Chinny Chin Chin",
+"Chafer Sergeant",
+"Kardorim"
+]
+},
+"Kimbo's Canopy": {
+"monsters": [
+"Kimbo"
+],
+"bosses": [
+"Kimbo"
+]
+},
+"Kitsoune Dungeon": {
+"monsters": [
+"Tanukouï San"
+],
+"bosses": [
+"Tanukouï San"
+]
+},
+"Koolich Cavern": {
+"monsters": [
+"Koolich",
+"Cave Gobball",
+"Gobkool"
+],
+"bosses": [
+"Cave Gobball",
+"Gobkool",
+"In the Eclectic Mist",
+"Koolich"
+]
+},
+"Kwismas Cavern": {
+"monsters": [
+"Mini Inuit",
+"Father Kwismas"
+],
+"bosses": [
+"Father Kwismas",
+"Mini Inuit",
+"The Cavern Myth"
+]
+},
+"Kwismas Dungeon": {
+"monsters": [
+"Snowy Tofu",
+"Itzting"
+],
+"bosses": [
+"Itzting",
+"Snowy Tofu",
+"The Dungeon Myth"
+]
+},
+"Lair of the Giant Kralove": {
+"monsters": [
+"Giant Kralove"
+],
+"bosses": [
+"Giant Kralove"
+]
+},
+"Larva Dungeon": {
+"monsters": [
+"Shin Larva",
+"Emerald Larva",
+"Golden Larva",
+"Lone Blue Larva",
+"Lone Green Larva",
+"Ruby Larva",
+"Sapphire Larva"
+],
+"bosses": [
+"Emerald Larva",
+"Golden Larva",
+"Poor Golden Larva",
+"Ruby Larva",
+"Sapphire Larva",
+"Shin Larva",
+"The Master's Henchmen"
+]
+},
+"Lord Crow's Library": {
+"monsters": [
+"Lord Crow",
+"Foxo the Crowfox",
+"Horace the Tamed Crobak",
+"Kapotie the Drinker",
+"Blood Sucker",
+"Crobak Chief",
+"Trained Crobak",
+"Capsaaloock"
+],
+"bosses": [
+"Crowmio, My Crowmio"
+]
+},
+"Minotot Room": {
+"monsters": [
+"Minotot",
+"Minotoror"
+],
+"bosses": []
+},
+"Moowolf Lair": {
+"monsters": [
+"Moowolf",
+"Boowoldlum"
+],
+"bosses": [
+"A Hysterical Judge",
+"Apprenticeship: Knife Fighter",
+"Boolanthropy",
+"Boowoldlum",
+"Draconthropy",
+"Moowolf"
+]
+},
+"Pandikazes' Hideout": {
+"monsters": [
+"Pandora Master",
+"Aerial Pandikaze",
+"Giddy Pandikaze",
+"Pandikaze Warrior",
+"Pandikwakaze",
+"Pandulkaze"
+],
+"bosses": [
+"Pandora Master"
+]
+},
+"Pet Sanctuary": {
+"monsters": [
+"Pet Sanctuary#Mechanics"
+],
+"bosses": []
+},
+"Royal Gobball's Court": {
+"monsters": [
+"Black Gobball",
+"Royal Gobball"
+],
+"bosses": [
+"Black Gobball",
+"Gobball Scramble",
+"Royal Gobball"
+]
+},
+"Royal Mastogob's Greenhouse": {
+"monsters": [
+"Royal Mastogob"
+],
+"bosses": [
+"Royal Mastogob"
+]
+},
+"Royal Pingwin's Excavation": {
+"monsters": [
+"Royal Pingwin"
+],
+"bosses": [
+"Fishing in Frozen Waters",
+"March of the Pingwins",
+"Royal Pingwin",
+"The Hunters",
+"Vini's Blessing"
+]
+},
+"Royal Rainbow Blop Lair": {
+"monsters": [
+"Royal Rainbow Blop"
+],
+"bosses": [
+"Royal Rainbow Blop"
+]
+},
+"Royal Tofu House": {
+"monsters": [
+"Royal Tofu",
+"Podgy Tofu",
+"Tofubine",
+"Ugly Tofu",
+"Blastofu",
+"Tofuzmo"
+],
+"bosses": [
+"How to Get Plucked"
+]
+},
+"Sakai Mine Dungeon": {
+"monsters": [
+"Grohlum",
+"Drilla"
+],
+"bosses": [
+"Bomma",
+"Grohlum"
+]
+},
+"Sandy Castle": {
+"monsters": [
+"Sponge Mob",
+"Kloon Snapper"
+],
+"bosses": [
+"Crush That Sand Castle",
+"Kloon Snapper",
+"Sponge Mob"
+]
+},
+"Scaraleaf Dungeon": {
+"monsters": [
+"Golden Scarabugly",
+"Black Scaraleaf",
+"Immature Scaraleaf"
+],
+"bosses": [
+"Black Scaraleaf",
+"Golden Foliage",
+"Golden Scarabugly",
+"Immature Scaraleaf"
+]
+},
+"Skeleton Dungeon": {
+"monsters": [
+"Ronin Chafer",
+"Primitive Chafer"
+],
+"bosses": [
+"Chafed to the Bone",
+"Chafer Tooth",
+"Primitive Chafer",
+"Ronin Chafer"
+]
+},
+"Skeunk's Hideout": {
+"monsters": [
+"Skeunk",
+"Diamondine",
+"Emeralda",
+"Emerald Doll",
+"Ruby (monster)",
+"Sapphira",
+"Famished Doll"
+],
+"bosses": []
+},
+"Soft Oak Clearing": {
+"monsters": [
+"Soft Oak",
+"Healing Branch",
+"Short-Tempered Arachnotron",
+"Short-Tempered Dark Treechnee",
+"Short-Tempered Dark Treechnid",
+"Summoning Branch"
+],
+"bosses": [
+"Healing Branch",
+"Short-Tempered Arachnotron",
+"Short-Tempered Dark Treechnee",
+"Short-Tempered Dark Treechnid",
+"Soft Oak",
+"Summoning Branch"
+]
+},
+"Sphincter Cell's Lair": {
+"monsters": [
+"Sphincter Cell",
+"Black Rat",
+"White Rat",
+"Brat",
+"Packrat",
+"Prat",
+"Raeman",
+"Ratfink",
+"Ratter",
+"Riffrat",
+"Rugrat"
+],
+"bosses": [
+"Black Rat",
+"Sphincter Cell",
+"White Rat"
+]
+},
+"Temple of the Great Ougaa": {
+"monsters": [
+"Ougaa"
+],
+"bosses": [
+"Ougaa"
+]
+},
+"The Jellith Dimension": {
+"monsters": [
+"Royal Blue Jelly",
+"Royal Lemon Jelly",
+"Royal Mint Jelly",
+"Royal Strawberry Jelly",
+"Lemon Jelly"
+],
+"bosses": []
+},
+"The Obsidemon's Hypogeum": {
+"monsters": [
+"Obsidemon",
+"Fumaroller",
+"Mofette"
+],
+"bosses": [
+"Blushing Blooms",
+"Drilling Fields",
+"Fumaroller",
+"Mofette",
+"Obsidemon",
+"Oopsydemon"
+]
+},
+"The Wreck of the Hesperus": {
+"monsters": [
+"Buck Anear"
+],
+"bosses": [
+"Buck Anear",
+"Sailor Kick"
+]
+},
+"Tofu House": {
+"monsters": [
+"Batofu",
+"Tofurby"
+],
+"bosses": [
+"Aggressive Black Tofu",
+"Aggressive Tofoone",
+"Aggressive Tofu",
+"Batofu",
+"Featherweight",
+"Tofurby"
+]
+},
+"Tynril Lab": {
+"monsters": [
+"Disconcerted Tynril",
+"Dismayed Tynril",
+"Perfidious Tynril",
+"Stunned Tynril"
+],
+"bosses": [
+"Around Your Little Finger",
+"Disconcerted Tynril",
+"Dismayed Tynril",
+"Perfidious Tynril",
+"Refactoring Complete",
+"Stunned Tynril",
+"Vini's Blessing"
+]
+},
+"Wa Wabbit's Castle": {
+"monsters": [
+"Wa Wabbit"
+],
+"bosses": [
+"Wa Wabbit",
+"Wab Wab"
+]
+},
+"Wa Wabbit's Warren": {
+"monsters": [
+"Wa Wobot",
+"Black Wo Wabbit",
+"Tiwobot",
+"Whitepaw Wabbit",
+"Wobot"
+],
+"bosses": [
+"Black Wo Wabbit",
+"Cawwoty Kid",
+"Egg or Cawwot?",
+"Tiwobot",
+"Wa Wobot",
+"Whitepaw Wabbit",
+"Wobot",
+"Wobot Wosungwee"
+]
+},
+"White Rat's Pantry": {
+"monsters": [
+"White Rat",
+"Capoei Rat"
+],
+"bosses": [
+"A Hysterical Judge",
+"Capoei Rat",
+"Ratagnan's Act",
+"Well I'll Be!",
+"White Rat"
+]
+},
+"Al Howin's Vegetable Patch": {
+"monsters": [
+"Al Howin",
+"Arachkin",
+"Borbkin",
+"Devhorror",
+"Toadkin",
+"Worm-O'-Lantern"
+],
+"bosses": [
+"Goulash"
+]
+},
+"Bearbarian Antichamber": {
+"monsters": [
+"Celestial Bearbarian",
+"Esurient Bearbarian"
+],
+"bosses": []
+},
+"Belly of the Whale": {
+"monsters": [
+"Protoz'orror",
+"Pathogerm"
+],
+"bosses": [
+"Pathogerm",
+"Protoz'orror"
+]
+},
+"Bethel's Tower": {
+"monsters": [
+"Bethel Akarna",
+"Zombrute"
+],
+"bosses": [
+"Bethel Akarna",
+"Zombrute"
+]
+},
+"Brumen Tinctorias's LaboRATory": {
+"monsters": [
+"Nelween",
+"Macian"
+],
+"bosses": [
+"Macian",
+"Nelween",
+"When the Boowolf Howls"
+]
+},
+"Brutatax's Factory": {
+"monsters": [
+"Brutatax",
+"Precious"
+],
+"bosses": [
+"Brutatax",
+"Precious"
+]
+},
+"Captain Meno's Ship": {
+"monsters": [
+"Captain Meno"
+],
+"bosses": [
+"Captain Meno",
+"Mobilis in Mobili"
+]
+},
+"Captain Scarlight's Ring": {
+"monsters": [
+"Captain Scarlight",
+"Elsumo"
+],
+"bosses": [
+"A Ring to Rule Them All",
+"Captain Scarlight",
+"Elsumo",
+"Tot's Ring"
+]
+},
+"Catseye Challenge": {
+"monsters": [
+"Catseye",
+"Queen of Fate"
+],
+"bosses": [
+"Catseye",
+"Queen of Fate"
+]
+},
+"Chamber of Tal Kasha": {
+"monsters": [
+"Tal Kasha",
+"Scratchotep"
+],
+"bosses": [
+"Scratchotep",
+"Sneerena",
+"Tal Kasha"
+]
+},
+"Colousses's Meowsoleum": {
+"monsters": [
+"Colousses",
+"Itsh"
+],
+"bosses": []
+},
+"Count Harebourg's Dungeon": {
+"monsters": [
+"Count Harebourg",
+"Treadfast"
+],
+"bosses": [
+"Count Harebourg",
+"Treadfast"
+]
+},
+"Count Razof's Camp": {
+"monsters": [
+"Count Razof",
+"Hunderp"
+],
+"bosses": [
+"Count Razof",
+"Count Razof's Hunts",
+"Hunderp"
+]
+},
+"Cross Strich's Aviary": {
+"monsters": [
+"Cross Strich",
+"Stretch"
+],
+"bosses": [
+"An Eternal Harvest",
+"Cross Strich",
+"Egg For Ecaflip",
+"Frankenstritch",
+"How to Get Plucked",
+"Stretch",
+"The Spy That Keeps On Giving"
+]
+},
+"Daggero's Lair": {
+"monsters": [
+"Daggero"
+],
+"bosses": [
+"Daggero"
+]
+},
+"Dantinea's Palace": {
+"monsters": [
+"Dantinea"
+],
+"bosses": [
+"Dantinea",
+"Under the sea"
+]
+},
+"Dragon Pig's Den": {
+"monsters": [
+"Dragon Pig",
+"Gorgoyle"
+],
+"bosses": [
+"A Pig in a Poke",
+"Dragon Pig",
+"Gorgoyle"
+]
+},
+"Dramak's Theatre": {
+"monsters": [
+"Puppet Master",
+"Dramak"
+],
+"bosses": [
+"Dramak",
+"Puppet Master"
+]
+},
+"Drhossil's Caves": {
+"monsters": [
+"Drhossil",
+"Drhellvina"
+],
+"bosses": [
+"Drhossil"
+]
+},
+"El Piko's Cave": {
+"monsters": [
+"El Piko",
+"Levito"
+],
+"bosses": [
+"Caramba",
+"El Piko",
+"Levito"
+]
+},
+"Eye of Vortex": {
+"monsters": [
+"Vortex",
+"Wastrel"
+],
+"bosses": [
+"Vortex",
+"Wastrel"
+]
+},
+"Forfut Manor": {
+"monsters": [
+"Anerice the Shushess",
+"Ghoulutton"
+],
+"bosses": []
+},
+"Fraktal's Megalith": {
+"monsters": [
+"Fraktal",
+"Segmantid"
+],
+"bosses": [
+"Fraktal",
+"Segmantid"
+]
+},
+"Haunted House": {
+"monsters": [
+"Boostache",
+"Prepubescent Boostache"
+],
+"bosses": [
+"Boostache",
+"Ghosthustlers",
+"Prepubescent Boostache"
+]
+},
+"Kanigrula's Cave": {
+"monsters": [
+"Kanigrula",
+"Kannihilator"
+],
+"bosses": [
+"Kanigrula",
+"Kannihilator"
+]
+},
+"Kanniball Village": {
+"monsters": [
+"Kanniball Andchain",
+"Kanniball Tam"
+],
+"bosses": [
+"I Ate His Liver With Some Fava Beans",
+"Kanniball Andchain",
+"Kanniball Tam"
+]
+},
+"Kickroach's Lair": {
+"monsters": [
+"Kickroach",
+"Gluwax"
+],
+"bosses": [
+"Gluwax",
+"Just a Bunch of Bugs!",
+"Kickroach",
+"Miniature Adventure"
+]
+},
+"King Dazahk's Brewery": {
+"monsters": [
+"Dazahk Freezammer",
+"Tankanvil"
+],
+"bosses": [
+"Dazahk Freezammer",
+"Tankanvil"
+]
+},
+"King Nidas's Palace": {
+"monsters": [
+"King Nidas",
+"Hairsh"
+],
+"bosses": [
+"Hairsh",
+"King Nidas"
+]
+},
+"Klime's Private Suite": {
+"monsters": [
+"Klime",
+"Putchup"
+],
+"bosses": [
+"Klime",
+"Putchup"
+]
+},
+"Kolosso's Caverns": {
+"monsters": [
+"Kolosso",
+"Professor Xa",
+"Venomous Brockhard"
+],
+"bosses": []
+},
+"Korriander's Lair": {
+"monsters": [
+"Korriander",
+"Serpula"
+],
+"bosses": [
+"Korriander"
+]
+},
+"Koutoulou's Temple": {
+"monsters": [
+"Koutoulou Larva"
+],
+"bosses": []
+},
+"Lair of the Rac Queen": {
+"monsters": [
+"Rac Queen",
+"Daddy Longlex"
+],
+"bosses": [
+"A Tangled Web",
+"Daddy Longlex",
+"Rac Queen"
+]
+},
+"LeChouque's Boat": {
+"monsters": [
+"LeChouque",
+"Drunkyller"
+],
+"bosses": [
+"A Well-Buried Treasure",
+"Drunkyller",
+"LeChouque",
+"Shake Our Hand"
+]
+},
+"Mastodon Cemetery": {
+"monsters": [
+"Mantiscore",
+"Spykbal"
+],
+"bosses": [
+"Cheese or Desert",
+"Finding a Femur in a Bone Pile",
+"Mantiscore",
+"Spykbal"
+]
+},
+"Merkator's Aquadome": {
+"monsters": [
+"Merkator",
+"Harpo"
+],
+"bosses": [
+"Harpo",
+"Merkator"
+]
+},
+"Missiz Freezz's Frostforge": {
+"monsters": [
+"Missiz Freezz",
+"Revish"
+],
+"bosses": [
+"Missiz Freezz",
+"Revish"
+]
+},
+"Moon's Tree": {
+"monsters": [
+"Moon",
+"Domoizelle"
+],
+"bosses": [
+"Domoizelle",
+"Moon",
+"Moon In The Mist"
+]
+},
+"Nileza's Laboratory": {
+"monsters": [
+"Nileza",
+"Thermite"
+],
+"bosses": [
+"A Crystal-Clear Voice",
+"Nileza",
+"Thermite"
+]
+},
+"Shadow's Pyramid": {
+"monsters": [
+"Shadow",
+"Brocktis"
+],
+"bosses": [
+"Between Light and Shadow",
+"Brocktis",
+"Shadow"
+]
+},
+"Snowfoux Den": {
+"monsters": [
+"Foster Fuji Snowfoux",
+"Tengu Snowfoux",
+"Kami Snowfoux"
+],
+"bosses": [
+"Foster Fuji Snowfoux",
+"Kami Snowfoux",
+"Tengu Snowfoux"
+]
+},
+"Solar's Tower": {
+"monsters": [
+"Solar",
+"Dead Key"
+],
+"bosses": [
+"Dead Key",
+"Solar"
+]
+},
+"Sylargh's Carrier": {
+"monsters": [
+"Sylargh",
+"Tinkerbear"
+],
+"bosses": [
+"Sylargh",
+"Tinkerbear"
+]
+},
+"The Kwakwa's Nest": {
+"monsters": [
+"Kwakwa",
+"Earth Bwak (monster)",
+"Fire Bwak (monster)",
+"Ice Bwak",
+"Wind Bwak"
+],
+"bosses": [
+"Earth Bwak (monster)",
+"Fire Bwak (monster)",
+"Ice Bwak",
+"Kwakwa",
+"No Nesting Allowed",
+"Wind Bwak"
+]
+},
+"Throne Room of the Dark Court": {
+"monsters": [
+"Queen of Thieves",
+"Skemage"
+],
+"bosses": [
+"Queen of Thieves",
+"Skemage"
+]
+},
+"Toxoliath's Cave": {
+"monsters": [
+"Toxoliath",
+"Dethornit"
+],
+"bosses": [
+"Dethornit",
+"Toxoliath"
+]
+},
+"Ush's Plateau": {
+"monsters": [
+"Ush Galesh",
+"Sucatrose"
+],
+"bosses": [
+"Sucatrose",
+"Ush Galesh"
+]
+},
+"Wurmlord's Passage": {
+"monsters": [
+"Wurmlord",
+"Stapleworm"
+],
+"bosses": [
+"Stapleworm",
+"Wurmlord"
+]
+},
+"XLII's Metronomicon": {
+"monsters": [
+"XLII",
+"Siks-T"
+],
+"bosses": [
+"Siks-T",
+"XLII"
+]
+},
+"Bitter-Hammers' Stronghold": {
+"monsters": [
+"Berybell Copperbeard",
+"Boarok"
+],
+"bosses": [
+"Berybell Copperbeard",
+"Boarok"
+]
+},
+"Bzzegg Supervisor's Checkpoint": {
+"monsters": [
+"Bzzegg Supervisor"
+],
+"bosses": [
+"Bzzegg Supervisor"
+]
+},
+"Chamber of Evils": {
+"monsters": [
+"Belladonna",
+"Statulip"
+],
+"bosses": [
+"Belladonna",
+"Statulip"
+]
+},
+"Chokao Temple": {
+"monsters": [
+"Chokao Priestess",
+"Chocoligarch"
+],
+"bosses": [
+"Chocoligarch",
+"Chokao Priestess"
+]
+},
+"Cire Momore's Cavern": {
+"monsters": [
+"Cire Momore"
+],
+"bosses": [
+"Belladonna",
+"Cire Momore",
+"Statulip"
+]
+},
+"Crunchery": {
+"monsters": [
+"Crunchler",
+"Yazkooalak"
+],
+"bosses": [
+"Crunchler",
+"Yazkooalak"
+]
+},
+"Damadrya's Bamboo Grove": {
+"monsters": [
+"Damadrya",
+"Bulbiflor"
+],
+"bosses": [
+"Bend Without Breaking",
+"Bulbiflor",
+"Damadrya"
+]
+},
+"Draegnerys's Trial": {
+"monsters": [
+"Alabaster Dreggon",
+"Draegnerys"
+],
+"bosses": [
+"Alabaster Dreggon",
+"Baptism by Fire",
+"Draegnerys"
+]
+},
+"Fouxwork Factory": {
+"monsters": [
+"Founoroshi",
+"Fouxnamballist"
+],
+"bosses": [
+"Founoroshi",
+"Fouxnamballist",
+"Lantern Festival",
+"The Warrior's Path",
+"Vini's Blessing"
+]
+},
+"Gob Akademy": {
+"monsters": [
+"Director Grunob",
+"Gobelishous"
+],
+"bosses": [
+"Director Grunob",
+"Gobelishous",
+"Going Gobs-Up"
+]
+},
+"Grozilla and Grasmera's Den": {
+"monsters": [
+"Grozilla",
+"Grasmera",
+"Tired Grozilla",
+"Tired Grasmera",
+"Exhausted Grozilla",
+"Exhausted Grasmera",
+"Sleepwalking Grozilla",
+"Sleepwalking Grasmera"
+],
+"bosses": [
+"Exhausted Grasmera",
+"Exhausted Grozilla",
+"Grasmera",
+"Grozilla",
+"Sleepwalking Grasmera",
+"Sleepwalking Grozilla",
+"Taking Blood",
+"Tired Grasmera",
+"Tired Grozilla"
+]
+},
+"Ilyzaelle's Lookout": {
+"monsters": [
+"Ilyzaelle",
+"Hothing"
+],
+"bosses": [
+"Hothing",
+"Ilyzaelle"
+]
+},
+"Imagiro's Memory": {
+"monsters": [
+"Queen Amirukam",
+"Fugokam"
+],
+"bosses": [
+"Queen Amirukam"
+]
+},
+"Kabaal Ritual": {
+"monsters": [
+"Kabaal"
+],
+"bosses": [
+"Possessed by Another"
+]
+},
+"Kharnotaurus's Lair": {
+"monsters": [
+"Kharnotaurus",
+"Shape-Shifting Dragoss"
+],
+"bosses": [
+"An Unaccommodating Innkeeper",
+"Kharnotaurus",
+"Shape-Shifting Dragoss"
+]
+},
+"Long Slumber's Barrow": {
+"monsters": [
+"Malwood",
+"Hell Mina"
+],
+"bosses": [
+"Hell Mina",
+"Malwood",
+"The Flames of Hell"
+]
+},
+"Magik Riktus Big Top": {
+"monsters": [
+"Cauldini",
+"Bozo Jumper"
+],
+"bosses": [
+"Bozo Jumper",
+"Cauldini"
+]
+},
+"Orukam's Memory": {
+"monsters": [
+"King Imagami",
+"Imafugo"
+],
+"bosses": [
+"King Imagami"
+]
+},
+"Shogun Tofugawa's Tomb": {
+"monsters": [
+"Shogun Tofugawa",
+"Kabushido"
+],
+"bosses": [
+"Shogun Tofugawa"
+]
+},
+"Spirit Abode": {
+"monsters": [
+"Koumiho",
+"Onigori"
+],
+"bosses": [
+"Koumiho"
+]
+},
+"Sylvan Refuge": {
+"monsters": [
+"Raccooper",
+"Coolwolf"
+],
+"bosses": [
+"Coolwolf",
+"Our Neighbours, the Twelvians",
+"Raccooper"
+]
+},
+"Tanukouï San's Workshop": {
+"monsters": [
+"Tanukouï San",
+"Shinobuubusu"
+],
+"bosses": [
+"In the Name of Art",
+"Shinobuubusu",
+"Tanukouï San",
+"The Warrior's Path"
+]
+},
+"The Ripper's Altar": {
+"monsters": [
+"Ripper"
+],
+"bosses": [
+"Altar Master",
+"Ripper"
+]
+},
+"The Venerable One's Thicket": {
+"monsters": [
+"Sleeping Venerable One"
+],
+"bosses": [
+"Sleeping Venerable One"
+]
+},
+"Tree of Death": {
+"monsters": [
+"Pistilick",
+"Corruption"
+],
+"bosses": [
+"Death and Renewal",
+"Pistilick"
+]
+},
+"Turtelonia's Sanctuary": {
+"monsters": [
+"Turtelonia",
+"Guilodyle"
+],
+"bosses": [
+"Guilodyle",
+"Turtelonia"
+]
+},
+"Valley of the Lady of the Water": {
+"monsters": [
+"Nagate",
+"Kwamurai"
+],
+"bosses": [
+"The Jetty of Lost Children"
+]
+},
+"Waddict Foundry": {
+"monsters": [
+"Mawabouwaino",
+"Eguntew"
+],
+"bosses": [
+"Eguntew",
+"Mawabouwaino"
+]
+},
+"Wind Dojo": {
+"monsters": [
+"Hanshi",
+"Shihan",
+"Uchiwang"
+],
+"bosses": [
+"Hanshi",
+"Shihan",
+"Uchiwang",
+"Under the Wind"
+]
+}
+}
