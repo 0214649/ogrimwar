@@ -88,6 +88,62 @@ def place(aid, stack=()):
     pos = max(x[1] for x in out) if out and ok else None
     memo[aid] = (pos, out); return memo[aid]
 
+# ---------- where the route walks: step position -> sub-area (polygons from the game's sub-area shapes) ----------
+import unicodedata
+nrm = lambda t: re.sub(r'[^a-z0-9]+', ' ', ''.join(c for c in unicodedata.normalize('NFKD', (t or '').lower()) if not unicodedata.combining(c))).strip()
+worlds = {w['id']: fr.get(w['nameId'], '') for w in rows('worldmaps')}
+super_world = {x['id']: x.get('worldmapId') for x in rows('superareas')}
+# an area's world: its own worldmapId, else its super-area's (Incarnam = "Zone de départ" -> world 2), else the main world
+area_world = {a['id']: (a.get('worldmapId') or super_world.get(a.get('superAreaId')) or 1) for a in rows('areas')}
+GANY_WORLD = {'douze': 1}
+def world_of(name):
+    n = nrm(name)
+    if not n: return None
+    if n in GANY_WORLD: return GANY_WORLD[n]
+    for wid, wn in worlds.items():
+        if n in nrm(wn) or nrm(wn) in n: return wid
+    return None
+def polygons(shape):
+    polys, cur, k = [], None, 0
+    while k + 1 < len(shape):
+        x, y = shape[k], shape[k + 1]; k += 2
+        if x > 5000 or y > 5000:
+            cur = [(x - 11000, y - 11000)]; polys.append(cur)
+        elif cur is not None: cur.append((x, y))
+    return polys
+def inside(px, py, poly):
+    c = False
+    for (x1, y1), (x2, y2) in zip(poly, poly[1:] + poly[:1]):
+        if (y1 > py) != (y2 > py) and px < (x2 - x1) * (py - y1) / (y2 - y1) + x1: c = not c
+    return c
+subs = []
+for sa in rows('subareas'):
+    w = sa['customWorldMapId'] if sa.get('customWorldMapId', -1) >= 0 else area_world.get(sa['areaId'])
+    subs.append({'id': sa['id'], 'fr': fr.get(sa['nameId'], ''), 'world': w, 'polys': polygons(sa.get('shape') or []), 'monsters': sa.get('monsters') or []})
+def sub_at(world, x, y):
+    for sa in subs:
+        if sa['world'] == world and any(inside(x + .5, y + .5, pg) or inside(x, y, pg) for pg in sa['polys']): return sa
+    return None
+COORD = re.compile(r'\[\s*(-?\d{1,3})\s*,\s*(-?\d{1,3})\s*\]')
+first_visit = {}
+for p_, (key_, h) in enumerate(items):
+    parts = key_.split('/')
+    st = gp0['steps'][int(parts[0])] if len(parts) == 1 else guide(int(parts[1]))['steps'][int(parts[2])]
+    w = world_of(st.get('map'))
+    if w is None: continue
+    pts = [(st.get('pos_x'), st.get('pos_y'))] + [(int(a_), int(b_)) for a_, b_ in COORD.findall(re.sub(r'<[^>]+>', ' ', h))]
+    for x, y in pts:
+        if x is None: continue
+        sa = sub_at(w, x, y)
+        if sa: first_visit.setdefault(sa['id'], p_)
+print('sub-areas visited by the route:', len(first_visit), 'of', len(subs))
+sub_by_name = {}
+for sa in subs: sub_by_name.setdefault(nrm(sa['fr']), []).append(sa)
+mon_first = {}
+for sa in subs:
+    if sa['id'] in first_visit:
+        for m in sa['monsters']: mon_first[m] = min(mon_first.get(m, 10**9), first_visit[sa['id']])
+
 data = json.load(open(f'{ROOT}/ach.json'))
 key = lambda p: items[p][0] if p is not None else None
 better = gained = 0
@@ -101,6 +157,23 @@ for a in data['ach']:
         elif a['done'] != key(pos): better += 1
         a['done'] = key(pos); a['sug'] = None
     if ob: a['o'] = [[label, key(p)] for label, p in ob]
+# exploration: "Découvrir la zone X" is done the first time the route walks into sub-area X
+cat_top = {}
+explo = 0; monst = 0
+for a in data['ach']:
+    if a['done'] or a.get('top') != 'Exploration' and not (a.get('d') or '').startswith('Découvrir la zone'): continue
+    cands = [sa for sa in sub_by_name.get(nrm(a['n']), []) if sa['id'] in first_visit]
+    if cands:
+        p_ = min(first_visit[sa['id']] for sa in cands)
+        a['done'] = key(p_); a['sug'] = None; a['o'] = [[f"Découvrir : {a['n']}", key(p_)]]; explo += 1
+# monster challenges: doable from the first step that walks through a sub-area where all its monsters live
+for a in data['ach']:
+    gid = a.get('gid')
+    if a['done'] or not gid: continue
+    mons = [int(m) for o in objs.get(gid, []) for m in re.findall(r'E[fM]>(\d+)', o.get('criterion') or '')]
+    if mons and all(m in mon_first for m in mons):
+        a['sug'] = key(max(mon_first[m] for m in mons)); monst += 1
+print(f'exploration placed: {explo}; monster achievements doable-from: {monst}')
 json.dump(data, open(f'{ROOT}/ach.json', 'w'), ensure_ascii=False, separators=(',', ':'))
 print(f'game pass: {gained} newly placed at an exact step, {better} moved, '
       f'{sum(1 for a in data["ach"] if a["done"])} exact in total out of {len(data["ach"])}')
