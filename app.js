@@ -624,7 +624,7 @@ document.addEventListener('click', e => {
   const gs = e.target.closest('[data-type=guide-step]');
   if (gs) {
     const g = +gs.getAttribute('guideid'), cur = items[idx].i;
-    const j = items.findIndex(x => x.i === cur && x.g === g);
+    const j = g === GP0 ? items.findIndex(x => x.key === String(cur)) : items.findIndex(x => x.i === cur && x.g === g);   // a [GP0] link = back to the current GP0 step
     if (j >= 0) go(j); else toast(`${gs.textContent.trim()} n'a pas de plage dans cette étape`);
   }
 });
