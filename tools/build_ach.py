@@ -189,6 +189,50 @@ def suggest(name, v):
     cand = ([min(zp)] if zp else []) + ([lp] if lp is not None else [])
     return max(cand) if cand else None
 
+# ---------- French descriptions: the wiki's English ones follow a handful of fixed sentences ----------
+def mon_fr(n):
+    n = n.strip()
+    for c in (n, n[4:] if n.lower().startswith('the ') else None, 'The ' + n):
+        if c and en2fr('Monsters', c): return en2fr('Monsters', c)
+    return en2fr('Dungeons', n) or n
+def bosses_fr(x): return ' et '.join(mon_fr(b) for b in re.split(r'\s+and\s+|,\s*', x) if b.strip())
+DESC_RULES = [
+    (r"Complete the following achievements:?", lambda m: "Terminer les succès suivants."),
+    (r"Complete the following quests?:?", lambda m: "Terminer les quêtes suivantes."),
+    (r"Complete the following achievements while accompanied by one of these sidekicks:?\s*\.?", lambda m: "Terminer les succès suivants accompagné d'un de ces compagnons."),
+    (r"Use the following items:?", lambda m: "Utiliser les objets suivants."),
+    (r"Earn ([\d,]+) achievement points\.?", lambda m: f"Obtenir {m.group(1).replace(',', ' ')} points de succès."),
+    (r"Complete ([\d,]+) quests\.?", lambda m: f"Terminer {m.group(1).replace(',', ' ')} quêtes."),
+    (r"Reach level (\d+)\.?", lambda m: f"Atteindre le niveau {m.group(1)}."),
+    (r"Reach level (\d+) of an alignment\.?", lambda m: f"Atteindre le niveau {m.group(1)} d'alignement."),
+    (r"Reach level (\d+) in a profession\.?", lambda m: f"Atteindre le niveau {m.group(1)} dans un métier."),
+    (r"Reach level (\d+) in (\d+) professions\.?", lambda m: f"Atteindre le niveau {m.group(1)} dans {m.group(2)} métiers."),
+    (r"Bring ([\d,]+) mounts? into the World\.?", lambda m: f"Faire naître {m.group(1).replace(',', ' ')} montures."),
+    (r"Craft ([\d,]+) items?\.?", lambda m: f"Fabriquer {m.group(1).replace(',', ' ')} objets."),
+    (r"Earn ([\d,]+) guildokens\.?", lambda m: f"Gagner {m.group(1)} guildetons."),
+    (r"Succeed in breeding all the types of (\w+)-generation (\w+)\.?", lambda m: f"Faire naître tous les types de {m.group(2)} de {dict(second='2e',third='3e',fourth='4e',fifth='5e',sixth='6e',seventh='7e',eighth='8e',ninth='9e',tenth='10e').get(m.group(1), m.group(1))} génération."),
+    (r"Complete ([\d,]+) (?:dungeon )?challenges against groups of a level higher than or equal to your own\.?", lambda m: f"Réussir {m.group(1).replace(',', ' ')} challenges contre des groupes de niveau supérieur ou égal au vôtre."),
+    (r"Capture the monsters wanted in (.+?)\.?", lambda m: f"Capturer les monstres recherchés à {m.group(1).replace(' and ', ' et ')}."),
+    (r"Reach the (first|second|third|fourth|fifth) rank in an Order\.?", lambda m: f"Atteindre le {dict(first='1er', second='2e', third='3e', fourth='4e', fifth='5e')[m.group(1)]} rang d'un Ordre."),
+    (r"Complete a challenge whilst defeating the following monsters[:.]?", lambda m: "Réussir un challenge en battant les monstres suivants."),
+    (r"Defeat (?:the )?(.+?) in (?:this boss's|these bosses'|their) dungeon( as a team)? while completing the challenge\.?",
+     lambda m: f"Vaincre {bosses_fr(m.group(1))} dans son donjon{' en équipe' if m.group(2) else ''} en réussissant le challenge."),
+    (r"Defeat (?:the )?(.+?) in (?:this boss's|these bosses'|their) dungeon\.?", lambda m: f"Vaincre {bosses_fr(m.group(1))} dans son donjon."),
+    (r"Defeat (?:the )?(.+?) while completing the challenge\.?", lambda m: f"Vaincre {bosses_fr(m.group(1))} en réussissant le challenge."),
+    (r"Complete (\d+) challenges? against (?:the )?(.+?)\.?", lambda m: f"Réussir {m.group(1)} challenge{'s' if m.group(1) != '1' else ''} contre {mon_fr(m.group(2))}."),
+    (r"Defeat (?:the )?(.+?) and (?:the )?(.+?) in the same fight, in a dungeon\.?", lambda m: f"Vaincre {mon_fr(m.group(1))} et {mon_fr(m.group(2))} dans le même combat, en donjon."),
+    (r"Defeat (?:the )?([^,]+?)\.?", lambda m: f"Vaincre {bosses_fr(m.group(1))}."),
+    (r"Discover the \"(.+?)\" area\.?", lambda m: f"Découvrir la zone « {m.group(1)} »."),
+    (r"Complete (\d+) guild missions? in the (.+?) category\.?", lambda m: f"Réussir {m.group(1)} mission{'s' if m.group(1) != '1' else ''} de guilde de la catégorie {m.group(2)}."),
+    (r"Complete all (?:the )?(.+?) quests\.?", lambda m: f"Terminer toutes les quêtes ({m.group(1)})."),
+]
+def fr_desc(d):
+    d = d.strip()
+    for rx, f in DESC_RULES:
+        m = re.fullmatch(rx, d)
+        if m: return f(m)
+    return d
+
 out, keyof = [], lambda p: items[p][0] if p is not None else None
 stats = collections.Counter()
 for name, v in ach.items():
@@ -215,7 +259,7 @@ for name, v in ach.items():
                 if b and boss_dungeon(b): djn = boss_dungeon(b); break
             if djn: break
     out.append({'dj': en2fr('Dungeons', djn) if djn else None, 'sug': sug, 'seasonal': cat in SEASONAL or tp == 'Events', 'n': fr_name(name), 'en': name, 'cat': cat, 'top': tp, 'lvl': v.get('level'),
-                'd': re.sub(r'\[challenge,\d+\] ?', '', html.unescape(v.get('description') or '')), 'done': keyof(d), 'o': objs,
+                'd': fr_desc(re.sub(r'\s*\[challenge,\d+\]', '', html.unescape(v.get('description') or ''))), 'done': keyof(d), 'o': objs,
                 'duo': name.endswith('(Duo)'), 'solo': name.endswith('(Solitary)') or name.endswith('(Lone Wolf)')})
 json.dump({'built': '2026-10-15', 'source': 'DofusWiki (dofuswiki.fandom.com), CC-BY-SA', 'ach': out},
           open(f'{ROOT}/ach.json', 'w'), ensure_ascii=False, separators=(',', ':'))
