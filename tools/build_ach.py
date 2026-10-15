@@ -42,12 +42,29 @@ for i, st in enumerate(gp0['steps']):
         for k in range(a, min(b, len(guide(g)['steps']))):
             if (g, k) in seen: continue
             seen.add((g, k)); items.append((f'{i}/{g}/{k}', guide(g)['steps'][k].get('web_text')))
+
+_plain = lambda h: re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', h or ''))).strip()
+def counts(key):
+    """False for GP0 pages that are not game steps: credits/welcome/how-to-read examples and the hidden bonus pages."""
+    if '/' in key: return True
+    return bool(re.match(r'Objectifs?\s*:', _plain(gp0['steps'][int(key)].get('web_text'))))
 TAG = re.compile(r'<span data-type="custom-tag"[^>]*?type="(\w+)"[^>]*?name="([^"]*)"')
 QB = re.compile(r'data-type="quest-block"[^>]*?questname="([^"]*)"[^>]*?status="(\w+)"')
-qend, qlast, dpos, mpos = {}, {}, {}, {}
+
+RUN_RE = re.compile(r'\b(Réalise[zr]|Effectue[zr]|Faites|Faire|Refaites|Termine[zr]|Vainque[zr]|Battez|Combattez|Lancez le combat)\b', re.I)
+NOT_RE = re.compile(r'sans (faire|lancer)|plus tard|pour prendre la sauvegarde|il vous faudra|vous pourrez|qui vous demande|en parallèle|Atteindre|Une fois à', re.I)
+def runs(h):
+    """Dungeon ids actually run in this step: tag in a sentence with a 'do it' verb, not a 'later' mention."""
+    out = []
+    for chunk in re.split(r'</p>|</li>|<br\s*/?>', h or ''):
+        t = re.sub(r'<[^>]+>', ' ', chunk)
+        if RUN_RE.search(t) and not NOT_RE.search(t):
+            out += [i for ty, i in re.findall(r'data-type="custom-tag"[^>]*?type="(\w+)"[^>]*?dofusdbid="(\d+)"', chunk) if ty == 'dungeon']
+    return out
+qend, qlast, dpos, mpos, dmention = {}, {}, {}, {}, {}
 miss = collections.Counter()
 for p, (key, h) in enumerate(items):
-    h = h or ''
+    h = (h or '') if counts(key) else ''
     for ty, name in TAG.findall(h):
         n = norm(name)
         if ty == 'quest':
@@ -56,7 +73,7 @@ for p, (key, h) in enumerate(items):
             else: miss['quest:' + name] += 1
         elif ty == 'dungeon':
             en = fr2en['Dungeons'].get(n)
-            if en: dpos.setdefault(en, p)
+            if en: dmention.setdefault(en, p)
             else: miss['dungeon:' + name] += 1
         elif ty == 'monster':
             en = fr2en['Monsters'].get(n)
@@ -66,8 +83,12 @@ for p, (key, h) in enumerate(items):
         if not en: miss['qblock:' + name] += 1; continue
         qlast[en] = p
         if status == 'end': qend[en] = p
+    for name in runs(h):
+        en = fr2en['Dungeons'].get(norm(name))
+        if en: dpos.setdefault(en, p)
+for en, p in dmention.items(): dpos.setdefault(en, p)
 qpos = {**qlast, **qend}
-plain = [' ' + norm(re.sub(r'<[^>]+>', ' ', h or '')) + ' ' for _, h in items]
+plain = [' ' + norm(re.sub(r'<[^>]+>', ' ', h or '')) + ' ' if counts(k) else '' for k, h in items]
 _text_memo = {}
 def text_pos(fr):
     """First route item whose text names `fr` (whole words), or None."""
@@ -177,6 +198,7 @@ for f in ('Monsters_Stats_A-K', 'Monsters_Stats_L-Z'):
     if os.path.exists(f'{HERE}/wiki/{f}.lua'): monsters.update(W(f)['monsters'])
 def level_pos(lvl):
     step = max(s_ for l_, s_ in LEVEL_STEPS if l_ <= (lvl or 1))
+    while step < len(gp0['steps']) and not counts(str(step)): step += 1      # bracket pages are hidden bonus pages: use the next real step
     return gp0_first.get(step)
 def suggest(name, v):
     zones = {v.get('category')}
@@ -278,7 +300,11 @@ for name, v in ach.items():
         objs.append([obj_label(cs[0], ob.get('condition')), keyof(max(pos)) if all(p is not None for p in pos) else None])
     d = done_at(name)
     stats['placed' if d is not None else ('partial' if any(o[1] for o in objs) else 'outside')] += 1
-    sug = keyof(suggest(name, v)) if d is None and (tp not in ('Events',) and cat not in SEASONAL) else None
+    g = official(name, v.get('description'))
+    if not g and game['achs']: stats['not in the game anymore'] += 1; continue
+    if g and game_top(g['cat']).get('fr') in ('Temporis', 'Kolizéum', "La Source : L'Héritage des Dofus"): stats['excluded'] += 1; continue
+    is_event = (game_top(g['cat']).get('en') == 'Events') if g else (tp == 'Events' or cat in SEASONAL)
+    sug = keyof(suggest(name, v)) if d is None and not is_event else None
     if sug: stats['suggested'] += 1
     djn = name if name in ills['Dungeons'] else None
     if not djn:
@@ -289,11 +315,10 @@ for name, v in ach.items():
                 b = ob.get('condition') if c.get('type') == 'Complete challenge' else c.get('value') if c.get('type') == 'Defeat monster' else None
                 if b and boss_dungeon(b): djn = boss_dungeon(b); break
             if djn: break
-    g = official(name, v.get('description'))
     if g: used_game.add(g['id'])
-    elif game['achs']: stats['not in the game anymore'] += 1; continue
     out.append({'gid': g['id'] if g else None, 'catfr': (game['cats'].get(str(g['cat'])) or {}).get('fr') if g else None,
-                'dj': en2fr('Dungeons', djn) if djn else None, 'sug': sug, 'seasonal': cat in SEASONAL or tp == 'Events', 'n': fr_name(name), 'en': name, 'cat': cat, 'top': tp, 'lvl': v.get('level'),
+                'topfr': game_top(g['cat']).get('fr') if g else None,
+                'dj': en2fr('Dungeons', djn) if djn else None, 'sug': sug, 'seasonal': is_event, 'n': g['fr'] if g and g['fr'] else fr_name(name), 'en': name, 'cat': cat, 'top': tp, 'lvl': v.get('level'),
                 'd': chal_text(g['dfr'], g['fr']) if g and g['dfr'] else fr_desc(re.sub(r'\s*\[challenge,\d+\]', '', html.unescape(v.get('description') or ''))), 'done': keyof(d), 'o': objs,
                 'duo': name.endswith('(Duo)'), 'solo': name.endswith('(Solitary)') or name.endswith('(Lone Wolf)')})
 SKIP_TOP = {'Temporis', 'Kolizéum', "La Source : L'Héritage des Dofus"}
@@ -302,7 +327,7 @@ for ga in game['achs']:
     top_c = game_top(ga['cat']); cat_c = game['cats'].get(str(ga['cat'])) or {}
     if top_c.get('fr') in SKIP_TOP or 'Dungeon Rusher' in cat_c.get('en', '') or 'Rusher' in cat_c.get('fr', ''): continue
     seasonal = top_c.get('en') == 'Events'
-    out.append({'gid': ga['id'], 'catfr': cat_c.get('fr'), 'dj': None, 'sug': None if seasonal else keyof(level_pos(ga['lvl'])),
+    out.append({'gid': ga['id'], 'catfr': cat_c.get('fr'), 'topfr': top_c.get('fr'), 'dj': None, 'sug': None if seasonal else keyof(level_pos(ga['lvl'])),
                 'seasonal': seasonal, 'n': ga['fr'], 'en': ga['en'] or ga['fr'], 'cat': cat_c.get('en', ''), 'top': top_c.get('en', ''),
                 'lvl': ga['lvl'], 'd': chal_text(ga['dfr'], ga['fr']), 'done': None, 'o': [], 'duo': ga['fr'].endswith('(Duo)'),
                 'solo': ga['fr'].endswith('(Solitaire)'), 'gameonly': True})

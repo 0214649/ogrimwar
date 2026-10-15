@@ -10,8 +10,8 @@ const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '
 // Several profiles per browser (one per team / friend); each keeps its own progress. A fresh visitor gets one blank profile.
 const LEGACY = 'carnet-team-v1', PROFILES = 'eclosion-profiles-v1', PKEY = id => 'eclosion-p-' + id;
 // Unlocked the moment a new character clicks "skip the tutorial": Premier temps, Second temps, Sur de bonnes bases, Temple Céleste
-const START_ACH = ['Beginning', 'Second Phase', 'A Good Foundation', 'Celestial Temple (Achievement)'];
-const blank = () => ({ pos: '0', t: {}, a: Object.fromEntries(START_ACH.map(k => [k, 1])), l: {}, align: 'bonta', v: 2 });   // l: put off until level 200 / a carry
+const START_ACH = ['First Steps', 'Second Phase', 'A Good Foundation', 'Celestial Temple (Achievement)'];
+const blank = () => ({ pos: '0', t: {}, a: Object.fromEntries(START_ACH.map(k => [k, 1])), l: {}, align: 'bonta', v: 3 });   // l: put off until level 200 / a carry
 const ALIGN = { bonta: 516, brak: 773 };   // GP9 Bontarien / Brâkmarien
 const lsGet = k => { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch { return null; } };
 const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
@@ -23,7 +23,7 @@ if (!P || !P.list?.length) {
   lsSet(PROFILES, P);
 }
 // profiles made before START_ACH existed get those four ticked once
-for (const p of P.list) { const st = lsGet(PKEY(p.id)); if (st && !(st.v >= 2)) { st.a = { ...(st.a || {}) }; START_ACH.forEach(k => st.a[k] = 1); st.v = 2; lsSet(PKEY(p.id), st); } }
+for (const p of P.list) { const st = lsGet(PKEY(p.id)); if (st && !(st.v >= 3)) { st.a = { ...(st.a || {}) }; delete st.a.Beginning; START_ACH.forEach(k => st.a[k] = 1); st.v = 3; lsSet(PKEY(p.id), st); } }
 let S = { ...blank(), ...(lsGet(PKEY(P.cur)) || {}) };
 const save = () => lsSet(PKEY(P.cur), S);
 const profName = () => P.list.find(p => p.id === P.cur)?.name || 'Profil';
@@ -418,7 +418,7 @@ function achLi(ai, here) {
 function renderAchPanel(it, html) {
   const panel = $('achPanel');
   if (!ACH.length) { panel.hidden = true; return; }
-  let h = dungeonCards(html ?? (it.g === undefined ? gp0.steps[it.i].web_text : ''));
+  let h = it.g === undefined && isIntro(it.i) ? '' : dungeonCards(html ?? (it.g === undefined ? gp0.steps[it.i].web_text : ''));
   if (it.g === undefined) {
     const xs = doneByStep.get(it.i) || [], ss = sugByStep.get(it.i) || [];
     const hasExtra = ai => ACH[ai].oi.some((x, j) => x < 0 && /^Quête : /.test(ACH[ai].o[j][0]));
@@ -459,7 +459,7 @@ function renderAchView() {
     <label>Duos : <select id="duoF"><option value="">tous les succès</option><option value="A"${ui.duoF === 'A' ? ' selected' : ''}>Duo A</option><option value="B"${ui.duoF === 'B' ? ' selected' : ''}>Duo B</option><option value="?"${ui.duoF === '?' ? ' selected' : ''}>Duo pas encore attribué</option></select></label>
     <label><input type="checkbox" id="laterOnly"${ui.laterOnly ? ' checked' : ''}> ⏳ Reportés (niveau 200 / passeur) : ${ACH.filter(a => S.l[a.en] && !got(a)).length}</label></div>`;
   const tops = new Map();
-  for (const ai of xs) { const a = ACH[ai]; const t = TOP_FR[a.top] || a.top; (tops.get(t) || tops.set(t, new Map()).get(t)); const m = tops.get(t); (m.get(catOf(a)) || m.set(catOf(a), []).get(catOf(a))).push(ai); }
+  for (const ai of xs) { const a = ACH[ai]; const t = a.topfr || TOP_FR[a.top] || a.top; (tops.get(t) || tops.set(t, new Map()).get(t)); const m = tops.get(t); (m.get(catOf(a)) || m.set(catOf(a), []).get(catOf(a))).push(ai); }
   for (const [t, cats] of [...tops].sort((x, y) => [...y[1].values()].flat().length - [...x[1].values()].flat().length)) {
     const all = [...cats.values()].flat(), g = all.filter(ai => got(ACH[ai])).length;
     h += `<details${q ? ' open' : ''}><summary><span>${esc(t)}</span><span class="cntc${g === all.length ? ' full' : ''}">${g}/${all.length}</span></summary><div class="inner">`;
@@ -667,7 +667,7 @@ function burst(el) {
     gp0 = await guide(GP0);
   } catch (e) { $('card').innerHTML = `<p class="empty">Le [GP0] n'a pas pu être chargé (${esc(e.message)}). Recharge la page dans un instant.</p>`; return; }
   buildItems();
-  try { indexAch(await (await fetch('ach.json?v=12')).json()); } catch (e) { console.warn('ach.json', e); }
+  try { indexAch(await (await fetch('ach.json?v=14')).json()); } catch (e) { console.warn('ach.json', e); }
   try { DJ = await (await fetch('dungeons.json?v=2')).json(); } catch (e) { console.warn('dungeons.json', e); }
   idx = Math.max(0, items.findIndex(x => x.key === S.pos));
   document.querySelector(`input[name=align][value=${S.align}]`).checked = true;

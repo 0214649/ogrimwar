@@ -22,3 +22,9 @@ python3 tools/build_ach.py                  # -> ach.json (wiki dans tools/wiki/
 ```
 
 `tools/fetch_guides.py` attend `tools/cache/gp_list.json` (`https://ganymede-app.com/api/guides?status=gp`).
+
+## Vérifier les données
+
+```sh
+python3 tools/audit.py   # pages exemple/bonus, catégories et noms du jeu, doublons, donjons, couverture
+```

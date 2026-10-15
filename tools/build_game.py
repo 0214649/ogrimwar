@@ -22,7 +22,9 @@ objs = {}
 for o in rows('achievementobjectives'): objs.setdefault(o['achievementId'], []).append(o)
 dungeons = rows('dungeons')
 quests = {q['id']: q for q in rows('quests')}
-a2d = {aid: d for d in dungeons for aid in d.get('achievements') or []}
+a2d = {}
+for d in sorted(dungeons, key=lambda d: len(d.get('achievements') or [])):   # most specific dungeon first ("Tempête" also lists the 4 horsemen's)
+    for aid in d.get('achievements') or []: a2d.setdefault(aid, d)
 boss2d = {b: d for d in dungeons for b in d.get('bosses') or []}
 
 # ---------- route items, same order as app.js ----------
@@ -38,18 +40,57 @@ for i, st in enumerate(gp0['steps']):
         for k in range(a, min(b, len(guide(g)['steps']))):
             if (g, k) in seen: continue
             seen.add((g, k)); items.append((f'{i}/{g}/{k}', guide(g)['steps'][k].get('web_text') or ''))
+import html
+
+_plain = lambda h: re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', h or ''))).strip()
+def counts(key):
+    """False for GP0 pages that are not game steps: credits/welcome/how-to-read examples and the hidden bonus pages."""
+    if '/' in key: return True
+    return bool(re.match(r'Objectifs?\s*:', _plain(gp0['steps'][int(key)].get('web_text'))))
 TAG = re.compile(r'data-type="custom-tag"[^>]*?type="(\w+)"[^>]*?dofusdbid="(\d+)"')
 QB = re.compile(r'<div data-type="quest-block"[^>]*?status="(\w+)"[^>]*>(.*?)</div>', re.S)
-qend, qlast, dpos, mpos = {}, {}, {}, {}
-for p, (_, h) in enumerate(items):
+
+RUN_RE = re.compile(r'\b(Réalise[zr]|Effectue[zr]|Faites|Faire|Refaites|Termine[zr]|Vainque[zr]|Battez|Combattez|Lancez le combat)\b', re.I)
+NOT_RE = re.compile(r'sans (faire|lancer)|plus tard|pour prendre la sauvegarde|il vous faudra|vous pourrez|qui vous demande|en parallèle|Atteindre|Une fois à', re.I)
+def runs(h):
+    """Dungeon ids actually run in this step: tag in a sentence with a 'do it' verb, not a 'later' mention."""
+    out = []
+    for chunk in re.split(r'</p>|</li>|<br\s*/?>', h or ''):
+        t = re.sub(r'<[^>]+>', ' ', chunk)
+        if RUN_RE.search(t) and not NOT_RE.search(t):
+            out += [i for ty, i in re.findall(r'data-type="custom-tag"[^>]*?type="(\w+)"[^>]*?dofusdbid="(\d+)"', chunk) if ty == 'dungeon']
+    return out
+qend, qlast, dpos, mpos, dmention, dmention_all, druns = {}, {}, {}, {}, {}, {}, {}
+for p, (k_, h) in enumerate(items):
+    if not counts(k_): continue
     for ty, i in TAG.findall(h):
         i = int(i)
         if ty == 'quest': qlast[i] = p
-        elif ty == 'dungeon': dpos.setdefault(i, p)
+        elif ty == 'dungeon': dmention.setdefault(i, p); dmention_all.setdefault(i, []).append(p)
         elif ty == 'monster': mpos.setdefault(i, p)
     for status, inner in QB.findall(h):
         for ty, i in TAG.findall(inner):
             if ty == 'quest' and status == 'end': qend[int(i)] = p
+    for i in runs(h): druns.setdefault(int(i), []).append(p)
+# never explicitly run: first mention, but not before the step matching the dungeon's level
+BRACKETS = [(1, 4), (40, 23), (60, 41), (100, 60), (120, 79), (150, 91), (180, 106), (200, 127)]
+real_first = {}
+for p_, (k_, _) in enumerate(items):
+    if '/' not in k_ and counts(k_): real_first.setdefault(int(k_), p_)
+def level_item(lvl):
+    step = max(s_ for l_, s_ in BRACKETS if l_ <= (lvl or 1))
+    while step not in real_first and step < len(gp0['steps']): step += 1
+    return real_first.get(step, 0)
+dlevel = {d['id']: d.get('optimalPlayerLevel') or 0 for d in dungeons}
+for i, ps in druns.items():                  # explicit runs: the first one reached at the dungeon's level
+    lp = level_item(dlevel.get(i, 0))
+    ok = [q for q in ps if q >= lp]
+    dpos[i] = ok[0] if ok else ps[-1]
+for i, p in dmention.items():
+    if i in dpos: continue
+    lp = level_item(dlevel.get(i, 0))
+    later = [q for q in dmention_all.get(i, []) if q >= lp]
+    dpos[i] = later[0] if later else max(p, lp)
 qpos = {**qlast, **qend}
 
 memo = {}
@@ -127,6 +168,7 @@ def sub_at(world, x, y):
 COORD = re.compile(r'\[\s*(-?\d{1,3})\s*,\s*(-?\d{1,3})\s*\]')
 first_visit = {}
 for p_, (key_, h) in enumerate(items):
+    if not counts(key_): continue
     parts = key_.split('/')
     st = gp0['steps'][int(parts[0])] if len(parts) == 1 else guide(int(parts[1]))['steps'][int(parts[2])]
     w = world_of(st.get('map'))
