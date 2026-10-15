@@ -12,7 +12,7 @@ def rows(name):
         if o.type.name == 'MonoBehaviour':
             return [r['data'] for r in o.read_typetree()['references']['RefIds'] if 'data' in r]
 fr, en = i18n.load(f'{G}/fr.bin'), i18n.load(f'{G}/en.bin')
-cats = {c['id']: {'parent': c.get('parentId'), 'fr': fr.get(c.get('nameId'), ''), 'en': en.get(c.get('nameId'), '')} for c in rows('achievementcategories')}
+cats = {c['id']: {'parent': c.get('parentId'), 'order': c.get('order', 0), 'fr': fr.get(c.get('nameId'), ''), 'en': en.get(c.get('nameId'), '')} for c in rows('achievementcategories')}
 achs = [{'id': a['id'], 'cat': a['categoryId'], 'pts': a.get('points'), 'lvl': a.get('level'),
          'fr': fr.get(a['nameId'], ''), 'en': en.get(a['nameId'], ''), 'dfr': fr.get(a['descriptionId'], ''), 'den': en.get(a['descriptionId'], '')}
         for a in rows('achievements')]

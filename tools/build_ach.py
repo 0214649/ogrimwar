@@ -333,6 +333,12 @@ for ga in game['achs']:
                 'solo': ga['fr'].endswith('(Solitaire)'), 'gameonly': True})
     stats['from game only'] += 1
 print('game names used', len(used_game))
+# the game's own category order (Général first, ...), for the Succès view
+corder = {}
+for c in game['cats'].values():
+    par = game['cats'].get(str(c['parent'])) if c.get('parent') else None
+    corder[(par['fr'] if par else '') + '|' + c['fr']] = c.get('order', 0)
+json.dump(corder, open(f'{ROOT}/catorder.json', 'w'), ensure_ascii=False, separators=(',', ':'))
 json.dump({'built': '2026-10-15', 'source': 'DofusWiki (dofuswiki.fandom.com), CC-BY-SA; noms et descriptions FR du jeu', 'ach': out},
           open(f'{ROOT}/ach.json', 'w'), ensure_ascii=False, separators=(',', ':'))
 print(dict(stats), 'items', len(items))

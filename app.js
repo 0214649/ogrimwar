@@ -353,7 +353,7 @@ function go(to) {
 const step = d => { lastDir = d; let j = idx + d; while (items[j] && !visible(items[j])) j += d; if (items[j]) go(j); };
 
 // ---------- achievements (DofusWiki, placed on the route by tools/build_ach.py) ----------
-let ACH = [], posOf = new Map(), touch = new Map(), doneIn = new Map(), doneByStep = new Map(), sugIn = new Map(), sugByStep = new Map();
+let CATORD = {}, ACH = [], posOf = new Map(), touch = new Map(), doneIn = new Map(), doneByStep = new Map(), sugIn = new Map(), sugByStep = new Map();
 const TOP_FR = { Dungeons: 'Donjons', Quests: 'Quêtes', Monsters: 'Monstres', 'Temporal Anomalies': 'Anomalies temporelles', Events: 'Événements',
   Exploration: 'Exploration', Sidekicks: 'Compagnons', Breeding: 'Élevage', 'Infinite Dreams': 'Songes infinis', Guilds: 'Guilde', Professions: 'Métiers', General: 'Général' };
 const catFr = c => c.replace(/^Levels (\d+) - (\d+)$/, 'Niveaux $1 à $2');
@@ -458,10 +458,11 @@ function renderAchView() {
     <label><input type="checkbox" id="laterOnly"${ui.laterOnly ? ' checked' : ''}> ⏳ Reportés (niveau 200 / passeur) : ${ACH.filter(a => S.l[a.en] && !got(a)).length}</label></div>`;
   const tops = new Map();
   for (const ai of xs) { const a = ACH[ai]; const t = a.topfr || TOP_FR[a.top] || a.top; (tops.get(t) || tops.set(t, new Map()).get(t)); const m = tops.get(t); (m.get(catOf(a)) || m.set(catOf(a), []).get(catOf(a))).push(ai); }
-  for (const [t, cats] of [...tops].sort((x, y) => [...y[1].values()].flat().length - [...x[1].values()].flat().length)) {
+  const ord = (parent, name) => CATORD[`${parent}|${name}`] ?? 999;     // the game's own order: Général first, ...
+  for (const [t, cats] of [...tops].sort((x, y) => ord('', x[0]) - ord('', y[0]))) {
     const all = [...cats.values()].flat(), g = all.filter(ai => got(ACH[ai])).length;
     h += `<details${q ? ' open' : ''}><summary><span>${esc(t)}</span><span class="cntc${g === all.length ? ' full' : ''}">${g}/${all.length}</span></summary><div class="inner">`;
-    for (const [c, ais] of [...cats].sort()) {
+    for (const [c, ais] of [...cats].sort((x, y) => ord(t, catFr(x[0])) - ord(t, catFr(y[0])) || x[0].localeCompare(y[0]))) {
       const gg = ais.filter(ai => got(ACH[ai])).length;
       ais.sort((x, y) => (ACH[x].di < 0) - (ACH[y].di < 0) || ACH[x].di - ACH[y].di);
       h += `<details${q ? ' open' : ''}><summary><span>${esc(catFr(c))}</span><span class="cntc${gg === ais.length ? ' full' : ''}">${gg}/${ais.length}</span></summary><ul class="al">${ais.map(ai => achLi(ai).replace('</li>', `<span class="ad">${ACH[ai].di >= 0 ? 'Terminé à l\'' + where(ACH[ai].di) : ACH[ai].si >= 0 ? 'Faisable à partir de l\'' + where(ACH[ai].si) : ACH[ai].seasonal ? 'Événement saisonnier' : where(-1)}</span></li>`)).join('')}</ul></details>`;
@@ -665,8 +666,9 @@ function burst(el) {
     gp0 = await guide(GP0);
   } catch (e) { $('card').innerHTML = `<p class="empty">Le [GP0] n'a pas pu être chargé (${esc(e.message)}). Recharge la page dans un instant.</p>`; return; }
   buildItems();
-  try { indexAch(await (await fetch('ach.json?v=14')).json()); } catch (e) { console.warn('ach.json', e); }
+  try { indexAch(await (await fetch('ach.json?v=15')).json()); } catch (e) { console.warn('ach.json', e); }
   try { DJ = await (await fetch('dungeons.json?v=2')).json(); } catch (e) { console.warn('dungeons.json', e); }
+  try { CATORD = await (await fetch('catorder.json?v=1')).json(); } catch (e) { console.warn('catorder.json', e); }
   idx = Math.max(0, items.findIndex(x => x.key === S.pos));
   document.querySelector(`input[name=align][value=${S.align}]`).checked = true;
   if (!visible(items[idx])) { const j = items.findIndex((x, n) => n > idx && visible(x)); if (j >= 0) idx = j; }
