@@ -174,10 +174,14 @@ function addX4Badges(doc, root) {
 // ---------- DPLN: their real page, shown in a side panel (never copied) ----------
 const slug = n => n.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/œ/g, 'oe').replace(/æ/g, 'ae').toLowerCase()
   .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+// A frame from another site can't be scrolled by this page (browser same-origin rule), so the panel shows
+// the page from the top; the "new tab" link adds a text fragment that jumps to and highlights the boss.
 function openDpln(name) {
   const url = `https://www.dofuspourlesnoobs.com/${slug(name)}.html`;
+  const boss = DJ[name]?.rooms.flatMap(r => r.m).find(m => m[2])?.[0];
   $('dplnTitle').textContent = name;
-  $('dplnOpen').href = url;
+  $('dplnOpen').href = boss ? `${url}#:~:text=${encodeURIComponent(boss)}` : url;
+  $('dplnOpen').textContent = boss ? `Ouvrir dans un onglet, direct sur « ${boss} » ↗` : 'Ouvrir dans un onglet ↗';
   $('dplnSearch').href = 'https://duckduckgo.com/?q=' + encodeURIComponent(`!ducky site:dofuspourlesnoobs.com ${name}`);
   $('dplnFrame').src = url;
   $('dpln').classList.add('open');
