@@ -9,7 +9,9 @@ const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '
 // ---------- state (browser storage + export code) ----------
 // Several profiles per browser (one per team / friend); each keeps its own progress. A fresh visitor gets one blank profile.
 const LEGACY = 'carnet-team-v1', PROFILES = 'eclosion-profiles-v1', PKEY = id => 'eclosion-p-' + id;
-const blank = () => ({ pos: '0', t: {}, a: {}, l: {}, align: 'bonta' });   // l: achievements put off until level 200 / a carry
+// Unlocked the moment a new character clicks "skip the tutorial": Premier temps, Second temps, Sur de bonnes bases, Temple Céleste
+const START_ACH = ['Beginning', 'Second Phase', 'A Good Foundation', 'Celestial Temple (Achievement)'];
+const blank = () => ({ pos: '0', t: {}, a: Object.fromEntries(START_ACH.map(k => [k, 1])), l: {}, align: 'bonta', v: 2 });   // l: put off until level 200 / a carry
 const ALIGN = { bonta: 516, brak: 773 };   // GP9 Bontarien / Brâkmarien
 const lsGet = k => { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch { return null; } };
 const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
@@ -20,6 +22,8 @@ if (!P || !P.list?.length) {
   lsSet(PKEY(id), { ...blank(), ...(lsGet(LEGACY) || {}) });          // earlier progress becomes the first profile
   lsSet(PROFILES, P);
 }
+// profiles made before START_ACH existed get those four ticked once
+for (const p of P.list) { const st = lsGet(PKEY(p.id)); if (st && !(st.v >= 2)) { st.a = { ...(st.a || {}) }; START_ACH.forEach(k => st.a[k] = 1); st.v = 2; lsSet(PKEY(p.id), st); } }
 let S = { ...blank(), ...(lsGet(PKEY(P.cur)) || {}) };
 const save = () => lsSet(PKEY(P.cur), S);
 const profName = () => P.list.find(p => p.id === P.cur)?.name || 'Profil';
@@ -376,7 +380,16 @@ function indexAch(data) {
   });
 }
 const got = a => !!S.a[a.en];
-function chips(a) { return (a.duo ? '<span class="chip duo">Duo</span>' : '') + (a.solo ? '<span class="chip solo">Solo</span>' : ''); }
+// Duo achievements: which duo of the team takes it (A / B), stored per profile
+function chips(a) {
+  const d = (S.d || {})[a.en];
+  return (a.duo ? `<span class="chip duo">Duo</span><span class="duopick" role="group" aria-label="Quel duo"><button class="${d === 'A' ? 'on' : ''}" data-duo="${esc(a.en)}" data-v="A" title="Duo A">A</button><button class="${d === 'B' ? 'on' : ''}" data-duo="${esc(a.en)}" data-v="B" title="Duo B">B</button></span>` : '')
+    + (a.solo ? '<span class="chip solo">Solo</span>' : '');
+}
+function extra(label) {
+  const q = label.replace(/^Quête : /, '');
+  return /^Quête : /.test(label) ? `<button class="jump" data-dpln="${esc(q)}">voir sur DPLN</button>` : '<span class="todo">hors parcours</span>';
+}
 function where(p) {
   if (p < 0) return '<span class="todo">hors parcours</span>';
   const it = items[p];
@@ -389,8 +402,12 @@ function achLi(ai, here) {
     ob = '<div class="ob">' + a.o.map(([label], oj) => {
       const p = a.oi[oj];
       const cls = p === here ? 'here' : p >= 0 && p < here ? 'ok' : 'todo';
-      return `<span class="${cls}">${p >= 0 && p <= here ? '✓' : '○'} ${esc(label)}${cls === 'todo' ? ' · ' + where(p) : ''}</span>`;
+      return `<span class="${cls}">${p >= 0 && p <= here ? '✓' : '○'} ${esc(label)}${cls === 'todo' ? ' · ' + (p < 0 ? extra(label) : where(p)) : ''}</span>`;
     }).join('') + '</div>';
+  } else {
+    // quests Ganymède never covers: list them with a direct DPLN link, so they get done "on top of" the guide
+    const miss = a.o.map(([label], oj) => [label, a.oi[oj]]).filter(([label, p]) => p < 0 && /^Quête : /.test(label));
+    if (miss.length && !got(a)) ob = `<div class="ob extra"><span class="lbl">En plus de Ganymède</span>${miss.map(([label]) => `<span class="todo">○ ${esc(label)} · ${extra(label)}</span>`).join('')}</div>`;
   }
   const later = !!S.l[a.en] && !got(a);
   return `<li class="${got(a) ? 'got' : ''}${later ? ' later' : ''}"><input type="checkbox" data-ach="${esc(a.en)}"${got(a) ? ' checked' : ''} aria-label="${esc(a.n)}">
@@ -404,7 +421,9 @@ function renderAchPanel(it, html) {
   let h = dungeonCards(html ?? (it.g === undefined ? gp0.steps[it.i].web_text : ''));
   if (it.g === undefined) {
     const xs = doneByStep.get(it.i) || [], ss = sugByStep.get(it.i) || [];
+    const hasExtra = ai => ACH[ai].oi.some((x, j) => x < 0 && /^Quête : /.test(ACH[ai].o[j][0]));
     const block = (arr, cls, label, tag) => {
+      arr = [...arr].sort((x, y) => hasExtra(y) - hasExtra(x));   // achievements needing quests outside Ganymède first
       const open = ui.more === it.key + tag;
       return `<div class="agroup ${cls}"><span class="lbl">${label}</span><ul class="al">${(open ? arr : arr.slice(0, 8)).map(ai => achLi(ai)).join('')}</ul>${arr.length > 8 && !open ? `<button class="more" data-more="${it.key + tag}">Voir les ${arr.length}</button>` : ''}</div>`;
     };
@@ -429,6 +448,7 @@ function renderAchView() {
     if (ui.hideGot && got(a)) return false;
     if (ui.outOnly && a.di >= 0) return false;
     if (ui.laterOnly && !(S.l[a.en] && !got(a))) return false;
+    if (ui.duoF && !(a.duo && (ui.duoF === '?' ? !(S.d || {})[a.en] : (S.d || {})[a.en] === ui.duoF))) return false;
     return !q || a.n.toLowerCase().includes(q) || a.en.toLowerCase().includes(q) || a.d.toLowerCase().includes(q);
   });
   const total = ACH.length, nGot = ACH.filter(got).length, onRoute = ACH.filter(a => a.di >= 0).length, sugg = ACH.filter(a => a.si >= 0).length;
@@ -436,6 +456,7 @@ function renderAchView() {
     <div class="tools"><input type="search" id="achQ" placeholder="Chercher un succès…" value="${esc(ui.q)}" aria-label="Chercher un succès">
     <label><input type="checkbox" id="hideGot"${ui.hideGot ? ' checked' : ''}> Masquer les cochés</label>
     <label><input type="checkbox" id="outOnly"${ui.outOnly ? ' checked' : ''}> Sans étape précise</label>
+    <label>Duos : <select id="duoF"><option value="">tous les succès</option><option value="A"${ui.duoF === 'A' ? ' selected' : ''}>Duo A</option><option value="B"${ui.duoF === 'B' ? ' selected' : ''}>Duo B</option><option value="?"${ui.duoF === '?' ? ' selected' : ''}>Duo pas encore attribué</option></select></label>
     <label><input type="checkbox" id="laterOnly"${ui.laterOnly ? ' checked' : ''}> ⏳ Reportés (niveau 200 / passeur) : ${ACH.filter(a => S.l[a.en] && !got(a)).length}</label></div>`;
   const tops = new Map();
   for (const ai of xs) { const a = ACH[ai]; const t = TOP_FR[a.top] || a.top; (tops.get(t) || tops.set(t, new Map()).get(t)); const m = tops.get(t); (m.get(catOf(a)) || m.set(catOf(a), []).get(catOf(a))).push(ai); }
@@ -508,6 +529,13 @@ document.addEventListener('click', e => {
   const gt = e.target.closest('[data-goto]'); if (gt) { if (ui.view !== 'route') setView('route'); go(items.findIndex(x => x.key === gt.dataset.goto)); return; }
   const vw = e.target.closest('[data-view]'); if (vw) { setView(vw.dataset.view); return; }
   const mo = e.target.closest('[data-more]'); if (mo) { ui.more = mo.dataset.more; renderAchPanel(items[idx], ui.html); return; }
+  const du = e.target.closest('[data-duo]');
+  if (du) {
+    S.d = S.d || {}; const k = du.dataset.duo, v = du.dataset.v;
+    if (S.d[k] === v) delete S.d[k]; else S.d[k] = v; save();
+    document.querySelectorAll(`[data-duo="${CSS.escape(k)}"]`).forEach(b => b.classList.toggle('on', S.d[k] === b.dataset.v));
+    toast(S.d[k] ? `Pour le duo ${S.d[k]}` : 'Duo non attribué'); return;
+  }
   const lt = e.target.closest('[data-later]');
   if (lt) {
     const k = lt.dataset.later; if (S.l[k]) delete S.l[k]; else S.l[k] = 1; save();
@@ -539,6 +567,7 @@ document.addEventListener('change', e => {
     save(); b.closest('li')?.classList.toggle('got', b.checked); return;
   }
   if (b.id === 'hideGot' || b.id === 'outOnly' || b.id === 'laterOnly') { ui[b.id] = b.checked; renderAchView(); return; }
+  if (b.id === 'duoF') { ui.duoF = b.value; renderAchView(); return; }
   if (b.dataset.task) { if (b.checked) S.t[b.dataset.task] = 1; else delete S.t[b.dataset.task]; save(); b.closest('li')?.classList.toggle('checked', b.checked); }
   if (b.name === 'align') { S.align = b.value; save(); if (!visible(items[idx])) step(1); else render(); return; }
 });
@@ -638,7 +667,7 @@ function burst(el) {
     gp0 = await guide(GP0);
   } catch (e) { $('card').innerHTML = `<p class="empty">Le [GP0] n'a pas pu être chargé (${esc(e.message)}). Recharge la page dans un instant.</p>`; return; }
   buildItems();
-  try { indexAch(await (await fetch('ach.json?v=10')).json()); } catch (e) { console.warn('ach.json', e); }
+  try { indexAch(await (await fetch('ach.json?v=11')).json()); } catch (e) { console.warn('ach.json', e); }
   try { DJ = await (await fetch('dungeons.json?v=2')).json(); } catch (e) { console.warn('dungeons.json', e); }
   idx = Math.max(0, items.findIndex(x => x.key === S.pos));
   document.querySelector(`input[name=align][value=${S.align}]`).checked = true;

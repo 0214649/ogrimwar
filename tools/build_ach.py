@@ -244,8 +244,17 @@ def game_top(cid):
     while c and c.get('parent') and str(c['parent']) in cats and c['parent'] not in seen_:
         seen_.add(c['parent']); c = cats[str(c['parent'])]
     return c or {}
-def official(name):
-    return g_by_en.get(norm(name))
+g_by_den = {}
+for ga in game['achs']: g_by_den.setdefault(norm(ga['den']), []).append(ga)
+def official(name, desc=None):
+    """Game record for a wiki achievement: by English name (wiki page suffixes removed), else by a unique English description."""
+    base = re.sub(r'\s*\((?:achievement|Achievement)\)\s*$', '', name)
+    g = g_by_en.get(norm(base))
+    if g: return g
+    if desc:
+        hits = [x for x in g_by_den.get(norm(desc), []) if x['id'] not in used_game]
+        if len(hits) == 1: return hits[0]
+    return None
 def chal_text(desc, name):
     m = re.search(r'\(([^)]+)\)\s*$', name)
     return re.sub(r'\s*\[challenge,\d+\]', f' {m.group(1)}' if m else '', desc).strip()
@@ -280,8 +289,9 @@ for name, v in ach.items():
                 b = ob.get('condition') if c.get('type') == 'Complete challenge' else c.get('value') if c.get('type') == 'Defeat monster' else None
                 if b and boss_dungeon(b): djn = boss_dungeon(b); break
             if djn: break
-    g = official(name)
+    g = official(name, v.get('description'))
     if g: used_game.add(g['id'])
+    elif game['achs']: stats['not in the game anymore'] += 1; continue
     out.append({'gid': g['id'] if g else None, 'catfr': (game['cats'].get(str(g['cat'])) or {}).get('fr') if g else None,
                 'dj': en2fr('Dungeons', djn) if djn else None, 'sug': sug, 'seasonal': cat in SEASONAL or tp == 'Events', 'n': fr_name(name), 'en': name, 'cat': cat, 'top': tp, 'lvl': v.get('level'),
                 'd': chal_text(g['dfr'], g['fr']) if g and g['dfr'] else fr_desc(re.sub(r'\s*\[challenge,\d+\]', '', html.unescape(v.get('description') or ''))), 'done': keyof(d), 'o': objs,

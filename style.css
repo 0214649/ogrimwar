@@ -135,6 +135,12 @@ ul.al{list-style:none;margin:0;padding:0;display:grid;gap:4px}
 .ob .here{color:var(--accent);font-weight:800}
 .chip{font:800 .66rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:2px}
 .chip.duo{background:#232043;color:#c3b8ff}
+.duopick{display:inline-flex;gap:2px;margin-left:4px;vertical-align:1px}
+.duopick button{font:800 .66rem var(--f-body);width:20px;height:18px;border-radius:5px;border:1px solid var(--line);background:none;color:var(--muted);cursor:pointer;padding:0}
+.duopick button.on{background:var(--sug);border-color:var(--sug);color:#141218}
+.ob.extra{border-left:2px dashed var(--accent);padding-left:8px;margin-top:6px}
+.ob.extra .lbl{color:var(--accent)}
+.achview select{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:4px 8px;font:inherit}
 .chip.solo{background:#3a1a2c;color:#ffb6d3}
 .jump{background:none;border:0;padding:0;color:var(--start);cursor:pointer;text-decoration:underline;text-underline-offset:3px;font:inherit}
 .more{background:none;border:0;color:var(--accent);cursor:pointer;padding:6px 8px;font-weight:700;font-size:.95rem}
