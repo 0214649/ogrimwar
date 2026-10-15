@@ -190,16 +190,16 @@ function openDpln(name) {
 // DPLN's layout needs ~1180px; on a narrower panel, render it at that width and scale it down instead of squeezing it
 const DPLN_W = 1180;
 let dz = 1;
-try { dz = +localStorage.getItem('dplnZoom') || 1; } catch {}
+try { dz = +localStorage.getItem('dplnZoom2') || 1; } catch {}
 function fitDpln() {
   const v = $('dplnView'), f = $('dplnFrame');
-  const k = Math.min(1.6, v.clientWidth / DPLN_W) * dz;      // fill the panel width, then the viewer's own zoom
+  const k = Math.min(1, v.clientWidth / DPLN_W) * dz;        // never enlarged on its own; shrunk only if the panel is narrower than DPLN's layout
   $('dzVal').textContent = Math.round(k * 100) + ' %';
   f.style.width = (v.clientWidth / k) + 'px';
   f.style.height = (v.clientHeight / k) + 'px';
   f.style.transform = k !== 1 ? `scale(${k})` : '';
 }
-function zoomDpln(d) { dz = Math.max(.5, Math.min(2, +(dz + d).toFixed(2))); try { localStorage.setItem('dplnZoom', dz); } catch {} fitDpln(); }
+function zoomDpln(d) { dz = Math.max(.5, Math.min(2, +(dz + d).toFixed(2))); try { localStorage.setItem('dplnZoom2', dz); } catch {} fitDpln(); }
 addEventListener('resize', () => { if ($('dpln').classList.contains('open')) fitDpln(); });
 function closeDpln() { $('dpln').classList.remove('open'); }
 
