@@ -86,6 +86,8 @@ for name, v in ach.items():
         for c in crit(v):
             if c.get('type') == 'Defeat monster': boss2d.setdefault(c['value'], name)
 
+ach_bosses = {}                                   # dungeon -> bosses named by its own achievement
+for b, dn in boss2d.items(): ach_bosses.setdefault(dn, set()).add(b)
 for dname, info in json.load(open(f'{HERE}/wiki/dungeon_monsters.json')).items():
     for mname in info['monsters']: boss2d.setdefault(mname, dname)
 
@@ -203,7 +205,16 @@ for name, v in ach.items():
     stats['placed' if d is not None else ('partial' if any(o[1] for o in objs) else 'outside')] += 1
     sug = keyof(suggest(name, v)) if d is None and (tp not in ('Events',) and cat not in SEASONAL) else None
     if sug: stats['suggested'] += 1
-    out.append({'sug': sug, 'seasonal': cat in SEASONAL or tp == 'Events', 'n': fr_name(name), 'en': name, 'cat': cat, 'top': tp, 'lvl': v.get('level'),
+    djn = name if name in ills['Dungeons'] else None
+    if not djn:
+        for ob in v.get('objectives') or []:
+            if not isinstance(ob, dict): continue
+            for c in ob.get('criteria') or []:
+                if not isinstance(c, dict): continue
+                b = ob.get('condition') if c.get('type') == 'Complete challenge' else c.get('value') if c.get('type') == 'Defeat monster' else None
+                if b and boss_dungeon(b): djn = boss_dungeon(b); break
+            if djn: break
+    out.append({'dj': en2fr('Dungeons', djn) if djn else None, 'sug': sug, 'seasonal': cat in SEASONAL or tp == 'Events', 'n': fr_name(name), 'en': name, 'cat': cat, 'top': tp, 'lvl': v.get('level'),
                 'd': re.sub(r'\[challenge,\d+\] ?', '', html.unescape(v.get('description') or '')), 'done': keyof(d), 'o': objs,
                 'duo': name.endswith('(Duo)'), 'solo': name.endswith('(Solitary)') or name.endswith('(Lone Wolf)')})
 json.dump({'built': '2026-10-15', 'source': 'DofusWiki (dofuswiki.fandom.com), CC-BY-SA', 'ach': out},
@@ -211,3 +222,16 @@ json.dump({'built': '2026-10-15', 'source': 'DofusWiki (dofuswiki.fandom.com), C
 print(dict(stats), 'items', len(items))
 print('unmatched FR names (top):', miss.most_common(12))
 print('top categories:', collections.Counter(a['top'] for a in out).most_common())
+
+# ---------- dungeon sheets for the hover cards (DofusWiki, CC-BY-SA) ----------
+full = json.load(open(f'{HERE}/wiki/dungeons_full.json'))
+bosses_of = {k: ach_bosses.get(k) or set(v['monsters']) for k, v in json.load(open(f'{HERE}/wiki/dungeon_monsters.json')).items()}
+sheets = {}
+for en, d in full.items():
+    fr = en2fr('Dungeons', en) or en
+    sheets[fr] = {'en': en, 'lvl': d['level'], 'where': ' · '.join(x for x in (d['area'], d['subarea'], d['coords']) if x),
+                  'key': d['key'], 'keyring': d['bunch'].lower().startswith('y'),
+                  'rooms': [{'n': r['name'], 'm': [[en2fr('Monsters', m) or m, lv, m in bosses_of.get(en, ())] for m, lv, _ in r['mons']]} for r in d['rooms']],
+                  'mech': d['mechanics'], 'notes': d['notes']}
+json.dump(sheets, open(f'{ROOT}/dungeons.json', 'w'), ensure_ascii=False, separators=(',', ':'))
+print('dungeon sheets', len(sheets))

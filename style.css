@@ -122,6 +122,51 @@ ul.al{list-style:none;margin:0;padding:0;display:grid;gap:4px}
 .burst{position:fixed;pointer-events:none;z-index:50;width:8px;height:8px;border-radius:50%;animation:burst .7s ease-out forwards}
 @keyframes burst{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
 
+/* x4 reminders inside the guide text */
+.x4{display:inline-flex;align-items:center;gap:4px;font:800 .72rem var(--f-body);letter-spacing:.04em;padding:1px 8px;border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);color:var(--accent);background:#ffb6d312;vertical-align:2px;white-space:nowrap}
+.x4.solo{border-color:#ff8a8a;color:#ffb0b0;background:#ff8a8a14}
+.x4.quest{display:inline-flex;margin:0 0 4px}
+.x4.key{border-color:var(--start);color:var(--start);background:#c3b8ff12}
+.x4.qty{margin-left:4px}
+.gc [data-type=custom-tag][type=quest],.gc [data-type=custom-tag][type=dungeon]{cursor:pointer;transition:transform .15s}
+.gc [data-type=custom-tag][type=quest]:hover,.gc [data-type=custom-tag][type=dungeon]:hover{transform:translateY(-1px)}
+
+/* put-off (level 200 / carry) */
+.al li{grid-template-columns:auto 1fr auto}
+.al li .ad,.al li .ob{grid-column:2 / 4}
+.laterbtn{background:none;border:1px solid var(--line);border-radius:8px;width:30px;height:28px;cursor:pointer;opacity:.45;font-size:.85rem;transition:opacity .15s,border-color .15s}
+.laterbtn:hover{opacity:1}
+.laterbtn.on{opacity:1;border-color:var(--sug);background:#b8c6ff1c}
+.al li.later .an{color:var(--sug)}
+.agroup.dj{border-color:color-mix(in srgb,var(--accent) 35%,var(--line))}
+.agroup.dj>.lbl{color:var(--accent)}
+.djbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 8px}
+.djbar .num{color:var(--muted);font-size:.85rem;margin-right:auto}
+.btn.small{padding:4px 12px;font-size:.85rem;border-radius:9px}
+
+/* dungeon sheet */
+.dlg.dj{max-width:none}
+dialog:has(.dlg.dj){max-width:min(860px,calc(100vw - 32px));width:100%}
+.djhead{display:flex;align-items:baseline;gap:14px}
+.djhead h2{font:700 1.7rem var(--f-display);color:var(--accent);margin:0}
+.djwhere{color:var(--muted)}
+.rooms{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:8px 0}
+.room{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.room ul{list-style:none;margin:6px 0 0;padding:0;font-size:.9rem}
+.room li.boss{color:var(--accent);font-weight:800}
+.mech summary{cursor:pointer;color:var(--muted)}
+.mech p{font-size:.9rem;color:var(--muted)}
+
+/* DPLN side panel: their live page in a frame */
+.dpln{position:fixed;top:0;right:0;bottom:0;width:min(760px,100vw);z-index:40;background:var(--bg-2);border-left:1px solid var(--line);
+  display:flex;flex-direction:column;transform:translateX(102%);transition:transform .25s cubic-bezier(.2,.8,.2,1);box-shadow:-20px 0 50px #000c}
+.dpln.open{transform:none}
+.dplnbar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:12px 14px;padding-top:calc(12px + env(safe-area-inset-top,0px));border-bottom:1px solid var(--line)}
+.dplnbar b{font:700 1.1rem var(--f-display);color:var(--accent);margin-right:auto}
+.dplnbar a{color:var(--muted);font-size:.85rem}
+.dpln iframe{flex:1;border:0;width:100%;background:#fff}
+
 /* ---------- Succès view ---------- */
 .achview{max-width:1100px;margin:0 auto}
 .achview .tools{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-bottom:18px;color:var(--muted);font-size:1rem}

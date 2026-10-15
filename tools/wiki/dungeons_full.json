@@ -1,0 +1,8934 @@
+{
+"Ancestral Domain": {
+"level": "90",
+"area": "Treechnid Forest",
+"subarea": "Dark Forest",
+"coords": "[-9,-14]",
+"key": "Ancestral Domain Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Venerable Treechnid",
+74,
+false
+],
+[
+"Dark Treechnid",
+78,
+false
+],
+[
+"Dark Treechnid",
+78,
+false
+],
+[
+"Dark Treechnee",
+82,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Arachnotron",
+79,
+true
+],
+[
+"Arachnotron",
+79,
+true
+],
+[
+"Venerable Treechnid",
+77,
+false
+],
+[
+"Dark Treechnee",
+84,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Arachnotron",
+82,
+true
+],
+[
+"Venerable Treechnid",
+80,
+false
+],
+[
+"Venerable Treechnid",
+80,
+false
+],
+[
+"Dark Treechnid",
+84,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Arachnotron",
+85,
+true
+],
+[
+"Venerable Treechnid",
+83,
+false
+],
+[
+"Dark Treechnid",
+87,
+false
+],
+[
+"Dark Treechnee",
+88,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Arachnotron",
+88,
+true
+],
+[
+"Dark Treechnee",
+90,
+false
+],
+[
+"Dark Treechnid",
+90,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Bherb's Gully": {
+"level": "110",
+"area": "Otomai Island",
+"subarea": "Grassy Plains",
+"coords": "[-51,9]",
+"key": "Bherb's Gully Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Black Rat's Moumousetrap": {
+"level": "110",
+"area": "Brakmar",
+"subarea": "Bowels of Brakmar",
+"coords": "[-28,37]",
+"key": "Black Rat's Moumousetrap Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Shrynk Rat",
+102,
+false
+],
+[
+"Rat Phink",
+102,
+false
+],
+[
+"Rat Lly",
+102,
+false
+],
+[
+"Flatt Rat",
+102,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Shrynk Rat",
+104,
+false
+],
+[
+"Rat Lly",
+104,
+false
+],
+[
+"Flatt Rat",
+104,
+false
+],
+[
+"Rat Shio",
+104,
+true
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Rat Phink",
+106,
+false
+],
+[
+"Rat Lly",
+106,
+false
+],
+[
+"Rat Lly",
+106,
+false
+],
+[
+"Rat Shio",
+106,
+true
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Shrynk Rat",
+108,
+false
+],
+[
+"Rat Phink",
+108,
+false
+],
+[
+"Rat Phink",
+108,
+false
+],
+[
+"Rat Lly",
+108,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Black Rat",
+110,
+true
+],
+[
+"Rat Lly",
+110,
+false
+],
+[
+"Shrynk Rat",
+110,
+false
+],
+[
+"Rat Shio",
+110,
+true
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Blacksmith Dungeon": {
+"level": "50",
+"area": "Amakna",
+"subarea": "Bandit Territory",
+"coords": "[13,21]",
+"key": "Blacksmith Dungeon Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Dark Baker",
+35,
+false
+],
+[
+"Dark Baker",
+35,
+false
+],
+[
+"Rogue Clan Bandit",
+37,
+false
+],
+[
+"Rogue Clan Bandit",
+37,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Dark Baker",
+38,
+false
+],
+[
+"Rogue Clan Bandit",
+40,
+false
+],
+[
+"Rogue Clan Bandit",
+40,
+false
+],
+[
+"Dark Miner",
+44,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Rogue Clan Bandit",
+43,
+false
+],
+[
+"Dark Miner",
+46,
+false
+],
+[
+"Dark Miner",
+46,
+false
+],
+[
+"Dark Smith",
+46,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Dark Baker",
+44,
+false
+],
+[
+"Rogue Clan Bandit",
+46,
+false
+],
+[
+"Dark Miner",
+48,
+false
+],
+[
+"Dark Smith",
+48,
+false
+]
+]
+},
+{
+"name": "7",
+"mons": [
+[
+"Rogue Clan Bandit",
+43,
+false
+],
+[
+"Dark Miner",
+46,
+false
+],
+[
+"Dark Miner",
+46,
+false
+],
+[
+"Dark Smith",
+46,
+false
+]
+]
+},
+{
+"name": "9",
+"mons": [
+[
+"Dark Baker",
+44,
+false
+],
+[
+"Rogue Clan Bandit",
+46,
+false
+],
+[
+"Dark Miner",
+48,
+false
+],
+[
+"Dark Smith",
+48,
+false
+]
+]
+},
+{
+"name": "name=Last Room",
+"mons": [
+[
+"Dark Baker",
+47,
+false
+],
+[
+"Dark Miner",
+50,
+false
+],
+[
+"Dark Smith",
+50,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Blop Fields": {
+"level": "60",
+"area": "Cania Plains",
+"subarea": "Cania Lake",
+"coords": "[-7,-43]",
+"key": "Blop Field Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Bulb Cavern": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Bwork Dungeon": {
+"level": "50",
+"area": "Amakna",
+"subarea": "Bwork Village",
+"coords": "[-5,10]",
+"key": "Bwork Dungeon Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Bwork Archer",
+37,
+false
+],
+[
+"Bwork Archer",
+37,
+false
+],
+[
+"Bwork Archer",
+37,
+false
+],
+[
+"Bwork Archer",
+37,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Bwork",
+44,
+false
+],
+[
+"Bwork Magus",
+44,
+false
+],
+[
+"Bwork Magus",
+44,
+false
+],
+[
+"Bwork Magus",
+44,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Bwork",
+46,
+false
+],
+[
+"Bwork",
+46,
+false
+],
+[
+"Bwork",
+46,
+false
+],
+[
+"Bwork Magus",
+46,
+false
+]
+]
+},
+{
+"name": "name=Swimp Confinement",
+"mons": []
+},
+{
+"name": "name=Swimp Confinement",
+"mons": []
+},
+{
+"name": "4",
+"mons": [
+[
+"Bwork Archer",
+46,
+false
+],
+[
+"Bwork",
+48,
+false
+],
+[
+"Bwork Magus",
+48,
+false
+],
+[
+"Bwork Magus",
+48,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Bwork Archer",
+48,
+false
+],
+[
+"Bwork",
+50,
+false
+],
+[
+"Bwork Magus",
+50,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Bworker's Cave": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Crackler's Rocky Peaks": {
+"level": "70",
+"area": "Amakna",
+"subarea": "Crackler Mountain",
+"coords": "[-3,-7]",
+"key": "Cracklers Rocky Peaks Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Plain Crackler",
+62,
+false
+],
+[
+"Cracklope",
+62,
+false
+],
+[
+"Elemearth",
+59,
+false
+],
+[
+"Cracklope",
+62,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Plain Crackler",
+64,
+false
+],
+[
+"Cracklope",
+64,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Crackler",
+64,
+false
+],
+[
+"Elemearth",
+61,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Elemearth",
+63,
+false
+],
+[
+"Crackrock",
+66,
+false
+],
+[
+"Plain Crackler",
+66,
+false
+],
+[
+"Crackler",
+66,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Crackrock",
+68,
+false
+],
+[
+"Crackler",
+68,
+false
+],
+[
+"Cracklope",
+68,
+false
+],
+[
+"Plain Crackler",
+68,
+false
+]
+]
+},
+{
+"name": "7",
+"mons": [
+[
+"Legendary Crackler",
+70,
+false
+],
+[
+"Crackler",
+70,
+false
+],
+[
+"Crackrock",
+70,
+false
+],
+[
+"Elemearth",
+67,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Crocabulia's Lair": {
+"level": "120",
+"area": "Amakna",
+"subarea": "The Dreggons' Sanctuary",
+"coords": "[-2,25]",
+"key": "Key to Crocabulia's Lair",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Dragandrop",
+112,
+false
+],
+[
+"Dragnarok",
+112,
+false
+],
+[
+"Dragnnoyed",
+112,
+false
+],
+[
+"Dragnnoyed",
+112,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Dragandrop",
+114,
+false
+],
+[
+"Dragnarok",
+114,
+false
+],
+[
+"Dragnarok",
+114,
+false
+],
+[
+"Dragostess",
+114,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Dragmatic",
+116,
+true
+],
+[
+"Dragandrop",
+116,
+false
+],
+[
+"Dragnnoyed",
+116,
+false
+],
+[
+"Dragostess",
+116,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Dragmatic",
+118,
+true
+],
+[
+"Dragandrop",
+118,
+false
+],
+[
+"Dragnarok",
+118,
+false
+],
+[
+"Dragnarok",
+118,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Dragmatic",
+120,
+true
+],
+[
+"Dragandrop",
+120,
+false
+],
+[
+"Dragostess",
+120,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Famished Sunflower's Barn": {
+"level": "20",
+"area": "Astrub",
+"subarea": "Astrub Fields",
+"coords": "[7,-25]",
+"key": "Field Dungeon Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Scarecro",
+16,
+false
+],
+[
+"Wild Sunflower",
+16,
+false
+],
+[
+"Evil Dandelion",
+16,
+false
+],
+[
+"Demonic Rose",
+16,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Scarecro",
+17,
+false
+],
+[
+"Wild Sunflower",
+17,
+false
+],
+[
+"Demonic Rose",
+17,
+false
+],
+[
+"Country Guardian",
+17,
+true
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Scarecro",
+18,
+false
+],
+[
+"Wild Sunflower",
+18,
+false
+],
+[
+"Evil Dandelion",
+18,
+false
+],
+[
+"Country Guardian",
+18,
+true
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Scarecro",
+19,
+false
+],
+[
+"Wild Sunflower",
+19,
+false
+],
+[
+"Evil Dandelion",
+19,
+false
+],
+[
+"Demonic Rose",
+19,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Famished Sunflower",
+20,
+true
+],
+[
+"Evil Dandelion",
+20,
+false
+],
+[
+"Demonic Rose",
+20,
+false
+],
+[
+"Country Guardian",
+20,
+true
+]
+]
+}
+],
+"mechanics": "",
+"notes": "is one of the 5 dungeons available to F2P players."
+},
+"Father Kwismas's House": {
+"level": "180",
+"area": "Kwismas Island",
+"subarea": "Kwismas Taiga",
+"coords": "[-34,-89]",
+"key": "Father Kwismas's House Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Abominable Snow Yiti",
+172,
+false
+],
+[
+"Ice Crackler",
+172,
+false
+],
+[
+"Prez",
+172,
+false
+],
+[
+"Stuffed Gobball (monster)",
+172,
+true
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Abominable Snow Yiti",
+174,
+false
+],
+[
+"Ice Crackler",
+174,
+false
+],
+[
+"Prez",
+174,
+false
+],
+[
+"Stuffed Tofu (monster)",
+174,
+true
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Abominable Snow Yiti",
+176,
+false
+],
+[
+"Ice Crackler",
+176,
+false
+],
+[
+"Prez",
+176,
+false
+],
+[
+"Stuffed Wabbit (monster)",
+176,
+true
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Stuffed Gobball (monster)",
+178,
+true
+],
+[
+"Stuffed Tofu (monster)",
+178,
+true
+],
+[
+"Stuffed Wabbit (monster)",
+178,
+true
+],
+[
+"Prez",
+178,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Father Whupper",
+180,
+true
+],
+[
+"Stuffed Gobball (monster)",
+180,
+true
+],
+[
+"Stuffed Tofu (monster)",
+180,
+true
+],
+[
+"Stuffed Wabbit (monster)",
+180,
+true
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Firefoux Dungeon": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "thumb|300px|Firefoux Dungeon Rooms\n isn't arranged like a normal dungeon (in that you kill a mob to progress to the next room), instead it is an open arrangement of 8 maps, shown in the map to the right.\n\nIn order to progress through the dungeon and fight Peki Peki in the final room, you must first acquire the 6 Firefacts. These are Quest Items unique to the dungeon, which you drop from a Zilla. In each of the dungeon's 6 main rooms there is a Zilla and each Zilla drops a unique Firefact, ranging from First Firefact to Sixth Firefact. Once you have obtained all of the Firefacts you may go to the last room, which upon entering you lose all 6 Firefacts and the Firefoux Dungeon Key.",
+"notes": ""
+},
+"Grotto Hesque": {
+"level": "50",
+"area": "Otomai Island",
+"subarea": "Coral Beach",
+"coords": "[-59,15]",
+"key": "Grotto Hesque Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Kurasso Palmflower",
+37,
+false
+],
+[
+"Mahlibuh Palmflower",
+37,
+false
+],
+[
+"Mojeeto Palmflower",
+37,
+false
+],
+[
+"Passaoh Palmflower",
+37,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Mahlibuh Craboral",
+39,
+false
+],
+[
+"Mojeeto Craboral",
+39,
+false
+],
+[
+"Passaoh Craboral",
+39,
+false
+],
+[
+"Mahlibuh Palmflower",
+40,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Kurasso Palmflower",
+43,
+false
+],
+[
+"Mahlibuh Palmflower",
+43,
+false
+],
+[
+"Mojeeto Palmflower",
+43,
+false
+],
+[
+"Passaoh Palmflower",
+43,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Kurasso Craboral",
+45,
+false
+],
+[
+"Kurasso Palmflower",
+46,
+false
+],
+[
+"Coralator",
+47,
+false
+],
+[
+"Coralator",
+47,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Mahlibuh Palmflower",
+49,
+false
+],
+[
+"Mojeeto Palmflower",
+49,
+false
+],
+[
+"Coralator",
+50,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Hold of Otomai's Ark": {
+"level": "70",
+"area": "Otomai Island",
+"subarea": "Otomai's Ark",
+"coords": "[-55,-4]",
+"key": "Otomai's Ark Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Inner Labyrinth of the Minotoror": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "In order to pass through the dungeon players must obtain a Mumminotor Relic and a Deminoball Relic. These are dropped by the Mumminotor and Deminoball respectively, which spawn in any of the rooms 1 to 25, but not room 13.\n\nPlayers enter in the unlabeled room on the map below. In the maze most of the doors are closed (except the doors to room 1, 2 and 6 which are always open). In order to open them players must pull levers found in the rooms. A lever in one room opens the doors in the room next to it, but also closes the door next to the lever.\n\n650px\n\nTo open the doors, it is recommended to do this with at least two players. Following the below image, P1 should follow the outside ring (red path) going down from room 1 to 2 etc., and P2 should follow the inside ring (blue path) going from room 1 to 6 and then down to 7 etc. Shown are the levers in every room connected to the right door that needs to be opened to let players through. Doing this strategy will take players through the whole labyrinth except room 13, which doesn't have any monsters. This could also be done clockwise rather than counter clockwise, but the text instructions will be counter-clockwise.\n\n650px\n\nText instructions\n#Player 1 (P1) enters room 6 (down from 1), Player 2 (P2) enters room 2 (right from 1)\n#P1 pulls the right lever > P2 goes down to room 7\n#P2 pulls the left lever and goes down to room 12, while P1 goes down to room 11\n#P1 pulls the right lever, P2 pulls the left lever, and both players go dow",
+"notes": ""
+},
+"Kardorim's Crypt": {
+"level": "10",
+"area": "Incarnam",
+"subarea": "Cemetery",
+"coords": "[5,-1]",
+"key": "Kardorim's Crypt Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Chafer Novice",
+7,
+false
+],
+[
+"Chafer Novice",
+7,
+false
+],
+[
+"Chafer Sneak",
+8,
+false
+],
+[
+"Chafer Sergeant",
+9,
+true
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Chafer Scout",
+8,
+false
+],
+[
+"Chafer Scout",
+8,
+false
+],
+[
+"Chafer Sneak",
+8,
+false
+],
+[
+"Chafer Novice",
+7,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Chafer Pikeman",
+9,
+false
+],
+[
+"Chafer Pikeman",
+9,
+false
+],
+[
+"Chafer Sneak",
+8,
+false
+],
+[
+"Chafer Scout",
+8,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Chafer Sneak",
+9,
+false
+],
+[
+"Chafer Sneak",
+9,
+false
+],
+[
+"Chafer Sergeant",
+10,
+true
+],
+[
+"Chafer Pikeman",
+10,
+false
+]
+]
+},
+{
+"name": "name=Kardorim's Tomb",
+"mons": [
+[
+"Kardorim",
+12,
+true
+],
+[
+"Chafer Sergeant",
+11,
+true
+],
+[
+"Chafer Pikeman",
+11,
+false
+],
+[
+"Chafer Scout",
+10,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": "is one of the five dungeons available to F2P players."
+},
+"Kimbo's Canopy": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Kitsoune Dungeon": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Koolich Cavern": {
+"level": "100",
+"area": "Koalak Mountain",
+"subarea": "Wild Canyon",
+"coords": "[-17,8]",
+"key": "Koolich Cavern Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Immature Koalak",
+60,
+false
+],
+[
+"Immature Koalak",
+60,
+false
+],
+[
+"Dok Alako",
+70,
+false
+],
+[
+"Dok Alako",
+70,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Coco Koalak",
+82,
+false
+],
+[
+"Indigo Koalak",
+82,
+false
+],
+[
+"Morello Cherry Koalak",
+82,
+false
+],
+[
+"Pippin Koalak",
+82,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Dok Alako",
+74,
+false
+],
+[
+"Brown Warko",
+78,
+false
+],
+[
+"Piralak",
+84,
+false
+],
+[
+"Mama Koalak",
+94,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Dok Alako",
+76,
+false
+],
+[
+"Brown Warko",
+80,
+false
+],
+[
+"Drakoalak",
+96,
+false
+],
+[
+"Mama Koalak",
+96,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Cave Gobball",
+100,
+true
+],
+[
+"Cave Gobball",
+100,
+true
+],
+[
+"Cave Gobball",
+100,
+true
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Kwismas Cavern": {
+"level": "110",
+"area": "Kwismas Island",
+"subarea": "Kwismas Land",
+"coords": "[-36,-89]",
+"key": "Kwismas Cavern Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Mini Inuit",
+102,
+true
+],
+[
+"Snowball",
+102,
+false
+],
+[
+"Snowman",
+102,
+false
+],
+[
+"Kwismas Whitish Fang",
+102,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Mini Inuit",
+104,
+true
+],
+[
+"Snowball",
+104,
+false
+],
+[
+"Wintry Kaniger",
+104,
+false
+],
+[
+"Wintry Kaniger",
+104,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Mini Inuit",
+106,
+true
+],
+[
+"Snowman",
+106,
+false
+],
+[
+"Kwismas Whitish Fang",
+106,
+false
+],
+[
+"Kwismas Whitish Fang",
+102,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Mini Inuit",
+108,
+true
+],
+[
+"Kwismas Whitish Fang",
+108,
+false
+],
+[
+"Wintry Kaniger",
+108,
+false
+],
+[
+"Snowman",
+102,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Father Kwismas",
+110,
+true
+],
+[
+"Kwismas Whitish Fang",
+110,
+false
+],
+[
+"Wintry Kaniger",
+106,
+false
+],
+[
+"Snowman",
+104,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Kwismas Dungeon": {
+"level": "50",
+"area": "Kwismas Island",
+"subarea": "Kwismas Haven",
+"coords": "[-32,-89]",
+"key": "Kwismas Dungeon Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Pricky",
+42,
+false
+],
+[
+"Snowy Tofu",
+42,
+true
+],
+[
+"Black Tiwabbitus",
+42,
+false
+],
+[
+"Black Tiwabbitus",
+42,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Pricky",
+44,
+false
+],
+[
+"Snowy Tofu",
+44,
+true
+],
+[
+"Kitsou Nakwatus",
+44,
+false
+],
+[
+"Kitsou Nakwatus",
+44,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Pricky",
+46,
+false
+],
+[
+"Snowy Tofu",
+46,
+true
+],
+[
+"Kwakus",
+46,
+false
+],
+[
+"Kwakus",
+46,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Snowy Tofu",
+48,
+true
+],
+[
+"Black Tiwabbitus",
+48,
+false
+],
+[
+"Kitsou Nakwatus",
+48,
+false
+],
+[
+"Kwakus",
+48,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Itzting",
+50,
+true
+],
+[
+"Black Tiwabbitus",
+50,
+false
+],
+[
+"Kitsou Nakwatus",
+50,
+false
+],
+[
+"Kwakus",
+50,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Lair of the Giant Kralove": {
+"level": "180",
+"area": "Otomai Island",
+"subarea": "Putrid Peat Bog",
+"coords": "[-60,-8]",
+"key": "None, see Access",
+"bunch": "No",
+"rooms": [
+{
+"name": "dungeon=Lair of the Kralove",
+"mons": [
+[
+"Mopeat",
+106,
+false
+],
+[
+"Miremop",
+101,
+false
+],
+[
+"Boggedown Ouassingue",
+98,
+false
+],
+[
+"Boggedown Ouassingue",
+98,
+false
+]
+]
+},
+{
+"name": "dungeon=Lair of the Kralove",
+"mons": [
+[
+"Mopy King",
+198,
+false
+],
+[
+"Mopeat",
+109,
+false
+],
+[
+"Mopeat",
+109,
+false
+],
+[
+"Miremop",
+104,
+false
+]
+]
+},
+{
+"name": "dungeon=Lair of the Kralove",
+"mons": [
+[
+"Giant Kralove",
+640,
+true
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Larva Dungeon": {
+"level": "50",
+"area": "Amakna",
+"subarea": "Crackler Mountain",
+"coords": "[-2,-5]",
+"key": "Golden Larva Egg",
+"bunch": "No",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Lord Crow's Library": {
+"level": "110",
+"area": "Cania Plains",
+"subarea": "The Crow's Domain",
+"coords": "[-15,-62]",
+"key": "Lord Crow's Library Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "thumb|400px\nYou need to find and kill Foxo the Crowfox, Horace the Tamed Crobak and Kapotie the Drinker. They usually spawn separately. Each one you kill will give you the corresponding feather as an alteration.\n\nYou can walk freely between rooms, without the need to kill any other mobs. Once you have killed the 3 \"library keepers\", go back and talk to Virgil to enter the dungeon proper (consisting of 2 rooms), which consumes the key.",
+"notes": ""
+},
+"Minotot Room": {
+"level": "160",
+"area": "Minotoror Island",
+"subarea": "Minotoror Island (subarea)",
+"coords": "[-37,-11]",
+"key": "Minotot Room Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Moowolf Lair": {
+"level": "100",
+"area": "Cania Plains",
+"subarea": "Howling Heights",
+"coords": "[-23,0]",
+"key": "Moowolf Lair Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Boowolf",
+92,
+false
+],
+[
+"Boogranny",
+92,
+false
+],
+[
+"Boopig",
+92,
+false
+],
+[
+"Boowonoké",
+92,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Boowolf",
+94,
+false
+],
+[
+"Boogranny",
+94,
+false
+],
+[
+"Boowonoké",
+94,
+false
+],
+[
+"Boowoldlum",
+94,
+true
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Boowolf",
+98,
+false
+],
+[
+"Boogranny",
+98,
+false
+],
+[
+"Boopig",
+98,
+false
+],
+[
+"Boowoldlum",
+98,
+true
+]
+]
+},
+{
+"name": "6",
+"mons": [
+[
+"Boopig",
+100,
+false
+],
+[
+"Boowonoké",
+100,
+false
+],
+[
+"Moowolf",
+100,
+true
+],
+[
+"Boowoldlum",
+100,
+true
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Pandikazes' Hideout": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Pet Sanctuary": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "differs from other dungeons as in it your characters are all transformed into one of four Pet Ghost types, and must fight other Pet Ghosts to progress.\n\nYou have the choice of which Ghost to fight as at the start of the dungeon. The four choices are:\n* Bow Meow Ghost: 110 HP. Melee warrior, may attack twice a turn, add MP or agility and has a weak ranged spell.\n* Gobtubby Ghost: 120 HP. Tank, has a moderate earth melee spell, can shield itself and an ally, can also attract a target.\n* Pandawa Cub Ghost: 100 HP. A healer. Has a weak ranged attack, two healing spells (one AoE, one single target) and can unbewitch a target.\n* Pink Dragoone Ghost: 90 HP. Distance fighter, can pushback a target, remove range and MP.\n\nYou also encounter the following enemies:\n* Crobak Ghost: 80 HP, ranged fighter.\n* Bilby Ghost: 90 HP, can remove MP and ranged attack.\n* Bworky Ghost: 120 HP, tank.\n* Crocodyl Ghost: 125 HP, AoE ranged fighter.\n* Croum Ghost: 120 HP, tank.\n* El Scarador Ghost: 80 HP, healer, AoE ranged fighter.\n* Leopardo Ghost: 80 HP, close combat fighter can remove MP.\n* Ross Ghost: 70 HP, healer.\n* Treechster Ghost: 90 HP, can remove AP and deal ranged damage in an AoE.\n* Willy Peninzias: 70 HP, close combat fighter can remove MP.\n* Young Wild Boar Ghost: 90 HP, removes AP.",
+"notes": ""
+},
+"Royal Gobball's Court": {
+"level": "30",
+"area": "Astrub",
+"subarea": "Tainela",
+"coords": "[2,-34]",
+"key": "Key to the Royal Gobball's Court",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Black Gobbly",
+22,
+false
+],
+[
+"Gobball",
+22,
+false
+],
+[
+"Gobball War Chief",
+22,
+false
+],
+[
+"White Gobbly",
+22,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Black Gobball",
+24,
+true
+],
+[
+"Black Gobbly",
+24,
+false
+],
+[
+"Gobball War Chief",
+24,
+false
+],
+[
+"White Gobbly",
+24,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Black Gobball",
+26,
+true
+],
+[
+"Black Gobbly",
+26,
+false
+],
+[
+"Gobball",
+26,
+false
+],
+[
+"White Gobbly",
+26,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Black Gobbly",
+28,
+false
+],
+[
+"Gobball",
+28,
+false
+],
+[
+"Gobball War Chief",
+28,
+false
+],
+[
+"White Gobbly",
+28,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Royal Gobball",
+30,
+true
+],
+[
+"Black Gobball",
+30,
+true
+],
+[
+"Gobball",
+30,
+false
+],
+[
+"Gobball War Chief",
+30,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Royal Mastogob's Greenhouse": {
+"level": "120",
+"area": "Frigost Island",
+"subarea": "Icefields",
+"coords": "[-84,-49]",
+"key": "Royal Mastogob's Greenhouse Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Royal Pingwin's Excavation": {
+"level": "140",
+"area": "Frigost Island",
+"subarea": "Frozen Lake",
+"coords": "[-64,-55]",
+"key": "Pingwin Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Pingwinkle",
+132,
+false
+],
+[
+"Pingwobble",
+132,
+false
+],
+[
+"Mama Pingwin",
+132,
+false
+],
+[
+"Shaman Pingwin",
+132,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Pingwinkle",
+134,
+false
+],
+[
+"Pingwinkle",
+134,
+false
+],
+[
+"Pingwobble",
+134,
+false
+],
+[
+"Mama Pingwin",
+134,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Pingwobble",
+136,
+false
+],
+[
+"Shaman Pingwin",
+136,
+false
+],
+[
+"Shaman Pingwin",
+136,
+false
+],
+[
+"Kung-Fu Pingwin",
+136,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Mama Pingwin",
+138,
+false
+],
+[
+"Mama Pingwin",
+138,
+false
+],
+[
+"Shaman Pingwin",
+138,
+false
+],
+[
+"Kung-Fu Pingwin",
+138,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Royal Pingwin",
+140,
+true
+],
+[
+"Mama Pingwin",
+140,
+false
+],
+[
+"Shaman Pingwin",
+140,
+false
+],
+[
+"Kung-Fu Pingwin",
+140,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Royal Rainbow Blop Lair": {
+"level": "120",
+"area": "Cania Plains",
+"subarea": "Cania Lake",
+"coords": "[-7,-43]",
+"key": "Royal Rainbow Blop Lair Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Royal Tofu House": {
+"level": "120",
+"area": "Amakna",
+"subarea": "Ingalsses' Fields",
+"coords": "[5,6]",
+"key": "Secret Royal Tofu House Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Sakai Mine Dungeon": {
+"level": "190",
+"area": "Sakai Island",
+"subarea": "Snowy Forest",
+"coords": "[-52,-45]",
+"key": "Sakai Mine Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Sandy Castle": {
+"level": "20",
+"area": "Astrub",
+"subarea": "Astrub Rocky Inlet",
+"coords": "[13,-28]",
+"key": "Sandy Castle Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Brown Snapper",
+16,
+false
+],
+[
+"Green Snapper",
+16,
+false
+],
+[
+"White Snapper",
+16,
+false
+],
+[
+"Brown Snapper",
+16,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Blue Snapper",
+17,
+false
+],
+[
+"Green Snapper",
+17,
+false
+],
+[
+"Kloon Snapper",
+17,
+true
+],
+[
+"Blue Snapper",
+17,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Kloon Snapper",
+18,
+true
+],
+[
+"Green Snapper",
+18,
+false
+],
+[
+"White Snapper",
+18,
+false
+],
+[
+"Kloon Snapper",
+18,
+true
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Green Snapper",
+19,
+false
+],
+[
+"White Snapper",
+19,
+false
+],
+[
+"Blue Snapper",
+19,
+false
+],
+[
+"Green Snapper",
+19,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Sponge Mob",
+20,
+true
+],
+[
+"Kloon Snapper",
+20,
+true
+],
+[
+"Brown Snapper",
+20,
+false
+],
+[
+"White Snapper",
+20,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": "is one of the 5 dungeons available to F2P players."
+},
+"Scaraleaf Dungeon": {
+"level": "40",
+"area": "Amakna",
+"subarea": "Scaraleaf Plain",
+"coords": "[1,26]",
+"key": "Scaraleaf Dungeon Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Immature Scaraleaf",
+30,
+true
+],
+[
+"Blue Scaraleaf",
+34,
+false
+],
+[
+"Blue Scaraleaf",
+34,
+false
+],
+[
+"White Scaraleaf",
+34,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Immature Scaraleaf",
+30,
+true
+],
+[
+"Green Scaraleaf",
+36,
+false
+],
+[
+"Green Scaraleaf",
+36,
+false
+],
+[
+"Red Scaraleaf",
+36,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Blue Scaraleaf",
+38,
+false
+],
+[
+"Green Scaraleaf",
+38,
+false
+],
+[
+"Red Scaraleaf",
+38,
+false
+],
+[
+"White Scaraleaf",
+38,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Immature Scaraleaf",
+30,
+true
+],
+[
+"Black Scaraleaf",
+42,
+true
+],
+[
+"Red Scaraleaf",
+40,
+false
+],
+[
+"White Scaraleaf",
+40,
+false
+]
+]
+},
+{
+"name": "6",
+"mons": [
+[
+"Black Scaraleaf",
+44,
+true
+],
+[
+"Blue Scaraleaf",
+42,
+false
+],
+[
+"White Scaraleaf",
+42,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Skeleton Dungeon": {
+"level": "40",
+"area": "Amakna",
+"subarea": "Cemetery (Amakna)",
+"coords": "[10,15]",
+"key": "Skeleton Dungeon Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Primitive Chafer",
+34,
+true
+],
+[
+"Rib",
+34,
+false
+],
+[
+"Rib",
+34,
+false
+],
+[
+"Rib",
+34,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Primitive Chafer",
+36,
+true
+],
+[
+"Primitive Chafer",
+36,
+true
+],
+[
+"Chafer Foot Soldier",
+35,
+false
+],
+[
+"Rib",
+36,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Primitive Chafer",
+38,
+true
+],
+[
+"Invisible Chafer",
+31,
+false
+],
+[
+"Chafer Foot Soldier",
+37,
+false
+],
+[
+"Draugur Chafer",
+42,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Primitive Chafer",
+40,
+true
+],
+[
+"Chafer",
+38,
+false
+],
+[
+"Chafer Foot Soldier",
+39,
+false
+],
+[
+"Draugur Chafer",
+44,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Primitive Chafer",
+42,
+true
+],
+[
+"Draugur Chafer",
+44,
+false
+],
+[
+"Draugur Chafer",
+44,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Skeunk's Hideout": {
+"level": "120",
+"area": "Koalak Mountain",
+"subarea": "Agony V'Helley",
+"coords": "[-20,10]",
+"key": "Skeunk's Hideout Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "is composed of 5 rooms, the four first containing the Sadidette mobs, and the final boss room, where all Sadidettes are present, along with the Skeunk.",
+"notes": ""
+},
+"Soft Oak Clearing": {
+"level": "140",
+"area": "Treechnid Forest",
+"subarea": "Dark Forest",
+"coords": "[-14,-13]",
+"key": "Soft Oak Clearing Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Sphincter Cell's Lair": {
+"level": "150",
+"area": "Amakna",
+"subarea": "Amakna Sewers",
+"coords": "[5,-8]",
+"key": "Sphincter Cell's Lair Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Temple of the Great Ougaa": {
+"level": "180",
+"area": "Sidimote Moors",
+"subarea": "Fungus Cavern",
+"coords": "[-9,29]",
+"key": "Temple of the Great Ougaa Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"The Jellith Dimension": {
+"level": "60",
+"area": "|subarea=",
+"subarea": "",
+"coords": "Any",
+"key": "Multijely",
+"bunch": "No",
+"rooms": [],
+"mechanics": "works somewhat differently to other dungeons. In each room you are faced with 4 mobs (and so must choose one of the following mobs listed on this page). Each mob of Jellies killed drops a Quest Item called a Pool of Jelly. You will get a Pool of Jelly based on the type of Jelly most dominating the mob, so fighting 4 Strawberry Jellies, 2 Mint Jellies, 1 Blue Jelly and 1 Lemon Jelly  would drop a Pool of Strawberry Jelly.\n\nThe boss mob, fought in the 5th room, depends upon which Pools of Jelly you have collected in the dungeon. Upon entering the 5th room you will see the 4 Royal Jellies playing a game; talking to either of the Royal Jellies will teleport you into another room with the boss mob. If you have each of the 4 colored Pools, talking to the Royal Jellies will teleport you into a room whereby you can fight all 4 Royal Jellies in a singular fight. If you are missing one of the Pools, you will be teleported into a room with the Royal Jelly corresponding to the pool you have the greatest amount of.",
+"notes": ""
+},
+"The Obsidemon's Hypogeum": {
+"level": "160",
+"area": "Frigost Island",
+"subarea": "The Tears of Ouronigride",
+"coords": "[-71,-83]",
+"key": "Obsidemon's Hypogeum Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "2",
+"mons": [
+[
+"Atomystique",
+152,
+false
+],
+[
+"Fumaroller",
+152,
+true
+],
+[
+"Mofette",
+152,
+true
+],
+[
+"Steam Crackler",
+152,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Fumaroller",
+154,
+true
+],
+[
+"Fumaroller",
+154,
+true
+],
+[
+"Mofette",
+154,
+true
+],
+[
+"Mofette",
+154,
+true
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Atomystique",
+156,
+false
+],
+[
+"Atomystique",
+156,
+false
+],
+[
+"Fumaroller",
+156,
+true
+],
+[
+"Mofette",
+156,
+true
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Solfatara",
+158,
+false
+],
+[
+"Fumaroller",
+158,
+true
+],
+[
+"Mofette",
+158,
+true
+],
+[
+"Steam Crackler",
+158,
+false
+]
+]
+},
+{
+"name": "6",
+"mons": [
+[
+"Obsidemon",
+160,
+true
+],
+[
+"Solfatara",
+160,
+false
+],
+[
+"Fumaroller",
+160,
+true
+],
+[
+"Mofette",
+160,
+true
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"The Wreck of the Hesperus": {
+"level": "150",
+"area": "Frigost Island",
+"subarea": "Alma's Cradle",
+"coords": "[-60,-84]",
+"key": "Wreck of the Hesperus Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Talklyka Pirate",
+142,
+false
+],
+[
+"Talklyka Pirate",
+142,
+false
+],
+[
+"Yuara Pirate",
+142,
+false
+],
+[
+"Yuara Pirate",
+142,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Karrybean Pirate",
+144,
+false
+],
+[
+"Retspan Pirate",
+144,
+false
+],
+[
+"Yuara Pirate",
+144,
+false
+],
+[
+"Harpy Pirate",
+144,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Karrybean Pirate",
+146,
+false
+],
+[
+"Karrybean Pirate",
+146,
+false
+],
+[
+"Harpy Pirate",
+146,
+false
+],
+[
+"Harpy Pirate",
+146,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Retspan Pirate",
+148,
+false
+],
+[
+"Retspan Pirate",
+148,
+false
+],
+[
+"Vigi Pirate",
+148,
+false
+],
+[
+"Vigi Pirate",
+148,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Buck Anear",
+150,
+true
+],
+[
+"Yuara Pirate",
+150,
+false
+],
+[
+"Harpy Pirate",
+150,
+false
+],
+[
+"Vigi Pirate",
+150,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Tofu House": {
+"level": "40",
+"area": "Amakna",
+"subarea": "Ingalsses' Fields",
+"coords": "[5,6]",
+"key": "Tofu House Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Black Tofu",
+32,
+false
+],
+[
+"Mutant Tofu",
+32,
+false
+],
+[
+"Tofoone",
+32,
+false
+],
+[
+"Tofukaz",
+32,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Tofurby",
+34,
+true
+],
+[
+"Black Tofu",
+34,
+false
+],
+[
+"Mutant Tofu",
+34,
+false
+],
+[
+"Tofoone",
+34,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Tofurby",
+36,
+true
+],
+[
+"Black Tofu",
+36,
+false
+],
+[
+"Mutant Tofu",
+36,
+false
+],
+[
+"Tofukaz",
+36,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Black Tofu",
+38,
+false
+],
+[
+"Mutant Tofu",
+38,
+false
+],
+[
+"Tofoone",
+38,
+false
+],
+[
+"Tofukaz",
+38,
+false
+]
+]
+},
+{
+"name": "6",
+"mons": [
+[
+"Tofurby",
+40,
+true
+],
+[
+"Tofoone",
+40,
+false
+],
+[
+"Tofukaz",
+40,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Tynril Lab": {
+"level": "140",
+"area": "Otomai Island",
+"subarea": "Dark Jungle",
+"coords": "[-53,20]",
+"key": "Tynril Lab Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Warguerite",
+125,
+false
+],
+[
+"Gwass",
+126,
+false
+],
+[
+"Rotaflor",
+127,
+false
+],
+[
+"Barkritter",
+128,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Warguerite",
+128,
+false
+],
+[
+"Gwass",
+129,
+false
+],
+[
+"Rotaflor",
+130,
+false
+],
+[
+"Floramor",
+132,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Barkritter",
+134,
+false
+],
+[
+"Floramor",
+135,
+false
+],
+[
+"Dark Pikoko",
+136,
+false
+],
+[
+"Dark Pikoko",
+136,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Floramor",
+138,
+false
+],
+[
+"Dark Pikoko",
+139,
+false
+],
+[
+"Dark Treeckler",
+140,
+false
+],
+[
+"Dark Treeckler",
+140,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": []
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Wa Wabbit's Castle": {
+"level": "60",
+"area": "Wabbit Islands",
+"subarea": "Isle of the Cwown",
+"coords": "[24,-13]",
+"key": "Wa Wabbit's Castle Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Tiwabbit",
+41,
+false
+],
+[
+"Black Tiwabbit",
+42,
+false
+],
+[
+"Wabbit (monster)",
+44,
+false
+],
+[
+"Black Wabbit",
+46,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Tiwabbit Wosungwee (monster)",
+42,
+false
+],
+[
+"Wabbit (monster)",
+46,
+false
+],
+[
+"Wabbit (monster)",
+46,
+false
+],
+[
+"Black Wabbit",
+48,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Wabbit (monster)",
+48,
+false
+],
+[
+"Black Wabbit",
+50,
+false
+],
+[
+"Black Wabbit",
+50,
+false
+],
+[
+"Wo Wabbit",
+56,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Wabbit (monster)",
+50,
+false
+],
+[
+"Black Wabbit",
+52,
+false
+],
+[
+"Gwandpa Wabbit",
+58,
+false
+],
+[
+"Wo Wabbit",
+58,
+false
+]
+]
+},
+{
+"name": "name=Throne Room",
+"mons": [
+[
+"Gwandpa Wabbit",
+60,
+false
+],
+[
+"Gwandpa Wabbit",
+60,
+false
+],
+[
+"Wo Wabbit",
+60,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Wa Wabbit's Warren": {
+"level": "80",
+"area": "Wabbit Islands",
+"subarea": "Gwimace Island",
+"coords": "[28,-12]",
+"key": "Wa Wabbit's Warren Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Black Wo Wabbit",
+72,
+true
+],
+[
+"Black Wo Wabbit",
+72,
+true
+],
+[
+"Tiwobot",
+72,
+true
+],
+[
+"Wobot",
+72,
+true
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Tiwobot",
+74,
+true
+],
+[
+"Whitepaw Wabbit",
+74,
+true
+],
+[
+"Wobot Wosungwee",
+74,
+true
+],
+[
+"Wobot Wosungwee",
+74,
+true
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Tiwobot",
+76,
+true
+],
+[
+"Wobot",
+76,
+true
+],
+[
+"Wobot",
+76,
+true
+],
+[
+"Wobot Wosungwee",
+76,
+true
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Black Wo Wabbit",
+78,
+true
+],
+[
+"Tiwobot",
+78,
+true
+],
+[
+"Whitepaw Wabbit",
+78,
+true
+],
+[
+"Whitepaw Wabbit",
+78,
+true
+]
+]
+},
+{
+"name": "name=Cawwot Dofus Room",
+"mons": [
+[
+"Black Wo Wabbit",
+80,
+true
+],
+[
+"Tiwobot",
+80,
+true
+],
+[
+"Wobot Wosungwee",
+80,
+true
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"White Rat's Pantry": {
+"level": "110",
+"area": "Bonta",
+"subarea": "Foul-Smelling Canals",
+"coords": "[-34,-59]",
+"key": "White Rat's Pantry Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Rat Batster",
+102,
+false
+],
+[
+"Chika Rat",
+102,
+false
+],
+[
+"Aloevie Rat",
+102,
+false
+],
+[
+"Chak Rat",
+102,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Capoei Rat",
+104,
+true
+],
+[
+"Chika Rat",
+104,
+false
+],
+[
+"Chika Rat",
+104,
+false
+],
+[
+"Rat Batster",
+102,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Capoei Rat",
+106,
+true
+],
+[
+"Capoei Rat",
+106,
+true
+],
+[
+"Chika Rat",
+106,
+false
+],
+[
+"Chika Rat",
+106,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Capoei Rat",
+108,
+true
+],
+[
+"Aloevie Rat",
+108,
+false
+],
+[
+"Aloevie Rat",
+108,
+false
+],
+[
+"Chika Rat",
+108,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"White Rat",
+110,
+true
+],
+[
+"Capoei Rat",
+110,
+true
+],
+[
+"Aloevie Rat",
+110,
+false
+],
+[
+"Rat Batster",
+110,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Al Howin's Vegetable Patch": {
+"level": "100",
+"area": "Amakna",
+"subarea": "Scaraleaf Plain",
+"coords": "[-1,22]",
+"key": "Al Howin's Vegetable Patch Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "name=Swamp",
+"mons": [
+[
+"Toadkin",
+94,
+false
+],
+[
+"Worm-O'-Lantern",
+92,
+false
+],
+[
+"Borbkin",
+90,
+false
+],
+[
+"Borbkin",
+90,
+false
+],
+[
+"Worm-O'-Lantern",
+92,
+false
+],
+[
+"Toadkin",
+94,
+false
+],
+[
+"Borbkin",
+90,
+false
+],
+[
+"Worm-O'-Lantern",
+92,
+false
+]
+]
+},
+{
+"name": "name= Cemetery",
+"mons": [
+[
+"Arachkin",
+99,
+false
+],
+[
+"Worm-O'-Lantern",
+95,
+false
+],
+[
+"Borbkin",
+93,
+false
+],
+[
+"Worm-O'-Lantern",
+95,
+false
+],
+[
+"Toadkin",
+97,
+false
+],
+[
+"Borbkin",
+93,
+false
+],
+[
+"Arachkin",
+99,
+false
+],
+[
+"Worm-O'-Lantern",
+95,
+false
+]
+]
+},
+{
+"name": "name= Witch's Lair",
+"mons": [
+[
+"Arachkin",
+102,
+false
+],
+[
+"Toadkin",
+100,
+false
+],
+[
+"Borbkin",
+96,
+false
+],
+[
+"Worm-O'-Lantern",
+98,
+false
+],
+[
+"Borbkin",
+96,
+false
+],
+[
+"Arachkin",
+102,
+false
+],
+[
+"Worm-O'-Lantern",
+98,
+false
+],
+[
+"Toadkin",
+100,
+false
+]
+]
+},
+{
+"name": "name= Pumpkwin Patch",
+"mons": [
+[
+"Devhorror",
+98,
+false
+],
+[
+"Arachkin",
+105,
+false
+],
+[
+"Toadkin",
+103,
+false
+],
+[
+"Worm-O'-Lantern",
+101,
+false
+],
+[
+"Devhorror",
+101,
+false
+],
+[
+"Toadkin",
+103,
+false
+],
+[
+"Devhorror",
+104,
+false
+],
+[
+"Borbkin",
+99,
+false
+],
+[
+"Devhorror",
+107,
+false
+],
+[
+"Arachkin",
+105,
+false
+],
+[
+"Devhorror",
+110,
+false
+],
+[
+"Worm-O'-Lantern",
+101,
+false
+]
+]
+},
+{
+"name": "name= Cursed Vegetable Patch",
+"mons": [
+[
+"Al Howin",
+100,
+false
+],
+[
+"Arachkin",
+108,
+false
+],
+[
+"Toadkin",
+106,
+false
+],
+[
+"Worm-O'-Lantern",
+104,
+false
+],
+[
+"Arachkin",
+108,
+false
+],
+[
+"Borbkin",
+102,
+false
+],
+[
+"Toadkin",
+106,
+false
+],
+[
+"Worm-O'-Lantern",
+104,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Bearbarian Antichamber": {
+"level": "190",
+"area": "Frigost Island",
+"subarea": "Mount Scauldron",
+"coords": "[-63,-75]",
+"key": "Bearbarian Antichamber Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Belly of the Whale": {
+"level": "200",
+"area": "Frigost Island",
+"subarea": "Albatrocious Rock",
+"coords": "[-85,-59]",
+"key": "Key to the Belly of the Whale",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Bethel's Tower": {
+"level": "200",
+"area": "Frigost Island",
+"subarea": "Silent Wrecks",
+"coords": "[-48,-82]",
+"key": "Key to Bethel's Tower",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Brumen Tinctorias's LaboRATory": {
+"level": "70",
+"area": "Sidimote Moors",
+"subarea": "Desolation of Sidimote",
+"coords": "[-27,17]",
+"key": "Brumen Tinctorias's LaboRATory Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Crovus",
+62,
+false
+],
+[
+"Kolerat",
+62,
+false
+],
+[
+"Scurvion",
+62,
+false
+],
+[
+"Whitish Fang",
+62,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Macian",
+64,
+true
+],
+[
+"Crovus",
+64,
+false
+],
+[
+"Kolerat",
+64,
+false
+],
+[
+"Whitish Fang",
+64,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Macian",
+66,
+true
+],
+[
+"Kolerat",
+66,
+false
+],
+[
+"Scurvion",
+66,
+false
+],
+[
+"Whitish Fang",
+66,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Crovus",
+68,
+false
+],
+[
+"Kolerat",
+68,
+false
+],
+[
+"Scurvion",
+68,
+false
+],
+[
+"Whitish Fang",
+68,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Macian",
+70,
+true
+],
+[
+"Crovus",
+70,
+false
+],
+[
+"Scurvion",
+70,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Brutatax's Factory": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [
+{
+"name": "name=Machine Room",
+"mons": [
+[
+"Brutatax",
+100,
+true
+],
+[
+"Persaport",
+100,
+false
+],
+[
+"Mimicasket",
+100,
+false
+],
+[
+"Antrezure",
+100,
+false
+],
+[
+"Antrezure",
+100,
+false
+],
+[
+"Antrezure",
+100,
+false
+],
+[
+"Precious",
+100,
+true
+],
+[
+"Hurtful Locker",
+100,
+false
+],
+[
+"Mimicasket",
+100,
+false
+],
+[
+"Mimicasket",
+100,
+false
+],
+[
+"Precious",
+100,
+true
+],
+[
+"Antrezure",
+100,
+false
+],
+[
+"Precious",
+100,
+true
+],
+[
+"Precious",
+100,
+true
+],
+[
+"Persaport",
+100,
+false
+],
+[
+"Mimicasket",
+100,
+false
+],
+[
+"Hurtful Locker",
+100,
+false
+],
+[
+"Hurtful Locker",
+100,
+false
+],
+[
+"Precious",
+100,
+true
+],
+[
+"Persaport",
+100,
+false
+]
+]
+}
+],
+"mechanics": "Unlike traditional dungeons, Brutatax's Factory (along with the other Divine Dimensions dungeons) do not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after a set number of turns, however they will also spawn as soon as all the monsters from the previous wave have been cleared.",
+"notes": ""
+},
+"Captain Meno's Ship": {
+"level": "200",
+"area": "Sufokia Bay",
+"subarea": "Depths of Sufokia",
+"coords": "[24,27]",
+"key": "Captain Meno's Ship Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Yoloinist Crab",
+200,
+false
+],
+[
+"Yoloinist Crab",
+200,
+false
+],
+[
+"Litlamprey",
+200,
+false
+],
+[
+"Mol Usk",
+200,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Gambasmak",
+203,
+false
+],
+[
+"Gambasmak",
+203,
+false
+],
+[
+"Litlamprey",
+203,
+false
+],
+[
+"Mantaze",
+203,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Mantaze",
+206,
+false
+],
+[
+"Mantaze",
+206,
+false
+],
+[
+"Litlamprey",
+206,
+false
+],
+[
+"Mol Usk",
+206,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Litlamprey",
+209,
+false
+],
+[
+"Litlamprey",
+209,
+false
+],
+[
+"Mol Usk",
+209,
+false
+],
+[
+"Gambasmak",
+209,
+false
+]
+]
+},
+{
+"name": "name=Final Room",
+"mons": [
+[
+"Captain Meno",
+220,
+true
+],
+[
+"Gambasmak",
+212,
+false
+],
+[
+"Mantaze",
+212,
+false
+],
+[
+"Litlamprey",
+212,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Captain Scarlight's Ring": {
+"level": "130",
+"area": "Srambad",
+"subarea": "Shrouded Canals",
+"coords": "[6,3]",
+"key": "Key to Captain Scarlight's Ring",
+"bunch": "No",
+"rooms": [],
+"mechanics": "Unlike traditional dungeons, Captain Scarlight's Ring (along with the other Divine Dimensions dungeons) do not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after 5 turns (so turns 6, 11, 16, and 21). The next wave will also spawn immediately if all monsters on the field are defeated; the 5 turn countdown for the next wave will start at that point.\n\n\n{{NamedRoom|Captain Scarlight's Ring|",
+"notes": ""
+},
+"Catseye Challenge": {
+"level": "200",
+"area": "Ecaflipus",
+"subarea": "Kerub Temple",
+"coords": "[-9,-22]",
+"key": "Catseye Challenge Key",
+"bunch": "No",
+"rooms": [],
+"mechanics": "Unlike traditional dungeons, Catseye Challenge (along with the other Divine Dimensions dungeons) do not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after a set number of turns, however they will also spawn as soon as all the monsters from the previous waves have been cleared. New waves spawn every 5 turns by default (turns 6, 11, 16, and 21).",
+"notes": ""
+},
+"Chamber of Tal Kasha": {
+"level": "200",
+"area": "Ohwymi",
+"subarea": "Cursed Pyramid",
+"coords": "[12,-77]",
+"key": "Chamber of Tal Kasha Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Colousses's Meowsoleum": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "Unlike traditional dungeons, Colousses's Meowsoleum (along with the other Divine Dimensions dungeons) do not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after a set number of turns, however they will also spawn as soon as all the monsters from the previous wave have been cleared.",
+"notes": ""
+},
+"Count Harebourg's Dungeon": {
+"level": "200",
+"area": "Frigost Island",
+"subarea": "Water Clock Tower",
+"coords": "[-61,-79]",
+"key": "Count Harebourg's Dungeon Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Count Razof's Camp": {
+"level": "190",
+"area": "Nimaltopia",
+"subarea": "Nimaltopia",
+"coords": "[-63,30]",
+"key": "Count Razof's Camp Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Draftwit",
+182,
+false
+],
+[
+"Buckshot",
+182,
+false
+],
+[
+"Crambo",
+182,
+false
+],
+[
+"Nemroz",
+182,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Draftwit",
+184,
+false
+],
+[
+"Crambo",
+184,
+false
+],
+[
+"Nemroz",
+184,
+false
+],
+[
+"Hunderp",
+184,
+true
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Draftwit",
+186,
+false
+],
+[
+"Buckshot",
+186,
+false
+],
+[
+"Nemroz",
+186,
+false
+],
+[
+"Hunderp",
+186,
+true
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Draftwit",
+188,
+false
+],
+[
+"Buckshot",
+188,
+false
+],
+[
+"Crambo",
+188,
+false
+],
+[
+"Hunderp",
+188,
+true
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Count Razof",
+190,
+true
+],
+[
+"Crambo",
+190,
+false
+],
+[
+"Nemroz",
+190,
+false
+],
+[
+"Hunderp",
+190,
+true
+]
+]
+}
+],
+"mechanics": "When the fight starts, Count Razof has almost 100% resistance on all elements. You reduce it by 20% per each summon your team has alive. He also summons a Minikron, a little pink unicorn that follows the character that summoned it around. When it finishes close to you, it heals and shields you for aprox. 8% of your max health. I recommend you lock it with a high lock character, kill the rest of the mob and then take care of the summons.\nFor achievements duo Cra and Panda worked just fine with Panda tanking it and Cra finishing the mob from afar.\nAt the end of his turn, Razof will lose 20% resistance per each summon your group controls that is alive (except for static summons). If the count kills a player his resistance to the element of his current sate will be reduced by 20% for 10 turns.",
+"notes": ""
+},
+"Cross Strich's Aviary": {
+"level": "130",
+"area": "Cania Plains",
+"subarea": "Cania Cirque",
+"coords": "[-10,-44]",
+"key": "Cross Strich's Aviary Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Trubout",
+112,
+false
+],
+[
+"Patrich",
+111,
+false
+],
+[
+"Stricheetru",
+110,
+false
+],
+[
+"Stricheetru",
+110,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Stretch",
+118,
+true
+],
+[
+"Trubout",
+116,
+false
+],
+[
+"Trubout",
+116,
+false
+],
+[
+"Stricheetru",
+114,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Stretch",
+122,
+true
+],
+[
+"Watchamatrich",
+121,
+false
+],
+[
+"Stricheetru",
+118,
+false
+],
+[
+"Patrich",
+119,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Stretch",
+126,
+true
+],
+[
+"Trubout",
+124,
+false
+],
+[
+"Watchamatrich",
+125,
+false
+],
+[
+"Patrich",
+123,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Cross Strich",
+130,
+true
+],
+[
+"Stretch",
+130,
+true
+],
+[
+"Watchamatrich",
+129,
+false
+],
+[
+"Patrich",
+127,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Daggero's Lair": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Dantinea's Palace": {
+"level": "200",
+"area": "Sufokia Bay",
+"subarea": "Realm of the Trituns",
+"coords": "[19,26]",
+"key": "Dantinea's Palace Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Octodoll",
+200,
+false
+],
+[
+"Octodoll",
+200,
+false
+],
+[
+"Crabtun",
+200,
+false
+],
+[
+"Merdiodon",
+200,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Tryde",
+203,
+false
+],
+[
+"Tryde",
+203,
+false
+],
+[
+"Silyrus",
+203,
+false
+],
+[
+"Merdiodon",
+203,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Silyrus",
+206,
+false
+],
+[
+"Silyrus",
+206,
+false
+],
+[
+"Crabtun",
+206,
+false
+],
+[
+"Merdiodon",
+206,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Merdiodon",
+209,
+false
+],
+[
+"Merdiodon",
+209,
+false
+],
+[
+"Tryde",
+209,
+false
+],
+[
+"Crabtun",
+209,
+false
+]
+]
+},
+{
+"name": "name=Final Room",
+"mons": [
+[
+"Dantinea",
+220,
+true
+],
+[
+"Merdiodon",
+212,
+false
+],
+[
+"Silyrus",
+212,
+false
+],
+[
+"Tryde",
+212,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Dragon Pig's Den": {
+"level": "100",
+"area": "Amakna",
+"subarea": "Porco Territory",
+"coords": "[-1,33]",
+"key": "Dragon Pig's Maze Key & Dragon Pig Den Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "3",
+"mons": [
+[
+"Pignolia",
+80,
+false
+],
+[
+"Pignolia",
+80,
+false
+],
+[
+"Pignolia",
+80,
+false
+],
+[
+"Farle's Pig",
+90,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Pignolia",
+83,
+false
+],
+[
+"Farle's Pig",
+92,
+false
+],
+[
+"Dorgan Ation",
+94,
+false
+],
+[
+"Dorgan Ation",
+94,
+false
+]
+]
+},
+{
+"name": "7",
+"mons": [
+[
+"Pignolia",
+86,
+false
+],
+[
+"Farle's Pig",
+94,
+false
+],
+[
+"Dorgan Ation",
+96,
+false
+],
+[
+"Dorgan Ation",
+96,
+false
+]
+]
+},
+{
+"name": "9",
+"mons": [
+[
+"Farle's Pig",
+96,
+false
+],
+[
+"Blodz Uker",
+98,
+false
+],
+[
+"Blodz Uker",
+98,
+false
+],
+[
+"Dorgan Ation",
+98,
+false
+]
+]
+},
+{
+"name": "11",
+"mons": []
+},
+{
+"name": "13",
+"mons": [
+[
+"Farle's Pig",
+98,
+false
+],
+[
+"Blodz Uker",
+100,
+false
+],
+[
+"Dorgan Ation",
+100,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Dramak's Theatre": {
+"level": "100",
+"area": "Asse Sea Islands",
+"subarea": "Krismahlo Island",
+"coords": "[21,7]",
+"key": "Dramak's Theatre Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Drhossil's Caves": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "Unlike traditional dungeons, Drhossil's Caves (along with the other Divine Dimensions dungeons) do not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after a set number of turns, however they will also spawn as soon as all the monsters from the previous wave have been cleared.",
+"notes": ""
+},
+"El Piko's Cave": {
+"level": "130",
+"area": "Ohwymi",
+"subarea": "Castuc Territory",
+"coords": "[15,-65]",
+"key": "El Piko's Cave Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Cactana",
+122,
+false
+],
+[
+"Castupod",
+122,
+false
+],
+[
+"Pampastuc",
+122,
+false
+],
+[
+"Saguaro",
+122,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Levito",
+124,
+true
+],
+[
+"Cactana",
+124,
+false
+],
+[
+"Pampastuc",
+124,
+false
+],
+[
+"Saguaro",
+124,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Levito",
+126,
+true
+],
+[
+"Cactana",
+126,
+false
+],
+[
+"Castupod",
+126,
+false
+],
+[
+"Pampastuc",
+126,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Cactana",
+128,
+false
+],
+[
+"Castupod",
+128,
+false
+],
+[
+"Pampastuc",
+128,
+false
+],
+[
+"Saguaro",
+128,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Levito",
+130,
+true
+],
+[
+"Castupod",
+130,
+false
+],
+[
+"Saguaro",
+130,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Eye of Vortex": {
+"level": "200",
+"area": "Xelorium",
+"subarea": "Uncertain Future",
+"coords": "[7,-7]",
+"key": "Vortex's Eye Key",
+"bunch": "No",
+"rooms": [],
+"mechanics": "Unlike traditional dungeons, Eye of Vortex (along with the other Divine Dimensions dungeons) do not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after a set number of turns, however they will also spawn as soon as all the monsters from the previous waves have been cleared. New waves spawn every 6 turns by default (turns 7, 13, 19, and 25).",
+"notes": ""
+},
+"Forfut Manor": {
+"level": "200",
+"area": "Sidimote Moors",
+"subarea": "Desecrated Highlands",
+"coords": "[-31,15]",
+"key": "Forfut Manor Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Fraktal's Megalith": {
+"level": "120",
+"area": "Xelorium",
+"subarea": "Gonebyways",
+"coords": "[7,3]",
+"key": "Fraktal's Megalith Key",
+"bunch": "No",
+"rooms": [],
+"mechanics": "Unlike traditional dungeons, Fraktal's Megalith (along with the other Divine Dimensions dungeons) do not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after a set number of turns, however they will also spawn as soon as all the monsters from the previous waves have been cleared. New waves spawn every 5 turns by default (turns 6, 11, 16, and 21).",
+"notes": ""
+},
+"Haunted House": {
+"level": "40",
+"area": "Cania Plains",
+"subarea": "Trool Fair",
+"coords": "[-13,-41]",
+"key": "Haunted House Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Prepubescent Boostache",
+32,
+true
+],
+[
+"Evil Tofu",
+32,
+false
+],
+[
+"Kwoan",
+32,
+false
+],
+[
+"Vampire",
+32,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Prepubescent Boostache",
+34,
+true
+],
+[
+"Evil Tofu",
+34,
+false
+],
+[
+"Gargoyl",
+34,
+false
+],
+[
+"Vampire",
+34,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Prepubescent Boostache",
+36,
+true
+],
+[
+"Evil Tofu",
+36,
+false
+],
+[
+"Kwoan",
+36,
+false
+],
+[
+"Vampire",
+36,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Prepubescent Boostache",
+38,
+true
+],
+[
+"Evil Tofu",
+38,
+false
+],
+[
+"Gargoyl",
+38,
+false
+],
+[
+"Kwoan",
+38,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Gargoyl",
+40,
+false
+],
+[
+"Kwoan",
+40,
+false
+],
+[
+"Vampire",
+40,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Kanigrula's Cave": {
+"level": "160",
+"area": "Cania Plains",
+"subarea": "Stontusk Desert",
+"coords": "[-5,-54]",
+"key": "Kanigrula's Cave Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Kanniball Village": {
+"level": "60",
+"area": "Moon Island",
+"subarea": "The Forest of Masks",
+"coords": "[29,9]",
+"key": "Kanniball Village Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Kanniball Tam",
+52,
+true
+],
+[
+"Kanniball Thierry",
+52,
+false
+],
+[
+"Kanniballbo",
+52,
+false
+],
+[
+"Kanniballbo",
+52,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Kanniball Sarbak",
+54,
+false
+],
+[
+"Kanniball Sarbak",
+54,
+false
+],
+[
+"Kanniball Thierry",
+54,
+false
+],
+[
+"Kanniballbo",
+54,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Kanniball Jav",
+56,
+false
+],
+[
+"Kanniball Jav",
+56,
+false
+],
+[
+"Kanniball Sarbak",
+56,
+false
+],
+[
+"Kanniball Thierry",
+56,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Kanniball Tam",
+58,
+true
+],
+[
+"Kanniball Jav",
+58,
+false
+],
+[
+"Kanniball Thierry",
+58,
+false
+],
+[
+"Kanniball Thierry",
+58,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Kanniball Tam",
+60,
+true
+],
+[
+"Kanniball Jav",
+60,
+false
+],
+[
+"Kanniball Sarbak",
+60,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Kickroach's Lair": {
+"level": "40",
+"area": "Astrub",
+"subarea": "Astrub City",
+"coords": "[3,-17]",
+"key": "Kickroach's Lair Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Gluwax",
+32,
+true
+],
+[
+"Roarcher",
+32,
+false
+],
+[
+"Sacarid",
+32,
+false
+],
+[
+"Sacarid",
+32,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Gluwax",
+34,
+true
+],
+[
+"Crooket",
+34,
+false
+],
+[
+"Crooket",
+34,
+false
+],
+[
+"Sacarid",
+34,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Gluwax",
+36,
+true
+],
+[
+"Crooket",
+36,
+false
+],
+[
+"Pyrasite",
+36,
+false
+],
+[
+"Pyrasite",
+36,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Gluwax",
+38,
+true
+],
+[
+"Gluwax",
+38,
+true
+],
+[
+"Pyrasite",
+38,
+false
+],
+[
+"Roarcher",
+38,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Crooket",
+40,
+false
+],
+[
+"Pyrasite",
+40,
+false
+],
+[
+"Roarcher",
+40,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": "is one of the five dungeons available to F2P players."
+},
+"King Dazahk's Brewery": {
+"level": "200",
+"area": "Frigost Island",
+"subarea": "Kingdom of Freezammer",
+"coords": "[-62,-70]",
+"key": "King Dazahk's Brewery Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"King Nidas's Palace": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "Unlike traditional dungeons, King Nidas's Palace (along with the other Divine Dimensions dungeons) do not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after a set number of turns, however they will also spawn as soon as all the monsters from the previous wave have been cleared.",
+"notes": ""
+},
+"Klime's Private Suite": {
+"level": "200",
+"area": "Frigost Island",
+"subarea": "Scarlet Tannery",
+"coords": "[-63,-83]",
+"key": "Klime's Private Suite Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Kolosso's Caverns": {
+"level": "190",
+"area": "Frigost Island",
+"subarea": "Fangs of Glass",
+"coords": "[-61,-69]",
+"key": "Kolosso's Caverns Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "Unlike most other dungeons, progress in the  is not linear. Upon entering the dungeon players are greeted with five doors, four of which are numbered one, two, four and five, and the fifth with Professor Xa (NPC) next to it. (Another room with the number three used to be available, but was removed in order to shorten the dungeon.)\n\nThe numbered doors lead to rooms (called Badgette, Badgom, Badgauve and Jewel respectively) containing a mob each.\n\nIn order to enter the room by Professor Xa (NPC), which contains the final boss mob, players need to have the four relics. These relics are dropped by the mobs within each of the numbered rooms. Each of the rooms contains a unique relic. Players can collect up to five of each relic (after which point they cannot enter back into the numbered rooms) though only need one complete set in order to pass by Professor Xa. The rooms can be done in any order.",
+"notes": ""
+},
+"Korriander's Lair": {
+"level": "180",
+"area": "Frigost Island",
+"subarea": "The Petrified Forest",
+"coords": "[-73,-69]",
+"key": "Korriander's Lair Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Koutoulou's Temple": {
+"level": "200",
+"area": "Sufokia Bay",
+"subarea": "Rygurgal Plateau",
+"coords": "[27,26]",
+"key": "Koutoulou's Temple Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "Include in dungeons which work oddly (Peki, Lord Crow etc.).",
+"notes": ""
+},
+"Lair of the Rac Queen": {
+"level": "90",
+"area": "Treechnid Forest",
+"subarea": "Arak-hai Forest",
+"coords": "[-6,-15]",
+"key": "Key to the Lair of the Rac Queen",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Daddy Longlex",
+82,
+true
+],
+[
+"Gargantula",
+82,
+false
+],
+[
+"Gargantula",
+82,
+false
+],
+[
+"Jumparak",
+82,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Gargantula",
+84,
+false
+],
+[
+"Jumparak",
+84,
+false
+],
+[
+"Nephilady",
+84,
+false
+],
+[
+"Nephilady",
+84,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Jumparak",
+86,
+false
+],
+[
+"Nephilady",
+86,
+false
+],
+[
+"Venomica",
+86,
+false
+],
+[
+"Venomica",
+86,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Daddy Longlex",
+88,
+true
+],
+[
+"Jumparak",
+88,
+false
+],
+[
+"Jumparak",
+88,
+false
+],
+[
+"Venomica",
+88,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Daddy Longlex",
+90,
+true
+],
+[
+"Nephilady",
+90,
+false
+],
+[
+"Venomica",
+90,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"LeChouque's Boat": {
+"level": "90",
+"area": "Moon Island",
+"subarea": "Skull Path",
+"coords": "[33,3]",
+"key": "LeChouque's Boat Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Drunkyller",
+82,
+true
+],
+[
+"Boomba",
+82,
+false
+],
+[
+"Boomba",
+82,
+false
+],
+[
+"Cannon Dorf",
+82,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Boomba",
+84,
+false
+],
+[
+"Cannon Dorf",
+84,
+false
+],
+[
+"Hazwonarm",
+84,
+false
+],
+[
+"Hazwonarm",
+84,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Cannon Dorf",
+86,
+false
+],
+[
+"Hazwonarm",
+86,
+false
+],
+[
+"Snickerblade",
+86,
+false
+],
+[
+"Snickerblade",
+86,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Drunkyller",
+88,
+true
+],
+[
+"Cannon Dorf",
+88,
+false
+],
+[
+"Cannon Dorf",
+88,
+false
+],
+[
+"Snickerblade",
+88,
+false
+]
+]
+},
+{
+"name": "name=LeChouque's Cabin",
+"mons": [
+[
+"Drunkyller",
+90,
+true
+],
+[
+"Hazwonarm",
+90,
+false
+],
+[
+"Snickerblade",
+90,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Mastodon Cemetery": {
+"level": "80",
+"area": "Ohwymi",
+"subarea": "Dunes of Bones",
+"coords": "[19,-61]",
+"key": "Mastodon Cemetery Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Fennex",
+72,
+false
+],
+[
+"Fennex",
+72,
+false
+],
+[
+"Leopena",
+72,
+false
+],
+[
+"Ourobubble",
+72,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Spykbal",
+74,
+true
+],
+[
+"Leopena",
+74,
+false
+],
+[
+"Scordion",
+74,
+false
+],
+[
+"Scordion",
+74,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Spykbal",
+76,
+true
+],
+[
+"Spykbal",
+76,
+true
+],
+[
+"Leopena",
+76,
+false
+],
+[
+"Ourobubble",
+76,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Leopena",
+78,
+false
+],
+[
+"Leopena",
+78,
+false
+],
+[
+"Ourobubble",
+78,
+false
+],
+[
+"Scordion",
+78,
+false
+]
+]
+},
+{
+"name": "name=Final Room",
+"mons": [
+[
+"Fennex",
+80,
+false
+],
+[
+"Leopena",
+80,
+false
+],
+[
+"Ourobubble",
+80,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Merkator's Aquadome": {
+"level": "200",
+"area": "Sufokia Bay",
+"subarea": "Abyss Rooms",
+"coords": "[21,18]",
+"key": "Merkator's Aquadome Key",
+"bunch": "Yes|rewards = None",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Missiz Freezz's Frostforge": {
+"level": "200",
+"area": "Frigost Island",
+"subarea": "Bleak Legion Bastion",
+"coords": "[-70,-81]",
+"key": "Missiz Freezz's Frostforge Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Moon's Tree": {
+"level": "100",
+"area": "Moon Island",
+"subarea": "The Forbidden Jungle",
+"coords": "[29,6]",
+"key": "Moon's Tree Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Domoizelle",
+92,
+true
+],
+[
+"Ambusher",
+92,
+false
+],
+[
+"Ambusher",
+92,
+false
+],
+[
+"Greedovore",
+92,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Ambusher",
+94,
+false
+],
+[
+"Glukoko",
+94,
+false
+],
+[
+"Glukoko",
+94,
+false
+],
+[
+"Greedovore",
+94,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Dostrogo",
+96,
+false
+],
+[
+"Dostrogo",
+96,
+false
+],
+[
+"Glukoko",
+96,
+false
+],
+[
+"Greedovore",
+96,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Domoizelle",
+98,
+true
+],
+[
+"Dostrogo",
+98,
+false
+],
+[
+"Greedovore",
+98,
+false
+],
+[
+"Greedovore",
+98,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Domoizelle",
+100,
+true
+],
+[
+"Dostrogo",
+100,
+false
+],
+[
+"Glukoko",
+100,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Nileza's Laboratory": {
+"level": "200",
+"area": "Frigost Island",
+"subarea": "Winter Gardens",
+"coords": "[-61,-74]",
+"key": "Nileza's Laboratory Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Shadow's Pyramid": {
+"level": "190",
+"area": "Amakna",
+"subarea": "Lost Dimension",
+"coords": "[6,13]",
+"key": "Shadow's Pyramid Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Panterror",
+182,
+false
+],
+[
+"Panterror",
+182,
+false
+],
+[
+"Brocktis",
+182,
+true
+],
+[
+"Dominous",
+182,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Mirefly",
+184,
+false
+],
+[
+"Mirefly",
+184,
+false
+],
+[
+"Brocktis",
+184,
+true
+],
+[
+"Nightfoul",
+184,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Nightfoul",
+186,
+false
+],
+[
+"Nightfoul",
+186,
+false
+],
+[
+"Brocktis",
+186,
+true
+],
+[
+"Dominous",
+186,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Brocktis",
+188,
+true
+],
+[
+"Brocktis",
+188,
+true
+],
+[
+"Dominous",
+188,
+false
+],
+[
+"Mirefly",
+188,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Shadow",
+190,
+true
+],
+[
+"Brocktis",
+190,
+true
+],
+[
+"Nightfoul",
+190,
+false
+],
+[
+"Mirefly",
+190,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Snowfoux Den": {
+"level": "170",
+"area": "Frigost Island",
+"subarea": "Snowfoux Caverns",
+"coords": "[-76,-75]",
+"key": "Snowfoux Den Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Solar's Tower": {
+"level": "200",
+"area": "Sidimote Moors",
+"subarea": "Magmatic Steps",
+"coords": "[-31,15]",
+"key": "Key to Solar's Tower",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "Include in dungeons which work oddly (Peki, Lord Crow etc.).",
+"notes": ""
+},
+"Sylargh's Carrier": {
+"level": "200",
+"area": "Frigost Island",
+"subarea": "Windblast Barricade",
+"coords": "[-53,-84]",
+"key": "Sylargh's Carrier Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"The Kwakwa's Nest": {
+"level": "50",
+"area": "Amakna",
+"subarea": "Crackler Mountain",
+"coords": "[-4,-7]",
+"key": "Kwakwa's Nest Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Ice Bwak",
+42,
+true
+],
+[
+"Ice Kwak",
+42,
+false
+],
+[
+"Ice Kwak",
+42,
+false
+],
+[
+"Ice Kwakere",
+42,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Wind Bwak",
+44,
+true
+],
+[
+"Wind Kwak",
+44,
+false
+],
+[
+"Wind Kwak",
+44,
+false
+],
+[
+"Wind Kwakere",
+44,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Earth Bwak (monster)",
+46,
+true
+],
+[
+"Earth Kwak",
+46,
+false
+],
+[
+"Earth Kwak",
+46,
+false
+],
+[
+"Earth Kwakere",
+46,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Fire Bwak (monster)",
+48,
+true
+],
+[
+"Fire Kwak",
+48,
+false
+],
+[
+"Fire Kwak",
+48,
+false
+],
+[
+"Fire Kwakere",
+48,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Earth Kwak",
+50,
+false
+],
+[
+"Ice Kwak",
+50,
+false
+],
+[
+"Wind Kwak",
+50,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Throne Room of the Dark Court": {
+"level": "200",
+"area": "Srambad",
+"subarea": "Shadowy Heights",
+"coords": "[8,-4]",
+"key": "Key to the Throne Room of the Dark Court",
+"bunch": "No",
+"rooms": [],
+"mechanics": "Unlike traditional dungeons, Throne Room of the Dark Court (along with the other Divine Dimensions dungeons) do not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after a set number of turns, however they will also spawn as soon as all the monsters from the previous waves have been cleared. New waves spawn every 5 turns by default (turns 6, 11, 16, and 21).",
+"notes": ""
+},
+"Toxoliath's Cave": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "Unlike traditional dungeons, Toxoliath's Cave (along with the other Divine Dimensions dungeons) do not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after a set number of turns, however they will also spawn as soon as all the monsters from the previous wave have been cleared.",
+"notes": ""
+},
+"Ush's Plateau": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "Unlike traditional dungeons,  (along with the other Divine Dimensions dungeons) do not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after a set number of turns, however they will also spawn as soon as all the monsters from the previous wave have been cleared.",
+"notes": ""
+},
+"Wurmlord's Passage": {
+"level": "170",
+"area": "Ohwymi",
+"subarea": "Gorge of Howling Winds",
+"coords": "[7,-70]",
+"key": "Wurmlord's Passage Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"XLII's Metronomicon": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "Unlike traditional dungeons, XLII's Metronomicon (along with the other Divine Dimensions dungeons) do not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after a set number of turns, however they will also spawn as soon as all the monsters from the previous wave have been cleared.",
+"notes": ""
+},
+"Bitter-Hammers' Stronghold": {
+"level": "190",
+"area": "Archipelago of Valonia",
+"subarea": "Ereboria Tunnels",
+"coords": "[32,-64]",
+"key": "Bitter-Hammers' Stronghold Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Bylhuk",
+182,
+false
+],
+[
+"Slingobb",
+182,
+false
+],
+[
+"Hardarmur",
+182,
+false
+],
+[
+"Bonehammer",
+182,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Boarok",
+182,
+true
+],
+[
+"Slingobb",
+182,
+false
+],
+[
+"Bonehammer",
+182,
+false
+],
+[
+"Bylhuk",
+182,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Boarok",
+182,
+true
+],
+[
+"Boarok",
+182,
+true
+],
+[
+"Bylhuk",
+182,
+false
+],
+[
+"Bylhuk",
+182,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Slingobb",
+182,
+false
+],
+[
+"Hardarmur",
+182,
+false
+],
+[
+"Hardarmur",
+182,
+false
+],
+[
+"Bylhuk",
+182,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Berybell Copperbeard",
+220,
+true
+],
+[
+"Boarok",
+182,
+true
+],
+[
+"Bonehammer",
+182,
+false
+],
+[
+"Bylhuk",
+182,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Bzzegg Supervisor's Checkpoint": {
+"level": "170",
+"area": "Osavora",
+"subarea": "Bzzkkbz Zowzrbz",
+"coords": "{{pos|[24,23]",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "Bzzegg Supervisor starts the fight invulnerable. To remove the invulnerability, you must hit the boss four times with an explosion from killing one of the monsters summoned eggs. There is a counter above Bzzegg Supervisor's head that tracks how many times he has been hit. Each monsters summoned egg has a different explosion range.\n\n{|\n! Bzzkkbz Zowzrbz monster !! Summoned egg explosion area\n|-\n| 100pxKamikabz \n| 3x3 square\n|-\n| 100pxBzzulky \n| Swaps positions with the nearest allied monster within 4 range\n|-\n| 100pxBzzoctor \n| 1-2 range around the summon\n|-\n| 100pxQuadrabz \n| 2-2 range around the summon\n|}\n\nOnce Bzzegg Supervisor become vulnerable, he gains +20% Critical Hit and +10% Final Damage for the rest of the fight. He will also unbewitch Gravity state immediately on his turn. When Bzzegg Supervisor summons a clone of himself, the clone will explode in two turns dealing 500 fire damage to everyone within 3 range of him. If you kill the summoned clone before it explodes, Bzzegg Supervisor will take 20% additional damage for one turn. Bzzegg Supervisor teleports to the closest player character at the start of his turn, and when Bzzegg Supervisor is eventually killed, he will deal 250 damage in all elements to everyone within 3 range of him.",
+"notes": ""
+},
+"Chamber of Evils": {
+"level": "200",
+"area": "Archipelago of Valonia",
+"subarea": "Ephedrya",
+"coords": "[29,-88]",
+"key": "Chamber of Evils Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Soldalia",
+200,
+false
+],
+[
+"Arm-of-the-Valley",
+200,
+false
+],
+[
+"Wallopoppy",
+200,
+false
+],
+[
+"Camelliaxe",
+200,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Statulip",
+200,
+true
+],
+[
+"Soldalia",
+200,
+false
+],
+[
+"Arm-of-the-Valley",
+200,
+false
+],
+[
+"Camelliaxe",
+200,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Statulip",
+200,
+true
+],
+[
+"Soldalia",
+200,
+false
+],
+[
+"Wallopoppy",
+200,
+false
+],
+[
+"Camelliaxe",
+200,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Soldalia",
+200,
+false
+],
+[
+"Arm-of-the-Valley",
+200,
+false
+],
+[
+"Wallopoppy",
+200,
+false
+],
+[
+"Wallopoppy",
+200,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Belladonna",
+220,
+true
+],
+[
+"Arm-of-the-Valley",
+200,
+false
+],
+[
+"Camelliaxe",
+200,
+false
+],
+[
+"Wallopoppy",
+200,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Chokao Temple": {
+"level": "200",
+"area": "Fleaster Island",
+"subarea": "Chocomancers' Laboratories",
+"coords": "[-1,-10]",
+"key": "Chokao Temple Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Cire Momore's Cavern": {
+"level": "200",
+"area": "Archipelago of Valonia",
+"subarea": "Ereboria",
+"coords": "[36,-70]",
+"key": "No key required",
+"bunch": "N/A",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Cire Momore",
+900,
+true
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Statulip",
+200,
+true
+],
+[
+"Soldalia",
+200,
+false
+],
+[
+"Arm-of-the-Valley",
+200,
+false
+],
+[
+"Camelliaxe",
+200,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Statulip",
+200,
+true
+],
+[
+"Soldalia",
+200,
+false
+],
+[
+"Wallopoppy",
+200,
+false
+],
+[
+"Camelliaxe",
+200,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Soldalia",
+200,
+false
+],
+[
+"Arm-of-the-Valley",
+200,
+false
+],
+[
+"Wallopoppy",
+200,
+false
+],
+[
+"Wallopoppy",
+200,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Belladonna",
+220,
+true
+],
+[
+"Arm-of-the-Valley",
+200,
+false
+],
+[
+"Camelliaxe",
+200,
+false
+],
+[
+"Wallopoppy",
+200,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Crunchery": {
+"level": "130",
+"area": "Fleaster Island",
+"subarea": "Creamy Gardens",
+"coords": "[-1,-7]",
+"key": "Crunchery Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Damadrya's Bamboo Grove": {
+"level": "110",
+"area": "Pandala Island",
+"subarea": "Plantala",
+"coords": "[26,-30]",
+"key": "Damadrya's Bamboo Grove Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Bulbiflor",
+102,
+true
+],
+[
+"Bambooto",
+102,
+false
+],
+[
+"Bulbush",
+102,
+false
+],
+[
+"Flowistil",
+102,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Bulbiflor",
+104,
+true
+],
+[
+"Bulbush",
+104,
+false
+],
+[
+"Flowistil",
+104,
+false
+],
+[
+"Nenufrog",
+104,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Bulbiflor",
+106,
+true
+],
+[
+"Flowistil",
+106,
+false
+],
+[
+"Flowistil",
+106,
+false
+],
+[
+"Nenufrog",
+106,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Bulbiflor",
+108,
+true
+],
+[
+"Bulbiflor",
+108,
+true
+],
+[
+"Bambooto",
+108,
+false
+],
+[
+"Bulbush",
+108,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Bulbiflor",
+110,
+true
+],
+[
+"Bulbush",
+110,
+false
+],
+[
+"Flowistil",
+110,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Draegnerys's Trial": {
+"level": "70",
+"area": "Amakna",
+"subarea": "Dreggon Peninsula",
+"coords": "[-4,29]",
+"key": "Key to Draegnerys's Trial",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Clay Dreggon",
+62,
+false
+],
+[
+"Coal Dreggon",
+62,
+false
+],
+[
+"Limestone Dreggon",
+62,
+false
+],
+[
+"Slate Dreggon",
+62,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Clay Dreggon",
+64,
+false
+],
+[
+"Clay Dreggon",
+64,
+false
+],
+[
+"Limestone Dreggon",
+64,
+false
+],
+[
+"Slate Dreggon",
+64,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Alabaster Dreggon",
+66,
+true
+],
+[
+"Coal Dreggon",
+66,
+false
+],
+[
+"Limestone Dreggon",
+66,
+false
+],
+[
+"Slate Dreggon",
+66,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Alabaster Dreggon",
+68,
+true
+],
+[
+"Clay Dreggon",
+68,
+false
+],
+[
+"Clay Dreggon",
+68,
+false
+],
+[
+"Limestone Dreggon",
+68,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Alabaster Dreggon",
+70,
+true
+],
+[
+"Clay Dreggon",
+70,
+false
+],
+[
+"Coal Dreggon",
+70,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Fouxwork Factory": {
+"level": "140",
+"area": "Pandala Island",
+"subarea": "Feudala",
+"coords": "[14,-32]",
+"key": "Fouxwork Factory Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Spitfoux",
+132,
+false
+],
+[
+"Bangartifoux",
+132,
+false
+],
+[
+"Boombardier",
+132,
+false
+],
+[
+"Gingerocket",
+132,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Spitfoux",
+134,
+false
+],
+[
+"Bangartifoux",
+134,
+false
+],
+[
+"Boombardier",
+134,
+false
+],
+[
+"Fouxnamballist",
+134,
+true
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Spitfoux",
+136,
+false
+],
+[
+"Bangartifoux",
+136,
+false
+],
+[
+"Boombardier",
+136,
+false
+],
+[
+"Gingerocket",
+136,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Spitfoux",
+138,
+false
+],
+[
+"Bangartifoux",
+138,
+false
+],
+[
+"Boombardier",
+138,
+false
+],
+[
+"Gingerocket",
+138,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Founoroshi",
+140,
+true
+],
+[
+"Boombardier",
+140,
+false
+],
+[
+"Gingerocket",
+140,
+false
+],
+[
+"Fouxnamballist",
+140,
+true
+]
+]
+}
+],
+"mechanics": "In the final room, all monsters start out invulnerable. The boss will summon torches and some barrels first turn. To make the monsters vulnerable you need to extinguish all the torches. You need to extinguish at least one of the torches before the second turn. If all the torches are lit after the first turn, everyone on the team will be instantly killed. This applies to any turn afterwards, not just the second turn; if all torches are lit when Founoroshi starts his turn your team will be instantly killed.\n\nTo extinguish a torch, a character needs to stand on one of the blue glyphs placed by the boss and then afterwards run and stand on the brown glyph next to the torch. Extinguishing a torch gives you a -10% resistance debuff for 4 turns and also buffs the boss. Torches will light again after 7 turns of being extinguished. The barrels will heal and shield you if you hit them. Upon being hit, the barrel will also pull you in if you are not next to it, or push you away if you are next to it.",
+"notes": "The Founoroshi fight cannot be souled."
+},
+"Gob Akademy": {
+"level": "40",
+"area": "Amakna",
+"subarea": "The Goblin Camp",
+"coords": "[-5,3]",
+"key": "Gob Akademy Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Gob-Trotter",
+32,
+false
+],
+[
+"Goballista",
+32,
+false
+],
+[
+"Gobdoroad",
+32,
+false
+],
+[
+"Gobnoramus",
+32,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Gobelishous",
+34,
+true
+],
+[
+"Goballista",
+34,
+false
+],
+[
+"Gobdoroad",
+34,
+false
+],
+[
+"Gobnoramus",
+34,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Gob-Trotter",
+36,
+false
+],
+[
+"Gob-Trotter",
+36,
+false
+],
+[
+"Goballista",
+36,
+false
+],
+[
+"Gobdoroad",
+36,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Gobelishous",
+38,
+true
+],
+[
+"Gobdoroad",
+38,
+false
+],
+[
+"Gobdoroad",
+38,
+false
+],
+[
+"Gobnoramus",
+38,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Gobelishous",
+40,
+true
+],
+[
+"Gobelishous",
+40,
+true
+],
+[
+"Gobdoroad",
+40,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Grozilla and Grasmera's Den": {
+"level": "40~190",
+"area": "Archipelago of Vulkania",
+"subarea": "Pinki Crater",
+"coords": "[-51,40]",
+"key": "Not needed",
+"bunch": "No",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Dry Juvenile Sauroshell",
+20,
+false
+],
+[
+"Incandescent Juvenile Sauroshell",
+20,
+false
+],
+[
+"Insipid Juvenile Sauroshell",
+20,
+false
+],
+[
+"Moist Juvenile Sauroshell",
+20,
+false
+],
+[
+"Muddy Juvenile Sauroshell",
+20,
+false
+],
+[
+"Dry Novice Sauroshell",
+50,
+false
+],
+[
+"Incandescent Novice Sauroshell",
+50,
+false
+],
+[
+"Insipid Novice Sauroshell",
+50,
+false
+],
+[
+"Moist Novice Sauroshell",
+50,
+false
+],
+[
+"Muddy Novice Sauroshell",
+50,
+false
+],
+[
+"Dry Mature Sauroshell",
+100,
+false
+],
+[
+"Incandescent Mature Sauroshell",
+100,
+false
+],
+[
+"Insipid Mature Sauroshell",
+100,
+false
+],
+[
+"Moist Mature Sauroshell",
+100,
+false
+],
+[
+"Muddy Mature Sauroshell",
+100,
+false
+],
+[
+"Dry Venerable Sauroshell",
+150,
+false
+],
+[
+"Incandescent Venerable Sauroshell",
+150,
+false
+],
+[
+"Insipid Venerable Sauroshell",
+150,
+false
+],
+[
+"Moist Venerable Sauroshell",
+150,
+false
+],
+[
+"Muddy Venerable Sauroshell",
+150,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Dry Juvenile Sauroshell",
+20,
+false
+],
+[
+"Incandescent Juvenile Sauroshell",
+20,
+false
+],
+[
+"Insipid Juvenile Sauroshell",
+20,
+false
+],
+[
+"Moist Juvenile Sauroshell",
+20,
+false
+],
+[
+"Muddy Juvenile Sauroshell",
+20,
+false
+],
+[
+"Dry Novice Sauroshell",
+50,
+false
+],
+[
+"Incandescent Novice Sauroshell",
+50,
+false
+],
+[
+"Insipid Novice Sauroshell",
+50,
+false
+],
+[
+"Moist Novice Sauroshell",
+50,
+false
+],
+[
+"Muddy Novice Sauroshell",
+50,
+false
+],
+[
+"Dry Mature Sauroshell",
+100,
+false
+],
+[
+"Incandescent Mature Sauroshell",
+100,
+false
+],
+[
+"Insipid Mature Sauroshell",
+100,
+false
+],
+[
+"Moist Mature Sauroshell",
+100,
+false
+],
+[
+"Muddy Mature Sauroshell",
+100,
+false
+],
+[
+"Dry Venerable Sauroshell",
+150,
+false
+],
+[
+"Incandescent Venerable Sauroshell",
+150,
+false
+],
+[
+"Insipid Venerable Sauroshell",
+150,
+false
+],
+[
+"Moist Venerable Sauroshell",
+150,
+false
+],
+[
+"Muddy Venerable Sauroshell",
+150,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Sleepwalking Grozilla",
+100,
+true
+],
+[
+"Sleepwalking Grasmera",
+100,
+true
+],
+[
+"Exhausted Grozilla",
+200,
+true
+],
+[
+"Exhausted Grasmera",
+200,
+true
+],
+[
+"Tired Grozilla",
+300,
+true
+],
+[
+"Tired Grasmera",
+300,
+true
+],
+[
+"Grozilla",
+400,
+true
+],
+[
+"Grasmera",
+400,
+true
+]
+]
+}
+],
+"mechanics": "No matter which version of Grozilla and Grasmera the players want to face, they will have to pass through 2 rooms in Nomads' Land with 5 Sauroshells of different colours in each room before directly reaching .\nThere are 4 types of the rooms filled with 4 different Sauroshell level groups for 4 different character level categories. Each player can only access one type of the rooms of its own level category.\nthumb|center|450px|There are 4 types of the rooms for different level categories\n#Levels 1-50 --> can only enter \"Tourist Room\" and access 2 rooms consisting of 5 different Juvenile Sauroshells\n#Levels 51-100 --> can only enter \"Amateur Room\" and access 2 rooms consisting of 5 different Novice Sauroshells\n#Levels 101-150 --> can only enter \"Specialist Room\" and access 2 rooms consisting of 5 different Mature Sauroshells\n#Levels 151-200 --> can only enter \"Expert Room\" and access 2 rooms consisting of 5 different Venerable Sauroshells\nSo, for example, level 151 and level 200 characters can go through Nomads' Land together, but level 150 and level 151 characters will have to beat the rooms separately before meeting each other at the entrance of .",
+"notes": ""
+},
+"Ilyzaelle's Lookout": {
+"level": "200",
+"area": "Frigost Island",
+"subarea": "Barracks of the Day Without End",
+"coords": "[-73,-76]",
+"key": "Ilyzaelle's Lookout Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Imagiro's Memory": {
+"level": "200",
+"area": "Wukin and Wukang",
+"subarea": "Kingdom of Paper",
+"coords": "{{pos|[2,0]",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "Unlike traditional dungeons,  does not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after a set number of turns, however they will also spawn as soon as all the monsters from the previous wave have been cleared.\n\nAll monsters in Wukin and Wukang, including the non-boss monsters in the dungeon, have a special effect called \"Lotus\". When you get a monster down to a 10% health threshold, it will enter its lotus form, become invulnerable, and summon the corresponding monster from the other side of the island.\n\n{|\n! Kingdom of Ink monster !! Kingdom of Paper monster\n|-\n| 100pxKing Imagami \n| 100pxQueen Amirukam\n|-\n| 100pxImafugo \n| 100pxFugokam\n|-\n| 100pxImetsu \n| 100pxTsunam\n|-\n| 100pxImiyama \n| 100pxMabram\n|-\n| 100pxImorok \n| 100pxRokoram\n|-\n| 100pxImushin \n| 100pxShinlam\n|}\n\nYou must kill the summoned monster in 3 turns or else the monster that summoned it will kill the summon itself on its 4th turn of being in its Lotus form and return to full health. You will have to repeat this until you kill the summon, that is the only way to defeat the monster.\n\nWhen Queen Amirukam hits each of her 3 health thresholds (75%, 50%, and 25%) she will enter the lotus form, cast a star shaped glyph on herself (7x7, 5x5, and 3x3 for each respective health threshold), and summon King Imagami who will be controllab",
+"notes": ""
+},
+"Kabaal Ritual": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "Include in dungeons which work oddly (Peki, Lord Crow etc.).",
+"notes": ""
+},
+"Kharnotaurus's Lair": {
+"level": "100",
+"area": "Amakna",
+"subarea": "Dreggon Village",
+"coords": "[-3,25]",
+"key": "Key to Kharnotaurus's Lair",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Charcoal Dragoss",
+92,
+false
+],
+[
+"Clay Dragoss",
+92,
+false
+],
+[
+"Clay Dragoss",
+92,
+false
+],
+[
+"Slate Dragoss",
+92,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Shape-Shifting Dragoss",
+94,
+true
+],
+[
+"Clay Dragoss",
+94,
+false
+],
+[
+"Limestone Dragoss",
+94,
+false
+],
+[
+"Slate Dragoss",
+94,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Charcoal Dragoss",
+96,
+false
+],
+[
+"Limestone Dragoss",
+96,
+false
+],
+[
+"Limestone Dragoss",
+96,
+false
+],
+[
+"Slate Dragoss",
+96,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Charcoal Dragoss",
+98,
+false
+],
+[
+"Charcoal Dragoss",
+98,
+false
+],
+[
+"Clay Dragoss",
+98,
+false
+],
+[
+"Clay Dragoss",
+98,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Shape-Shifting Dragoss",
+100,
+true
+],
+[
+"Charcoal Dragoss",
+100,
+false
+],
+[
+"Clay Dragoss",
+100,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Long Slumber's Barrow": {
+"level": "150",
+"area": "Evil Forest",
+"subarea": "Dark Vlad's Labyrinth",
+"coords": "[-3,19]",
+"key": "Key to Long Slumber's Barrow",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "name=Church",
+"mons": [
+[
+"Malzerb",
+142,
+false
+],
+[
+"Maltrio",
+142,
+false
+],
+[
+"Malterbarb",
+142,
+false
+],
+[
+"Malalfa",
+142,
+false
+]
+]
+},
+{
+"name": "name=Dragon's Crypt",
+"mons": [
+[
+"Malwood",
+144,
+true
+],
+[
+"Malalfa",
+144,
+false
+],
+[
+"Malterbarb",
+144,
+false
+],
+[
+"Malterbarb",
+144,
+false
+]
+]
+},
+{
+"name": "name=Crypt of Flames",
+"mons": [
+[
+"Malalfa",
+146,
+false
+],
+[
+"Malalfa",
+146,
+false
+],
+[
+"Malwood",
+146,
+true
+],
+[
+"Malzerb",
+146,
+false
+]
+]
+},
+{
+"name": "name=Crypt of Memory",
+"mons": [
+[
+"Maltrio",
+148,
+false
+],
+[
+"Maltrio",
+148,
+false
+],
+[
+"Malzerb",
+148,
+false
+],
+[
+"Malterbarb",
+148,
+false
+]
+]
+},
+{
+"name": "name=Stakes of the Sacrificed",
+"mons": [
+[
+"Hell Mina",
+150,
+true
+],
+[
+"Malzerb",
+150,
+false
+],
+[
+"Malwood",
+150,
+true
+],
+[
+"Malalfa",
+150,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Magik Riktus Big Top": {
+"level": "90",
+"area": "Sidimote Moors",
+"subarea": "Caravan Alley",
+"coords": "[-22,12]",
+"key": "Magik Riktus Big Top Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Orukam's Memory": {
+"level": "200",
+"area": "Wukin and Wukang",
+"subarea": "Kingdom of Ink",
+"coords": "{{pos|[-3,-1]",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "Unlike traditional dungeons,  does not have a series of rooms through which you progress. Rather, there is one single fight consisting of various waves of monsters. The Boss Monster will be included in the very first wave. Each wave of monsters will spawn automatically after a set number of turns, however they will also spawn as soon as all the monsters from the previous wave have been cleared.\n\nAll monsters in Wukin and Wukang, including the non-boss monsters in the dungeon, have a special effect called \"Lotus\". When you get a monster down to a 10% health threshold, it will enter its lotus form, become invulnerable, and summon the corresponding monster from the other side of the island.\n\n{|\n! Kingdom of Ink monster !! Kingdom of Paper monster\n|-\n| 100pxKing Imagami \n| 100pxQueen Amirukam\n|-\n| 100pxImafugo \n| 100pxFugokam\n|-\n| 100pxImetsu \n| 100pxTsunam\n|-\n| 100pxImiyama \n| 100pxMabram\n|-\n| 100pxImorok \n| 100pxRokoram\n|-\n| 100pxImushin \n| 100pxShinlam\n|}\n\nYou must kill the summoned monster in 3 turns or else the monster that summoned it will kill the summon itself on its 4th turn of being in its Lotus form and return to full health. You will have to repeat this until you kill the summon, that is the only way to defeat the monster.\n\nWhen King Imagami hits each of his 3 health thresholds (75%, 50%, and 25%) he will enter the lotus form, cast a glyph on himself (7x7, 5x5, and 3x3 for each respective health threshold), and summon Queen Amirukam who will be controllable by the all",
+"notes": ""
+},
+"Shogun Tofugawa's Tomb": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "You will need the spell Slayspirit Lantern which can be obtained by trading 4 Samurai Ghost Fabric with Danaba Retzu. The boss starts invulnerable and to vuln him you need to cast the spell when he is within range, making him suffer pushback damage. Casting the spell on yourself will activate the lantern and also push monsters next to you 3(?) cells away.\n\nMaking the Shogun vulnerable places a glyph throughout the room where the enemy monsters are invisible, unless they are within the lantern glyph. The invisibility glyph is active for the duration of the Shogun's vulnerability.  When becoming vulneralbe Shogun will summon two assisins with 3100 vit, they don't do much damage.  If you don't kill Shogon in a single turn there is a 2 or 3 turn cool down before Shogun can become vulnerable again.",
+"notes": ""
+},
+"Spirit Abode": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Sylvan Refuge": {
+"level": "50",
+"area": "Archipelago of Valonia",
+"subarea": "Snowbound Timberland",
+"coords": "[40,-84]",
+"key": "Sylvan Refuge Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Coolwolf",
+42,
+true
+],
+[
+"Bulkyfallo",
+42,
+false
+],
+[
+"Thoronduddleswell",
+42,
+false
+],
+[
+"Timongoose",
+42,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Coolwolf",
+44,
+true
+],
+[
+"Bulkyfallo",
+44,
+false
+],
+[
+"Thoronduddleswell",
+44,
+false
+],
+[
+"Timongoose",
+44,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Bulkyfallo",
+46,
+false
+],
+[
+"Loutbear",
+46,
+false
+],
+[
+"Thoronduddleswell",
+46,
+false
+],
+[
+"Thoronduddleswell",
+46,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Coolwolf",
+48,
+true
+],
+[
+"Coolwolf",
+48,
+true
+],
+[
+"Loutbear",
+48,
+false
+],
+[
+"Thoronduddleswell",
+48,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Bulkyfallo",
+50,
+false
+],
+[
+"Loutbear",
+50,
+false
+],
+[
+"Timongoose",
+50,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Tanukouï San's Workshop": {
+"level": "130",
+"area": "Pandala Island",
+"subarea": "Terrdala",
+"coords": "[26,-24]",
+"key": "Tanukouï San's Workshop Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Parashutackle",
+122,
+false
+],
+[
+"Titinuki",
+122,
+false
+],
+[
+"Ishibig Pak",
+122,
+false
+],
+[
+"Ishibig Pak",
+122,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Parashutackle",
+124,
+false
+],
+[
+"Parashutackle",
+124,
+false
+],
+[
+"Tatatojiki",
+124,
+false
+],
+[
+"Shinobuubusu",
+124,
+true
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Titinuki",
+126,
+false
+],
+[
+"Titinuki",
+126,
+false
+],
+[
+"Ishibig Pak",
+126,
+false
+],
+[
+"Tatatojiki",
+126,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Parashutackle",
+128,
+false
+],
+[
+"Tatatojiki",
+128,
+false
+],
+[
+"Shinobuubusu",
+128,
+true
+],
+[
+"Shinobuubusu",
+128,
+true
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Tanukouï San",
+130,
+true
+],
+[
+"Ishibig Pak",
+130,
+false
+],
+[
+"Shinobuubusu",
+130,
+true
+],
+[
+"Titinuki",
+130,
+false
+]
+]
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"The Ripper's Altar": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [
+{
+"name": "name=Ritual Room",
+"mons": [
+[
+"Ripper",
+220,
+true
+],
+[
+"Touslecat",
+212,
+false
+],
+[
+"Killtamer",
+212,
+false
+],
+[
+"Voracle",
+212,
+false
+],
+[
+"Touslecat",
+212,
+false
+],
+[
+"Killtamer",
+212,
+false
+],
+[
+"Voracle",
+212,
+false
+],
+[
+"Touslecat",
+212,
+false
+],
+[
+"Touslecat",
+212,
+false
+],
+[
+"Killtamer",
+212,
+false
+],
+[
+"Voracle",
+212,
+false
+],
+[
+"Killtamer",
+212,
+false
+],
+[
+"Touslecat",
+212,
+false
+],
+[
+"Killtamer",
+212,
+false
+],
+[
+"Voracle",
+212,
+false
+],
+[
+"Voracle",
+212,
+false
+],
+[
+"Touslecat",
+212,
+false
+],
+[
+"Killtamer",
+212,
+false
+],
+[
+"Voracle",
+212,
+false
+],
+[
+"Killtamer",
+212,
+false
+]
+]
+}
+],
+"mechanics": "is a wave dungeon, with new waves spawning every 5 turns by default (turns 6, 11, 16, and 21). Unlike other wave dungeons, new waves do not automatically spawn when every existing enemy is killed, due to the presence of the Hunting Altar.\n\nArea effects are always active. Monster effects activate every 5th time the monster is hit. There is a counter above the monsters head that tracks how many times it has been hit.\n{| \n! Entity !! Birthing Season !! Hunting Season !! Season of Rest\n|-\n| 128pxOsavora\n| A glyph is placed under each character at the start of their turn. If they end their turn on the glyph, they gain 100% of their level in shield for one turn. They healed for 5% of their health if they are not attacked during their turn.\n| When an allied fighter kills an enemy, the ally and their summons both gain 1 AP and 3% Final Damage for 2 turns, this stacks 3 times.\n| When an entity invokes a summon, both the entry and the summon gain 1 MP for 2 turns that stacks 2 times. At the end of the summmon's turn, it's allies within 2 range gain 15 Lock and Dodge.\n|-\n| 128pxRhoarim monsters\n| +1 MP\n| +20% Final Damage\n| +20% Vitality\n|-\n| 128pxVoracle\n| Turns invisible until it takes damage, then heals for 10% health.Trigger this effect through the Hunting Altar to remove the Ripper's Invulnerability\n| Gives 10% Critical Damage to all enemy monster for 3 turns.\n| Pushes all entities back 3 tiles that end within 3 range of Voracle.\n|-\n| 128pxKilltamer\n| Skips the characters turn imme",
+"notes": ""
+},
+"The Venerable One's Thicket": {
+"level": "200",
+"area": "Osavora",
+"subarea": "Bushy Reserve",
+"coords": "[6,9]",
+"key": "Key to the Venerable One's Thicket",
+"bunch": "No",
+"rooms": [],
+"mechanics": "All monsters start in the apathetic state, meaning that they have 80% reduced stats, and 1 MP (depending on the season), and generally won't attack or will deal low damage due to their reduced stats. When a monster is hit, it leaves the apathetic state and enters the alerted state for two turns, removes the reduced stats, and alerts all monsters within 3 range at the time the monster is hit. This can cause a chain reaction for monsters are within 3 range of a monster that was just alerted, even if they are not within 3 range of the initial monster that was alerted. Every time a monster is hit not through damage sharing, the alerted state is refreshed for two turns, but if the monster is not hit for two turns it will go back into the apathetic state.\n\nThe boss starts off the fight invulnerable, -100 MP, and just passes his turn. This is his apathetic state. The boss can be alerted just like the rest of the monsters, and will go back to apathetic state like normal, or you can kill his summon which will remove his apathetic state permanently.",
+"notes": ""
+},
+"Tree of Death": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Dolid",
+200,
+false
+],
+[
+"Elgrun",
+200,
+false
+],
+[
+"Demongrel",
+200,
+false
+],
+[
+"Demongrel",
+200,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Tentaclobber",
+203,
+false
+],
+[
+"Pistilick",
+203,
+true
+],
+[
+"Elgrun",
+203,
+false
+],
+[
+"Dolid",
+203,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": []
+},
+{
+"name": "4",
+"mons": []
+},
+{
+"name": "5",
+"mons": []
+}
+],
+"mechanics": "",
+"notes": ""
+},
+"Turtelonia's Sanctuary": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "In this dungeon, all monsters have a special mechanic called \"lunar cycle\". Thus each turn, all the monsters of the fight gain a bonus according to the cycle.\n;  Killing a monster during one of these cycles will give the bonus of the current cycle to all monsters for the rest of the fight!\nThe cycles start in this order and once a cycle is finished, we go back to the beginning of the cycle and it's a loop:\n# File:New Moon.png New Moon: When you hit a monster a light damage return is applied to the allies in a radius 2 radius area around you. If you kill a monster, all the others have a reconstitution + the invulnerable state (1 turn).\n# File:Waxing Crescent.png Waxing Crescent: Damage suffered x80%.\n# File:First Quarter.png First Quarter: 10% Resistance.\n# File:Waxing Gibbous.png Waxing Gibbous: 2 MP.\n# File:Full Moon.png Full Moon: Damage returned by 200%.\n# File:Waning Gibbous.png Waning Gibbous: 2 AP.\n# File:Last Quarter.png Last Quarter: 500 SP.\n# File:Waning Crescent.png Waning Crescent: Increases final damage caused by 20%.\n;  Avoid killing monsters during the Full Moon state (most important), and New Moon.",
+"notes": ""
+},
+"Valley of the Lady of the Water": {
+"level": null,
+"area": "",
+"subarea": "",
+"coords": "",
+"key": "",
+"bunch": "",
+"rooms": [],
+"mechanics": "The Boss room may be easier to complete if you have the special spell Bow, which is obtained from Sai Keirei inside the inn at [20,-20].",
+"notes": ""
+},
+"Waddict Foundry": {
+"level": "60",
+"area": "Fleaster Island",
+"subarea": "Chocolate Quarry",
+"coords": "[-3,-4]",
+"key": "Waddict Foundry Key",
+"bunch": "Yes",
+"rooms": [],
+"mechanics": "",
+"notes": ""
+},
+"Wind Dojo": {
+"level": "140",
+"area": "Pandala Island",
+"subarea": "Aerdala",
+"coords": "[20,-37]",
+"key": "Wind Dojo Key",
+"bunch": "Yes",
+"rooms": [
+{
+"name": "1",
+"mons": [
+[
+"Kurookin",
+132,
+false
+],
+[
+"Lichangoro",
+132,
+false
+],
+[
+"Ino-Naru",
+132,
+false
+],
+[
+"Lichangoro",
+132,
+false
+]
+]
+},
+{
+"name": "2",
+"mons": [
+[
+"Kurookin",
+134,
+false
+],
+[
+"Kurookin",
+134,
+false
+],
+[
+"Fangshu",
+134,
+false
+],
+[
+"Lichangoro",
+134,
+false
+]
+]
+},
+{
+"name": "3",
+"mons": [
+[
+"Uchiwang",
+136,
+true
+],
+[
+"Fangshu",
+136,
+false
+],
+[
+"Ino-Naru",
+136,
+false
+],
+[
+"Lichangoro",
+136,
+false
+]
+]
+},
+{
+"name": "4",
+"mons": [
+[
+"Uchiwang",
+138,
+true
+],
+[
+"Kurookin",
+138,
+false
+],
+[
+"Ino-Naru",
+138,
+false
+],
+[
+"Fangshu",
+138,
+false
+]
+]
+},
+{
+"name": "5",
+"mons": [
+[
+"Shihan",
+140,
+true
+],
+[
+"Hanshi",
+140,
+true
+],
+[
+"Kurookin",
+140,
+false
+],
+[
+"Lichangoro",
+140,
+false
+]
+]
+}
+],
+"mechanics": "The final room has two bosses, Hanshi and Shihan.  They share all dmg with over 10K vit between them.  One achievement is to kill Hanshi last. For this achievement, knowing that Hanshi and Shihan share their damage and that Hanshi reduces melee damage by 50% while Shihan reduces ranged damage by 50%, it is better to rush Shihan in melee, causing Shihan to die first.",
+"notes": ""
+}
+}

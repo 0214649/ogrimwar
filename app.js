@@ -8,7 +8,7 @@ const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '
 
 // ---------- state (browser storage + export code) ----------
 const KEY = 'carnet-team-v1';
-let S = { pos: '0', t: {}, a: {}, align: 'bonta' };
+let S = { pos: '0', t: {}, a: {}, l: {}, align: 'bonta' };   // l: achievements put off until level 200 / a carry
 const ALIGN = { bonta: 516, brak: 773 };   // GP9 Bontarien / Brâkmarien
 try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch {} };
@@ -142,7 +142,76 @@ function enrich(html, scope) {
     li.classList.toggle('checked', box.checked);
   });
   root.querySelectorAll('[data-type=guide-step]').forEach(s => { s.tabIndex = 0; s.setAttribute('role', 'link'); });
+  addX4Badges(doc, root);
   return root.innerHTML;
+}
+
+// ---------- "x4" reminders: everything each of the 4 characters must do on its own ----------
+const X4_RULES = [
+  [/\b(seule?s?\s+contre|combat\s+seul|en\s+solo|combat\s+solo)\b/i, '⚔ Combat solo ×4', 'solo'],
+  [/\bParle[rz]\b/i, '×4 PNJ', ''],
+  [/\b(Cliquez|Cliquer|Utilisez|Utiliser|Interagissez|Ramassez|Fouillez|Récoltez)\b/i, '×4', ''],
+];
+function badge(doc, text, cls) { const b = doc.createElement('span'); b.className = 'x4 ' + cls; b.textContent = text; return b; }
+function addX4Badges(doc, root) {
+  root.querySelectorAll('[data-type=quest-block]').forEach(q => {
+    const st = q.getAttribute('status');
+    q.prepend(badge(doc, st === 'end' ? 'Rendre la quête ×4' : st === 'progress' ? 'Avancer la quête ×4' : 'Lancer la quête ×4', 'quest'));
+  });
+  root.querySelectorAll('p, li[data-type=taskItem] > div').forEach(el => {
+    if (el.closest('[data-type=quest-block]') && el.tagName === 'P' && !/\S/.test(el.textContent)) return;
+    const t = el.textContent;
+    for (const [re, label, cls] of X4_RULES) if (re.test(t)) { el.append(' ', badge(doc, label, cls)); break; }
+    if (/\b(Réalisez|Effectuez|Faites|Refaites)\b/.test(t) && el.querySelector('[type=dungeon]')) el.append(' ', badge(doc, '🗝 Clé ×4 ou trousseau', 'key'));
+  });
+  root.querySelectorAll('[data-type=custom-tag][type=item]').forEach(tag => {
+    const prev = tag.previousSibling;
+    const m = prev && prev.nodeType === 3 && prev.data.match(/(\d+)\s*$/);
+    if (m && +m[1] > 0) tag.after(badge(doc, `×4 = ${+m[1] * 4}`, 'qty'));
+  });
+}
+
+// ---------- DPLN: their real page, shown in a side panel (never copied) ----------
+const slug = n => n.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/œ/g, 'oe').replace(/æ/g, 'ae').toLowerCase()
+  .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+function openDpln(name) {
+  const url = `https://www.dofuspourlesnoobs.com/${slug(name)}.html`;
+  $('dplnTitle').textContent = name;
+  $('dplnOpen').href = url;
+  $('dplnSearch').href = 'https://duckduckgo.com/?q=' + encodeURIComponent(`!ducky site:dofuspourlesnoobs.com ${name}`);
+  $('dplnFrame').src = url;
+  $('dpln').classList.add('open');
+}
+function closeDpln() { $('dpln').classList.remove('open'); }
+
+// ---------- dungeon sheet (DofusWiki facts) ----------
+let DJ = {};
+function openDungeon(name) {
+  const d = DJ[name];
+  const achs = ACH.map((a, ai) => ai).filter(ai => ACH[ai].dj === name);
+  let h = `<div class="djhead"><h2>${esc(name)}</h2>${d ? `<span class="num">niv. ${esc(d.lvl)}</span>` : ''}</div>`;
+  if (d) {
+    h += `<p class="djwhere">${esc(d.where)}</p><p class="djkey"><b>🗝 Clé :</b> une par perso, donc <b>4 clés</b>${d.keyring ? ', ou le <b>trousseau de clefs</b> (donjon inclus)' : ' (pas dans le trousseau)'}.</p>`;
+    if (d.rooms.length) h += `<div class="rooms">${d.rooms.map((r, n) => `<div class="room"><span class="lbl">Salle ${n + 1}${/^\d+$/.test(r.n) ? '' : ' · ' + esc(r.n)}</span><ul>${r.m.map(([m, lv, boss]) => `<li class="${boss ? 'boss' : ''}">${boss ? '👑 ' : ''}${esc(m)} <span class="num">${lv}</span></li>`).join('')}</ul></div>`).join('')}</div>`;
+    if (d.mech) h += `<details class="mech"><summary>Mécaniques notées par le wiki (en anglais)</summary><p>${esc(d.mech)}</p></details>`;
+  } else h += `<p class="empty">Le wiki n'a pas de fiche pour ce donjon.</p>`;
+  if (achs.length) h += `<div class="agroup dj"><span class="lbl">Succès du donjon · ${achs.filter(ai => got(ACH[ai])).length}/${achs.length}</span><ul class="al">${achs.map(ai => achLi(ai)).join('')}</ul></div>`;
+  h += `<div class="row"><button class="btn primary" data-dpln="${esc(name)}">Stratégie sur Dofus pour les Noobs</button></div>`;
+  $('djBody').innerHTML = h;
+  $('djDlg').showModal();
+}
+function dungeonNames(html) {
+  return [...new Set([...String(html || '').matchAll(/data-type="custom-tag"[^>]*?type="dungeon"[^>]*?name="([^"]*)"/g)].map(m => m[1].replace(/&#39;/g, "'").replace(/&amp;/g, '&')))];
+}
+function dungeonCards(html) {
+  return dungeonNames(html).map(name => {
+    const achs = ACH.map((a, ai) => ai).filter(ai => ACH[ai].dj === name);
+    if (!achs.length && !DJ[name]) return '';
+    const g = achs.filter(ai => got(ACH[ai])).length, l = achs.filter(ai => S.l[ACH[ai].en] && !got(ACH[ai])).length;
+    return `<div class="agroup dj"><span class="lbl">Donjon · ${esc(name)}${DJ[name] ? ' · niv. ' + esc(DJ[name].lvl) : ''}</span>
+      <div class="djbar"><span class="num">${g}/${achs.length} faits${l ? ` · ${l} ⏳` : ''}</span><button class="btn small" data-dungeon="${esc(name)}">Fiche du donjon</button><button class="btn small" data-dpln="${esc(name)}">DPLN</button></div>
+      <ul class="al">${achs.map(ai => achLi(ai)).join('')}</ul></div>`;
+  }).join('');
 }
 
 // ---------- rendering ----------
@@ -171,7 +240,8 @@ async function render() {
   $('prev').disabled = !items.slice(0, idx).some(visible);
   $('next').disabled = !items.slice(idx + 1).some(visible);
   renderSide();
-  renderAchPanel(it);
+  ui.html = it.g === undefined ? gp0.steps[it.i].web_text : '';
+  renderAchPanel(it, ui.html);
 
   const ctx = $('ctx'), card = $('card'), links = $('links');
   if (it.g === undefined) {
@@ -200,6 +270,7 @@ async function render() {
     if (!st) { it.gone = true; step(lastDir); return; }     // guide got shorter since route.json was built
     $('stepHead').innerHTML = `<div class="bignum">${it.i + 1}</div><span class="eyebrow">${esc(name)} · étape ${it.k + 1} sur ${g.steps.length}</span><h2>${esc(st.name || stepTitle(it.i))}</h2>${summary(it, st)}`;
     card.innerHTML = `<div class="gc">${enrich(st.web_text, `${it.g}:${it.k}`)}</div>`;
+    ui.html = st.web_text; renderAchPanel(it, ui.html);
     links.hidden = false;
     links.innerHTML = `<span class="lbl">Plage du GP0</span><span class="num">ét. ${seg ? seg[1] + 1 : '?'}→${seg ? seg[2] : '?'} · ${n}/${of}</span>`;
   }
@@ -273,13 +344,16 @@ function achLi(ai, here) {
       return `<span class="${cls}">${p >= 0 && p <= here ? '✓' : '○'} ${esc(label)}${cls === 'todo' ? ' · ' + where(p) : ''}</span>`;
     }).join('') + '</div>';
   }
-  return `<li class="${got(a) ? 'got' : ''}"><input type="checkbox" data-ach="${esc(a.en)}"${got(a) ? ' checked' : ''} aria-label="${esc(a.n)}">
-    <span><span class="an">${esc(a.n)}</span>${chips(a)}</span><span class="ad">${esc(a.d)}</span>${ob}</li>`;
+  const later = !!S.l[a.en] && !got(a);
+  return `<li class="${got(a) ? 'got' : ''}${later ? ' later' : ''}"><input type="checkbox" data-ach="${esc(a.en)}"${got(a) ? ' checked' : ''} aria-label="${esc(a.n)}">
+    <span><span class="an">${esc(a.n)}</span>${chips(a)}</span>
+    <button class="laterbtn${later ? ' on' : ''}" data-later="${esc(a.en)}" title="Plus tard : au niveau 200 ou avec un passeur" aria-pressed="${later}">⏳</button>
+    <span class="ad">${esc(a.d)}</span>${ob}</li>`;
 }
-function renderAchPanel(it) {
+function renderAchPanel(it, html) {
   const panel = $('achPanel');
   if (!ACH.length) { panel.hidden = true; return; }
-  let h = '';
+  let h = dungeonCards(html ?? (it.g === undefined ? gp0.steps[it.i].web_text : ''));
   if (it.g === undefined) {
     const xs = doneByStep.get(it.i) || [], ss = sugByStep.get(it.i) || [];
     const block = (arr, cls, label, tag) => {
@@ -306,13 +380,15 @@ function renderAchView() {
     const a = ACH[ai];
     if (ui.hideGot && got(a)) return false;
     if (ui.outOnly && a.di >= 0) return false;
+    if (ui.laterOnly && !(S.l[a.en] && !got(a))) return false;
     return !q || a.n.toLowerCase().includes(q) || a.en.toLowerCase().includes(q) || a.d.toLowerCase().includes(q);
   });
   const total = ACH.length, nGot = ACH.filter(got).length, onRoute = ACH.filter(a => a.di >= 0).length, sugg = ACH.filter(a => a.si >= 0).length;
   let h = `<div class="big"><div><b>${nGot}/${total}</b><span>succès cochés par la team</span></div><div><b>${onRoute}</b><span>terminés à une étape précise</span></div><div><b>${sugg}</b><span>placés selon la zone et le niveau</span></div><div><b>${total - onRoute - sugg}</b><span>événements saisonniers</span></div></div>
     <div class="tools"><input type="search" id="achQ" placeholder="Chercher un succès…" value="${esc(ui.q)}" aria-label="Chercher un succès">
     <label><input type="checkbox" id="hideGot"${ui.hideGot ? ' checked' : ''}> Masquer les cochés</label>
-    <label><input type="checkbox" id="outOnly"${ui.outOnly ? ' checked' : ''}> Sans étape précise</label></div>`;
+    <label><input type="checkbox" id="outOnly"${ui.outOnly ? ' checked' : ''}> Sans étape précise</label>
+    <label><input type="checkbox" id="laterOnly"${ui.laterOnly ? ' checked' : ''}> ⏳ Reportés (niveau 200 / passeur) : ${ACH.filter(a => S.l[a.en] && !got(a)).length}</label></div>`;
   const tops = new Map();
   for (const ai of xs) { const a = ACH[ai]; const t = TOP_FR[a.top] || a.top; (tops.get(t) || tops.set(t, new Map()).get(t)); const m = tops.get(t); (m.get(a.cat) || m.set(a.cat, []).get(a.cat)).push(ai); }
   for (const [t, cats] of [...tops].sort((x, y) => [...y[1].values()].flat().length - [...x[1].values()].flat().length)) {
@@ -353,13 +429,29 @@ document.addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
   if (k === 'arrowright' || k === 'd') { e.preventDefault(); step(1); }
   if (k === 'arrowleft' || k === 'a' || k === 'q') { e.preventDefault(); step(-1); }
+  if (k === 'escape') closeDpln();
 });
 document.addEventListener('click', e => {
   const tr = e.target.closest('[data-travel]'); if (tr) { copy(`/travel ${tr.dataset.travel}`); return; }
   const li = e.target.closest('#stepList li'); if (li) { go(items.findIndex(x => x.key === li.dataset.step)); $('side').classList.remove('open'); return; }
   const gt = e.target.closest('[data-goto]'); if (gt) { if (ui.view !== 'route') setView('route'); go(items.findIndex(x => x.key === gt.dataset.goto)); return; }
   const vw = e.target.closest('[data-view]'); if (vw) { setView(vw.dataset.view); return; }
-  const mo = e.target.closest('[data-more]'); if (mo) { ui.more = mo.dataset.more; renderAchPanel(items[idx]); return; }
+  const mo = e.target.closest('[data-more]'); if (mo) { ui.more = mo.dataset.more; renderAchPanel(items[idx], ui.html); return; }
+  const lt = e.target.closest('[data-later]');
+  if (lt) {
+    const k = lt.dataset.later; if (S.l[k]) delete S.l[k]; else S.l[k] = 1; save();
+    document.querySelectorAll(`[data-later="${CSS.escape(k)}"]`).forEach(b => { const on = !!S.l[k]; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); b.closest('li')?.classList.toggle('later', on && !S.a[k]); });
+    toast(S.l[k] ? 'Reporté : à refaire au niveau 200 ou avec un passeur' : 'Plus reporté'); return;
+  }
+  const dj = e.target.closest('[data-dungeon]'); if (dj) { openDungeon(dj.dataset.dungeon); return; }
+  const dp = e.target.closest('[data-dpln]'); if (dp) { if ($('djDlg').open) $('djDlg').close(); openDpln(dp.dataset.dpln); return; }
+  const tag = e.target.closest('.gc [data-type=custom-tag]');
+  if (tag) {
+    const ty = tag.getAttribute('type'), name = tag.getAttribute('name');
+    if (ty === 'dungeon') { openDungeon(name); return; }
+    if (ty === 'quest') { openDpln(name); return; }
+  }
+  if (e.target.closest('#dplnClose')) { closeDpln(); return; }
   const gs = e.target.closest('[data-type=guide-step]');
   if (gs) {
     const g = +gs.getAttribute('guideid'), cur = items[idx].i;
@@ -373,7 +465,7 @@ document.addEventListener('change', e => {
     if (b.checked) { S.a[b.dataset.ach] = 1; burst(b); toast('Succès coché pour la team !'); } else delete S.a[b.dataset.ach];
     save(); b.closest('li')?.classList.toggle('got', b.checked); return;
   }
-  if (b.id === 'hideGot' || b.id === 'outOnly') { ui[b.id] = b.checked; renderAchView(); return; }
+  if (b.id === 'hideGot' || b.id === 'outOnly' || b.id === 'laterOnly') { ui[b.id] = b.checked; renderAchView(); return; }
   if (b.dataset.task) { if (b.checked) S.t[b.dataset.task] = 1; else delete S.t[b.dataset.task]; save(); b.closest('li')?.classList.toggle('checked', b.checked); }
   if (b.name === 'align') { S.align = b.value; save(); if (!visible(items[idx])) step(1); else render(); return; }
 });
@@ -385,7 +477,7 @@ $('doImport').onclick = () => {
   try {
     const s = decode($('importCode').value);
     if (typeof s !== 'object' || !s.pos) throw 0;
-    S = { pos: '0', t: {}, a: {}, align: 'bonta', ...s }; save();
+    S = { pos: '0', t: {}, a: {}, l: {}, align: 'bonta', ...s }; save();
     idx = Math.max(0, items.findIndex(x => x.key === S.pos));
     $('saveDlg').close(); render(); toast('Progression chargée');
   } catch { $('importErr').textContent = 'Ce code n\'est pas reconnu. Copie-le en entier depuis l\'autre PC.'; $('importErr').hidden = false; }
@@ -431,7 +523,8 @@ function burst(el) {
     gp0 = await guide(GP0);
   } catch (e) { $('card').innerHTML = `<p class="empty">Le guide principal n'a pas pu être chargé (${esc(e.message)}). Recharge la page dans un instant.</p>`; return; }
   buildItems();
-  try { indexAch(await (await fetch('ach.json')).json()); } catch (e) { console.warn('ach.json', e); }
+  try { indexAch(await (await fetch('ach.json?v=8')).json()); } catch (e) { console.warn('ach.json', e); }
+  try { DJ = await (await fetch('dungeons.json?v=1')).json(); } catch (e) { console.warn('dungeons.json', e); }
   idx = Math.max(0, items.findIndex(x => x.key === S.pos));
   document.querySelector(`input[name=align][value=${S.align}]`).checked = true;
   if (!visible(items[idx])) { const j = items.findIndex((x, n) => n > idx && visible(x)); if (j >= 0) idx = j; }
