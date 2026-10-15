@@ -438,13 +438,36 @@ async function copy(text) {
 }
 $('prev').onclick = () => step(-1);
 $('next').onclick = () => step(1);
+$('finish').onclick = () => finishStep();
+
+// One click per step: tick its boxes and the achievements it completes (except those put off ⏳), then move on.
+let undo = null;
+function finishStep() {
+  const it = items[idx];
+  undo = { t: { ...S.t }, a: { ...S.a }, idx };
+  let boxes = 0, achs = 0;
+  document.querySelectorAll('#card [data-task]').forEach(b => { if (!S.t[b.dataset.task]) { S.t[b.dataset.task] = 1; boxes++; } });
+  const done = it.g === undefined ? [] : (doneIn.get(idx) || []);
+  for (const ai of done) { const a = ACH[ai]; if (!S.a[a.en] && !S.l[a.en]) { S.a[a.en] = 1; achs++; } }
+  save();
+  if (achs) burst($('finish'));
+  toast(achs ? `Étape terminée : ${achs} succès coché${achs > 1 ? 's' : ''} · Ctrl+Z pour annuler` : 'Étape terminée · Ctrl+Z pour annuler');
+  step(1);
+}
+function undoFinish() {
+  if (!undo) return;
+  S.t = undo.t; S.a = undo.a; save(); const back = undo.idx; undo = null;
+  go(back); toast('Annulé');
+}
 document.addEventListener('keydown', e => {
   if (e.target.closest('textarea,input[type=text],input[type=search],dialog') || ui.view !== 'route') return;
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); undoFinish(); return; }
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   const k = e.key.toLowerCase();
   if (k === 'arrowright' || k === 'd') { e.preventDefault(); step(1); }
   if (k === 'arrowleft' || k === 'a' || k === 'q') { e.preventDefault(); step(-1); }
   if (k === 'escape') closeDpln();
+  if (k === 'enter' && !e.target.closest('button,a,input')) { e.preventDefault(); finishStep(); }
 });
 document.addEventListener('click', e => {
   const tr = e.target.closest('[data-travel]'); if (tr) { copy(`/travel ${tr.dataset.travel}`); return; }
