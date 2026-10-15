@@ -1,5 +1,5 @@
 'use strict';
-// Éclosion — walks Ganymède's GP0 step by step, expanding every sub-guide range it points to.
+// Ogrimwar — walks Ganymède's GP0 step by step, expanding every sub-guide range it points to.
 // Guides are fetched live from ganymede-app.com (CORS open) and kept in the browser's Cache API.
 const API = 'https://ganymede-app.com/api';
 const GP0 = 2747;
@@ -350,6 +350,7 @@ let ACH = [], posOf = new Map(), touch = new Map(), doneIn = new Map(), doneBySt
 const TOP_FR = { Dungeons: 'Donjons', Quests: 'Quêtes', Monsters: 'Monstres', 'Temporal Anomalies': 'Anomalies temporelles', Events: 'Événements',
   Exploration: 'Exploration', Sidekicks: 'Compagnons', Breeding: 'Élevage', 'Infinite Dreams': 'Songes infinis', Guilds: 'Guilde', Professions: 'Métiers', General: 'Général' };
 const catFr = c => c.replace(/^Levels (\d+) - (\d+)$/, 'Niveaux $1 à $2');
+const catOf = a => a.catfr || a.cat;
 const gp0Of = key => +String(key).split('/')[0];
 function indexAch(data) {
   ACH = data.ach;
@@ -432,7 +433,7 @@ function renderAchView() {
     <label><input type="checkbox" id="outOnly"${ui.outOnly ? ' checked' : ''}> Sans étape précise</label>
     <label><input type="checkbox" id="laterOnly"${ui.laterOnly ? ' checked' : ''}> ⏳ Reportés (niveau 200 / passeur) : ${ACH.filter(a => S.l[a.en] && !got(a)).length}</label></div>`;
   const tops = new Map();
-  for (const ai of xs) { const a = ACH[ai]; const t = TOP_FR[a.top] || a.top; (tops.get(t) || tops.set(t, new Map()).get(t)); const m = tops.get(t); (m.get(a.cat) || m.set(a.cat, []).get(a.cat)).push(ai); }
+  for (const ai of xs) { const a = ACH[ai]; const t = TOP_FR[a.top] || a.top; (tops.get(t) || tops.set(t, new Map()).get(t)); const m = tops.get(t); (m.get(catOf(a)) || m.set(catOf(a), []).get(catOf(a))).push(ai); }
   for (const [t, cats] of [...tops].sort((x, y) => [...y[1].values()].flat().length - [...x[1].values()].flat().length)) {
     const all = [...cats.values()].flat(), g = all.filter(ai => got(ACH[ai])).length;
     h += `<details${q ? ' open' : ''}><summary><span>${esc(t)}</span><span class="cntc${g === all.length ? ' full' : ''}">${g}/${all.length}</span></summary><div class="inner">`;
@@ -632,7 +633,7 @@ function burst(el) {
     gp0 = await guide(GP0);
   } catch (e) { $('card').innerHTML = `<p class="empty">Le guide principal n'a pas pu être chargé (${esc(e.message)}). Recharge la page dans un instant.</p>`; return; }
   buildItems();
-  try { indexAch(await (await fetch('ach.json?v=9')).json()); } catch (e) { console.warn('ach.json', e); }
+  try { indexAch(await (await fetch('ach.json?v=10')).json()); } catch (e) { console.warn('ach.json', e); }
   try { DJ = await (await fetch('dungeons.json?v=2')).json(); } catch (e) { console.warn('dungeons.json', e); }
   idx = Math.max(0, items.findIndex(x => x.key === S.pos));
   document.querySelector(`input[name=align][value=${S.align}]`).checked = true;

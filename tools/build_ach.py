@@ -233,7 +233,29 @@ def fr_desc(d):
         if m: return f(m)
     return d
 
+# ---------- official French names/descriptions, from a local copy of the game data (tools/extract_game.py) ----------
+GAME = f'{HERE}/cache/game/game_achievements.json'
+game = json.load(open(GAME)) if os.path.exists(GAME) else {'achs': [], 'cats': {}}
+g_by_en = {}
+for ga in game['achs']: g_by_en.setdefault(norm(ga['en']), ga)
+def game_top(cid):
+    cats, seen_ = game['cats'], set()
+    c = cats.get(str(cid))
+    while c and c.get('parent') and str(c['parent']) in cats and c['parent'] not in seen_:
+        seen_.add(c['parent']); c = cats[str(c['parent'])]
+    return c or {}
+def official(name):
+    return g_by_en.get(norm(name))
+def chal_text(desc, name):
+    m = re.search(r'\(([^)]+)\)\s*$', name)
+    return re.sub(r'\s*\[challenge,\d+\]', f' {m.group(1)}' if m else '', desc).strip()
+_fr_name = fr_name
+def fr_name(name):
+    g = official(name)
+    return g['fr'] if g and g['fr'] else _fr_name(name)
+
 out, keyof = [], lambda p: items[p][0] if p is not None else None
+used_game = set()
 stats = collections.Counter()
 for name, v in ach.items():
     cat = v.get('category') or ''; tp = top(cat)
@@ -258,10 +280,25 @@ for name, v in ach.items():
                 b = ob.get('condition') if c.get('type') == 'Complete challenge' else c.get('value') if c.get('type') == 'Defeat monster' else None
                 if b and boss_dungeon(b): djn = boss_dungeon(b); break
             if djn: break
-    out.append({'dj': en2fr('Dungeons', djn) if djn else None, 'sug': sug, 'seasonal': cat in SEASONAL or tp == 'Events', 'n': fr_name(name), 'en': name, 'cat': cat, 'top': tp, 'lvl': v.get('level'),
-                'd': fr_desc(re.sub(r'\s*\[challenge,\d+\]', '', html.unescape(v.get('description') or ''))), 'done': keyof(d), 'o': objs,
+    g = official(name)
+    if g: used_game.add(g['id'])
+    out.append({'gid': g['id'] if g else None, 'catfr': (game['cats'].get(str(g['cat'])) or {}).get('fr') if g else None,
+                'dj': en2fr('Dungeons', djn) if djn else None, 'sug': sug, 'seasonal': cat in SEASONAL or tp == 'Events', 'n': fr_name(name), 'en': name, 'cat': cat, 'top': tp, 'lvl': v.get('level'),
+                'd': chal_text(g['dfr'], g['fr']) if g and g['dfr'] else fr_desc(re.sub(r'\s*\[challenge,\d+\]', '', html.unescape(v.get('description') or ''))), 'done': keyof(d), 'o': objs,
                 'duo': name.endswith('(Duo)'), 'solo': name.endswith('(Solitary)') or name.endswith('(Lone Wolf)')})
-json.dump({'built': '2026-10-15', 'source': 'DofusWiki (dofuswiki.fandom.com), CC-BY-SA', 'ach': out},
+SKIP_TOP = {'Temporis', 'Kolizéum', "La Source : L'Héritage des Dofus"}
+for ga in game['achs']:
+    if ga['id'] in used_game or not ga['fr']: continue
+    top_c = game_top(ga['cat']); cat_c = game['cats'].get(str(ga['cat'])) or {}
+    if top_c.get('fr') in SKIP_TOP or 'Dungeon Rusher' in cat_c.get('en', '') or 'Rusher' in cat_c.get('fr', ''): continue
+    seasonal = top_c.get('en') == 'Events'
+    out.append({'gid': ga['id'], 'catfr': cat_c.get('fr'), 'dj': None, 'sug': None if seasonal else keyof(level_pos(ga['lvl'])),
+                'seasonal': seasonal, 'n': ga['fr'], 'en': ga['en'] or ga['fr'], 'cat': cat_c.get('en', ''), 'top': top_c.get('en', ''),
+                'lvl': ga['lvl'], 'd': chal_text(ga['dfr'], ga['fr']), 'done': None, 'o': [], 'duo': ga['fr'].endswith('(Duo)'),
+                'solo': ga['fr'].endswith('(Solitaire)'), 'gameonly': True})
+    stats['from game only'] += 1
+print('game names used', len(used_game))
+json.dump({'built': '2026-10-15', 'source': 'DofusWiki (dofuswiki.fandom.com), CC-BY-SA; noms et descriptions FR du jeu', 'ach': out},
           open(f'{ROOT}/ach.json', 'w'), ensure_ascii=False, separators=(',', ':'))
 print(dict(stats), 'items', len(items))
 print('unmatched FR names (top):', miss.most_common(12))
