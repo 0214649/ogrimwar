@@ -44,9 +44,10 @@ import html
 
 _plain = lambda h: re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', h or ''))).strip()
 def counts(key):
-    """False for GP0 pages that are not game steps: credits/welcome/how-to-read examples and the hidden bonus pages."""
+    """False for GP0 pages that are not game steps: credits / welcome / how-to-read examples."""
     if '/' in key: return True
-    return bool(re.match(r'Objectifs?\s*:', _plain(gp0['steps'][int(key)].get('web_text'))))
+    t = _plain(gp0['steps'][int(key)].get('web_text'))
+    return bool(re.match(r'Objectifs?\s*:', t) or re.match(r'\W*Étape bonus', t))   # job/gear pages are regular steps now
 TAG = re.compile(r'data-type="custom-tag"[^>]*?type="(\w+)"[^>]*?dofusdbid="(\d+)"')
 QB = re.compile(r'<div data-type="quest-block"[^>]*?status="(\w+)"[^>]*>(.*?)</div>', re.S)
 
@@ -216,6 +217,18 @@ for a in data['ach']:
     if mons and all(m in mon_first for m in mons):
         a['sug'] = key(max(mon_first[m] for m in mons)); monst += 1
 print(f'exploration placed: {explo}; monster achievements doable-from: {monst}')
+# job levels: "Atteindre le niveau N dans un métier" is reached on the job page "… X à N …" of the GP0
+job_step = {}
+for i, st in enumerate(gp0['steps']):
+    t = _plain(st.get('web_text'))
+    if re.match(r'\W*Étape bonus', t):
+        for lo, hi in re.findall(r'(\d+) à (\d+)', t[:200]): job_step.setdefault(int(hi), i)
+jobs = 0
+for a in data['ach']:
+    m = re.fullmatch(r'Atteindre le niveau (\d+) dans un métier\.?', a['d'])
+    if m and not a['done'] and int(m.group(1)) in job_step:
+        k_ = str(job_step[int(m.group(1))]); a['done'] = k_; a['sug'] = None; a['o'] = [[a['d'], k_]]; jobs += 1
+print('job achievements placed on job pages:', jobs)
 json.dump(data, open(f'{ROOT}/ach.json', 'w'), ensure_ascii=False, separators=(',', ':'))
 print(f'game pass: {gained} newly placed at an exact step, {better} moved, '
       f'{sum(1 for a in data["ach"] if a["done"])} exact in total out of {len(data["ach"])}')

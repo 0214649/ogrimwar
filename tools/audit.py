@@ -6,7 +6,7 @@ route = json.load(open(f'{ROOT}/route.json'))
 G = json.load(open(f'{HERE}/cache/game/game_achievements.json'))
 gp0 = json.load(open(f'{HERE}/cache/guides/{route["gp0"]}.json'))
 plain = lambda h: re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', h or ''))).strip()
-real = {str(i) for i, st in enumerate(gp0['steps']) if re.match(r'Objectifs?\s*:', plain(st.get('web_text')))}
+real = {str(i) for i, st in enumerate(gp0['steps']) if re.match(r'Objectifs?\s*:', plain(st.get('web_text'))) or re.match(r'\W*Étape bonus', plain(st.get('web_text')))}
 GU = {}
 def text_of(key):
     p = key.split('/')
@@ -26,9 +26,9 @@ P = lambda k, msg: problems[k].append(msg)
 for a in A:
     for field in ('done', 'sug'):
         k = a.get(field)
-        if k and '/' not in k and k not in real: P('placé sur une page exemple/bonus', f"{a['n']} ({field}={k})")
+        if k and '/' not in k and k not in real: P('placé sur une page exemple', f"{a['n']} ({field}={k})")
     for label, k in a['o']:
-        if k and '/' not in k and k not in real: P('objectif sur une page exemple/bonus', f"{a['n']} : {label} ({k})")
+        if k and '/' not in k and k not in real: P('objectif sur une page exemple', f"{a['n']} : {label} ({k})")
 # 2. categories are the game's
 for a in A:
     if not a.get('gid'): P('sans identifiant du jeu', a['n']); continue

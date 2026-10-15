@@ -213,7 +213,7 @@ async function keyedDungeons() {
 }
 async function shoppingList(nSteps) {
   const from = items[idx].i, to = from + nSteps;
-  const its = items.slice(idx).filter(it => it.i < to && visible(it) && !(it.g === undefined && (isIntro(it.i) || isBonus(it.i))));
+  const its = items.slice(idx).filter(it => it.i < to && visible(it) && !(it.g === undefined && isIntro(it.i)));
   const need = new Map(), keys = new Map(), runs = new Map(), keyed = await keyedDungeons();
   for (const it of its) {
     let h;
@@ -321,7 +321,7 @@ function renderSide() {
   $('stepList').innerHTML = gp0.steps.map((_, i) => {
     const b = isBonus(i);
     const n = (doneByStep.get(i) || []).length + (sugByStep.get(i) || []).length;
-    return `<li data-step="${i}" class="${i < cur ? 'past' : ''}${i === cur ? ' cur' : ''}${b ? ' bonus' : ''}"><span class="num">${i + 1}</span><span>${esc(stepTitle(i))}</span>${n ? `<span class="ac">${n} succès</span>` : ''}</li>`;
+    return `<li data-step="${i}" class="${i < cur ? 'past' : ''}${i === cur ? ' cur' : ''}"><span class="num">${i + 1}</span><span>${esc(stepTitle(i))}</span>${n ? `<span class="ac">${n} succès</span>` : ''}</li>`;
   }).join('');
   $('stepList').querySelector('.cur')?.scrollIntoView({ block: 'nearest' });
 }
@@ -736,7 +736,7 @@ function burst(el) {
     gp0 = await guide(GP0);
   } catch (e) { $('card').innerHTML = `<p class="empty">Le [GP0] n'a pas pu être chargé (${esc(e.message)}). Recharge la page dans un instant.</p>`; return; }
   buildItems();
-  try { indexAch(await (await fetch('ach.json?v=16')).json()); } catch (e) { console.warn('ach.json', e); }
+  try { indexAch(await (await fetch('ach.json?v=17')).json()); } catch (e) { console.warn('ach.json', e); }
   try { DJ = await (await fetch('dungeons.json?v=2')).json(); } catch (e) { console.warn('dungeons.json', e); }
   try { CATORD = await (await fetch('catorder.json?v=1')).json(); } catch (e) { console.warn('catorder.json', e); }
   idx = Math.max(0, items.findIndex(x => x.key === S.pos));

@@ -45,9 +45,10 @@ for i, st in enumerate(gp0['steps']):
 
 _plain = lambda h: re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', h or ''))).strip()
 def counts(key):
-    """False for GP0 pages that are not game steps: credits/welcome/how-to-read examples and the hidden bonus pages."""
+    """False for GP0 pages that are not game steps: credits / welcome / how-to-read examples."""
     if '/' in key: return True
-    return bool(re.match(r'Objectifs?\s*:', _plain(gp0['steps'][int(key)].get('web_text'))))
+    t = _plain(gp0['steps'][int(key)].get('web_text'))
+    return bool(re.match(r'Objectifs?\s*:', t) or re.match(r'\W*Étape bonus', t))   # job/gear pages are regular steps now
 TAG = re.compile(r'<span data-type="custom-tag"[^>]*?type="(\w+)"[^>]*?name="([^"]*)"')
 QB = re.compile(r'data-type="quest-block"[^>]*?questname="([^"]*)"[^>]*?status="(\w+)"')
 
