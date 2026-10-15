@@ -21,7 +21,7 @@ for i, st in enumerate(gp0['steps']):
             except FileNotFoundError: print('missing guide', gid, file=sys.stderr); continue
             cur = cursor.get(gid, 0)
             m_de = re.search(r"(?:de|depuis) l' ?étapes? (\d+)", t)
-            m_to = re.search(r"jusqu'à l' ?étape (\d+)", t)
+            m_to = re.search(r"jusqu'à l' ?étape (\d+)", t) or re.search(r"(?:de|depuis) l' ?étapes? \d+ à l' ?étapes? (\d+)", t)
             if len(gids) > 1: m_de = m_to = None          # multi-guide line: handled via 'termin'/dungeon
             a = int(m_de.group(1)) - 1 if m_de else cur
             if m_to: b = int(m_to.group(1))
