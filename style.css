@@ -169,6 +169,7 @@ ul.al{list-style:none;margin:0;padding:0;display:grid;gap:4px}
 .gc .guide-step{display:inline-flex;align-items:center;gap:5px;color:var(--accent);font-weight:800;cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:4px}
 .gc .guide-step img{width:18px;height:18px;margin:0}
 .gc a{word-break:break-word}
+.gc .imgoff{display:inline-block;font-size:.85rem;color:var(--muted);border:1px dashed var(--line);border-radius:8px;padding:4px 10px;margin:6px 0}
 .travel{display:inline-flex;align-items:center;gap:6px;background:#c3b8ff14;border:1px solid color-mix(in srgb,var(--start) 45%,var(--line));border-radius:8px;padding:0 10px;cursor:pointer;font:600 .95rem var(--f-num);color:var(--start);vertical-align:baseline;transition:transform .15s,background .15s}
 .travel:hover{transform:translateY(-1px);background:#c3b8ff26}
 

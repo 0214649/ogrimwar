@@ -8,7 +8,7 @@ const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '
 
 // ---------- state (browser storage + export code) ----------
 const KEY = 'carnet-team-v1';
-let S = { pos: '0', t: {}, a: {}, skipBonus: false, align: 'bonta' };
+let S = { pos: '0', t: {}, a: {}, align: 'bonta' };
 const ALIGN = { bonta: 516, brak: 773 };   // GP9 Bontarien / Brâkmarien
 try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch {} };
@@ -86,11 +86,19 @@ function buildItems() {
   });
 }
 const isIntro = i => !/^Objectifs?\s*:/.test(txt(gp0.steps[i]?.web_text)) && !isBonus(i);
-const visible = it => !(S.skipBonus && it.g === undefined && isBonus(it.i)) && it.g !== ALIGN[S.align === 'bonta' ? 'brak' : 'bonta'] && !it.gone;
+const visible = it => !(it.g === undefined && isBonus(it.i))   // bonus pages (jobs, gear) are never shown
+   && it.g !== ALIGN[S.align === 'bonta' ? 'brak' : 'bonta'] && !it.gone;
 let lastDir = 1;
 
 // ---------- sanitising + enriching Ganymède HTML ----------
 const COORD = /\[\s*(-?\d{1,3})\s*,\s*(-?\d{1,3})\s*\]/g;
+// images whose host refuses them (Gyazo answers 503): show a quiet note with the link instead of a broken icon
+function brokenImg(img) {
+  const a = document.createElement('a');
+  a.href = img.src; a.target = '_blank'; a.rel = 'noopener'; a.className = 'imgoff';
+  a.textContent = 'Image du guide indisponible chez son hébergeur (ouvrir le lien)';
+  img.replaceWith(a);
+}
 function enrich(html, scope) {
   const doc = new DOMParser().parseFromString(`<div>${html || ''}</div>`, 'text/html');
   const root = doc.body.firstChild;
@@ -98,7 +106,7 @@ function enrich(html, scope) {
   root.querySelectorAll('*').forEach(el => {
     for (const a of [...el.attributes]) if (/^on/i.test(a.name) || (/^(href|src)$/i.test(a.name) && /^\s*javascript:/i.test(a.value))) el.removeAttribute(a.name);
     if (el.tagName === 'A') { el.target = '_blank'; el.rel = 'noopener'; }
-    if (el.tagName === 'IMG') el.loading = 'lazy';
+    if (el.tagName === 'IMG') { el.loading = 'lazy'; el.setAttribute('onerror', 'brokenImg(this)'); }
   });
   // coordinates -> /travel buttons
   const walker = doc.createTreeWalker(root, NodeFilter.SHOW_TEXT);
@@ -132,7 +140,8 @@ function renderSide() {
   $('stepList').innerHTML = gp0.steps.map((_, i) => {
     const b = isBonus(i);
     const n = (doneByStep.get(i) || []).length + (sugByStep.get(i) || []).length;
-    return `<li data-step="${i}" class=""${i < cur ? 'past' : ''}${i === cur ? ' cur' : ''}${b ? ' bonus' : ''}"${b && S.skipBonus ? ' hidden' : ''}><span class="num">${i + 1}</span><span>${esc(stepTitle(i))}</span>${n ? `<span class="ac">${n} succès</span>` : ''}</li>`;
+    if (b) return '';
+    return `<li data-step="${i}" class="${i < cur ? 'past' : ''}${i === cur ? ' cur' : ''}"><span class="num">${i + 1}</span><span>${esc(stepTitle(i))}</span>${n ? `<span class="ac">${n} succès</span>` : ''}</li>`;
   }).join('');
   $('stepList').querySelector('.cur')?.scrollIntoView({ block: 'nearest' });
 }
@@ -356,7 +365,6 @@ document.addEventListener('change', e => {
   if (b.id === 'hideGot' || b.id === 'outOnly') { ui[b.id] = b.checked; renderAchView(); return; }
   if (b.dataset.task) { if (b.checked) S.t[b.dataset.task] = 1; else delete S.t[b.dataset.task]; save(); b.closest('li')?.classList.toggle('checked', b.checked); }
   if (b.name === 'align') { S.align = b.value; save(); if (!visible(items[idx])) step(1); else render(); return; }
-  if (b.id === 'skipBonus') { S.skipBonus = b.checked; save(); if (!visible(items[idx])) step(1); else render(); }
 });
 $('menuBtn').onclick = e => { e.stopPropagation(); const o = $('side').classList.toggle('open'); $('menuBtn').setAttribute('aria-expanded', o); };
 document.addEventListener('pointerdown', e => { if ($('side').classList.contains('open') && !e.target.closest('#side,#menuBtn')) { $('side').classList.remove('open'); $('menuBtn').setAttribute('aria-expanded', false); } });
@@ -366,8 +374,8 @@ $('doImport').onclick = () => {
   try {
     const s = decode($('importCode').value);
     if (typeof s !== 'object' || !s.pos) throw 0;
-    S = { pos: '0', t: {}, a: {}, skipBonus: false, ...s }; save();
-    idx = Math.max(0, items.findIndex(x => x.key === S.pos)); $('skipBonus').checked = S.skipBonus;
+    S = { pos: '0', t: {}, a: {}, align: 'bonta', ...s }; save();
+    idx = Math.max(0, items.findIndex(x => x.key === S.pos));
     $('saveDlg').close(); render(); toast('Progression chargée');
   } catch { $('importErr').textContent = 'Ce code n\'est pas reconnu. Copie-le en entier depuis l\'autre PC.'; $('importErr').hidden = false; }
 };
@@ -414,7 +422,6 @@ function burst(el) {
   buildItems();
   try { indexAch(await (await fetch('ach.json')).json()); } catch (e) { console.warn('ach.json', e); }
   idx = Math.max(0, items.findIndex(x => x.key === S.pos));
-  $('skipBonus').checked = S.skipBonus;
   document.querySelector(`input[name=align][value=${S.align}]`).checked = true;
   if (!visible(items[idx])) { const j = items.findIndex((x, n) => n > idx && visible(x)); if (j >= 0) idx = j; }
   if (gp0.updated_at !== R.gp0_updated) console.info('GP0 modifié depuis la préparation du parcours :', gp0.updated_at, '≠', R.gp0_updated);
