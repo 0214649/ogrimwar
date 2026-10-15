@@ -101,8 +101,7 @@ function buildItems() {
   });
 }
 const isIntro = i => !/^Objectifs?\s*:/.test(txt(gp0.steps[i]?.web_text)) && !isBonus(i);
-const visible = it => !(it.g === undefined && isBonus(it.i))   // bonus pages (jobs, gear) are never shown
-   && it.g !== ALIGN[S.align === 'bonta' ? 'brak' : 'bonta'] && !it.gone;
+const visible = it => it.g !== ALIGN[S.align === 'bonta' ? 'brak' : 'bonta'] && !it.gone;
 let lastDir = 1;
 
 // ---------- sanitising + enriching Ganymède HTML ----------
@@ -254,8 +253,7 @@ function renderSide() {
   $('stepList').innerHTML = gp0.steps.map((_, i) => {
     const b = isBonus(i);
     const n = (doneByStep.get(i) || []).length + (sugByStep.get(i) || []).length;
-    if (b) return '';
-    return `<li data-step="${i}" class="${i < cur ? 'past' : ''}${i === cur ? ' cur' : ''}"><span class="num">${i + 1}</span><span>${esc(stepTitle(i))}</span>${n ? `<span class="ac">${n} succès</span>` : ''}</li>`;
+    return `<li data-step="${i}" class="${i < cur ? 'past' : ''}${i === cur ? ' cur' : ''}${b ? ' bonus' : ''}"><span class="num">${i + 1}</span><span>${esc(stepTitle(i))}</span>${n ? `<span class="ac">${n} succès</span>` : ''}</li>`;
   }).join('');
   $('stepList').querySelector('.cur')?.scrollIntoView({ block: 'nearest' });
 }
