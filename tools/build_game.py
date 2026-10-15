@@ -137,6 +137,7 @@ worlds = {w['id']: fr.get(w['nameId'], '') for w in rows('worldmaps')}
 super_world = {x['id']: x.get('worldmapId') for x in rows('superareas')}
 # an area's world: its own worldmapId, else its super-area's (Incarnam = "Zone de départ" -> world 2), else the main world
 area_world = {a['id']: (a.get('worldmapId') or super_world.get(a.get('superAreaId')) or 1) for a in rows('areas')}
+area_name = {a['id']: fr.get(a.get('nameId'), '') for a in rows('areas')}
 GANY_WORLD = {'douze': 1}
 def world_of(name):
     n = nrm(name)
@@ -161,18 +162,33 @@ def inside(px, py, poly):
 subs = []
 for sa in rows('subareas'):
     w = sa['customWorldMapId'] if sa.get('customWorldMapId', -1) >= 0 else area_world.get(sa['areaId'])
-    subs.append({'id': sa['id'], 'fr': fr.get(sa['nameId'], ''), 'world': w, 'polys': polygons(sa.get('shape') or []), 'monsters': sa.get('monsters') or []})
+    subs.append({'id': sa['id'], 'fr': fr.get(sa['nameId'], ''), 'world': w, 'area': area_name.get(sa['areaId'], ''), 'polys': polygons(sa.get('shape') or []), 'monsters': sa.get('monsters') or []})
 def sub_at(world, x, y):
     for sa in subs:
         if sa['world'] == world and any(inside(x + .5, y + .5, pg) or inside(x, y, pg) for pg in sa['polys']): return sa
     return None
 COORD = re.compile(r'\[\s*(-?\d{1,3})\s*,\s*(-?\d{1,3})\s*\]')
+def step_of(key_):
+    parts = key_.split('/')
+    return gp0['steps'][int(parts[0])] if len(parts) == 1 else guide(int(parts[1]))['steps'][int(parts[2])]
+item_world = [world_of(step_of(k_).get('map')) for k_, _ in items]
+# Ganymède sometimes tags steps with the wrong world ([GP1] étapes 5, 28-29 say "Douze" inside Incarnam):
+# a short run whose two sides agree on another world takes theirs
+p_ = 1
+while p_ < len(items) - 1:                       # runs of up to 3 mis-tagged steps between two steps of the same world
+    if item_world[p_] is not None and item_world[p_] != item_world[p_ - 1]:
+        q_ = p_
+        while q_ < len(items) and item_world[q_] == item_world[p_]: q_ += 1
+        if q_ < len(items) and q_ - p_ <= 3 and item_world[p_ - 1] is not None and item_world[q_] == item_world[p_ - 1]:
+            for r_ in range(p_, q_): item_world[r_] = item_world[p_ - 1]
+        p_ = q_
+    else:
+        p_ += 1
 first_visit = {}
 for p_, (key_, h) in enumerate(items):
     if not counts(key_): continue
-    parts = key_.split('/')
-    st = gp0['steps'][int(parts[0])] if len(parts) == 1 else guide(int(parts[1]))['steps'][int(parts[2])]
-    w = world_of(st.get('map'))
+    st = step_of(key_)
+    w = item_world[p_]
     if w is None: continue
     pts = [(st.get('pos_x'), st.get('pos_y'))] + [(int(a_), int(b_)) for a_, b_ in COORD.findall(re.sub(r'<[^>]+>', ' ', h))]
     for x, y in pts:
@@ -205,7 +221,10 @@ cat_top = {}
 explo = 0; monst = 0
 for a in data['ach']:
     if a['done'] or a.get('top') != 'Exploration' and not (a.get('d') or '').startswith('Découvrir la zone'): continue
-    cands = [sa for sa in sub_by_name.get(nrm(a['n']), []) if sa['id'] in first_visit]
+    same = sub_by_name.get(nrm(a['n']), [])
+    # homonyms ("Cimetière" in Incarnam and in Amakna): keep the sub-area of the achievement's own region
+    region = [sa for sa in same if a.get('catfr') and (nrm(a['catfr']) in nrm(sa['area']) or nrm(sa['area']) in nrm(a['catfr']))]
+    cands = [sa for sa in (region or same) if sa['id'] in first_visit]
     if cands:
         p_ = min(first_visit[sa['id']] for sa in cands)
         a['done'] = key(p_); a['sug'] = None; a['o'] = [[f"Découvrir : {a['n']}", key(p_)]]; explo += 1

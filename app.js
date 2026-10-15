@@ -749,7 +749,7 @@ function burst(el) {
     gp0 = await guide(GP0);
   } catch (e) { $('card').innerHTML = `<p class="empty">Le [GP0] n'a pas pu être chargé (${esc(e.message)}). Recharge la page dans un instant.</p>`; return; }
   buildItems();
-  try { indexAch(await (await fetch('ach.json?v=17')).json()); } catch (e) { console.warn('ach.json', e); }
+  try { indexAch(await (await fetch('ach.json?v=18')).json()); } catch (e) { console.warn('ach.json', e); }
   try { DJ = await (await fetch('dungeons.json?v=2')).json(); } catch (e) { console.warn('dungeons.json', e); }
   try { CATORD = await (await fetch('catorder.json?v=1')).json(); } catch (e) { console.warn('catorder.json', e); }
   idx = Math.max(0, items.findIndex(x => x.key === S.pos));
