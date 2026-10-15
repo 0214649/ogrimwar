@@ -266,7 +266,7 @@ async function render() {
   const total = gp0.steps.length;
   $('fill').style.width = `${(100 * it.i / (total - 1)).toFixed(1)}%`;
   $('meter').textContent = `${it.i + 1}/${total}`;
-  $('pos').textContent = it.g === undefined ? `Étape ${it.i + 1} du GP0` : `GP0 ${it.i + 1} · sous-étape ${segInfo(it).n}/${segInfo(it).of}`;
+  $('pos').textContent = it.g === undefined ? `Guide principal · étape ${it.i + 1}` : `Étape ${it.i + 1} › ${(R.names[it.g] || '').match(/^\[([^\]]+)\]/)?.[1] || 'sous-guide'} page ${it.k + 1}`;
   $('prev').disabled = !items.slice(0, idx).some(visible);
   $('next').disabled = !items.slice(idx + 1).some(visible);
   renderSide();
@@ -274,11 +274,13 @@ async function render() {
   renderAchPanel(it, ui.html);
 
   const ctx = $('ctx'), card = $('card'), links = $('links');
+  $('stage').classList.toggle('is-sub', it.g !== undefined);
   if (it.g === undefined) {
     ctx.hidden = true;
     $('crumb').textContent = `Guide principal · étape ${it.i + 1}`;
     const segs = (R.steps[it.i] || []);
-    $('stepHead').innerHTML = `<div class="bignum">${it.i + 1}</div><span class="eyebrow">Guide principal · étape ${it.i + 1} sur ${gp0.steps.length}</span><h2>${esc(stepTitle(it.i))}</h2>${summary(it)}`;
+    const pages = items.filter(x => x.i === it.i && x.g !== undefined).length;
+    $('stepHead').innerHTML = `<div class="bignum"><small>GP0</small>${it.i + 1}</div><span class="eyebrow">Guide principal · étape ${it.i + 1} sur ${gp0.steps.length}</span><h2>${esc(stepTitle(it.i))}</h2>${summary(it)}${pages ? `<p class="heronote">Cette étape t'envoie dans ${segs.length > 1 ? segs.length + ' sous-guides' : 'un sous-guide'} : ${pages} page${pages > 1 ? 's' : ''} à suivre, en appuyant sur Suivant.</p>` : ''}`;
     card.innerHTML = `<div class="gc">${enrich(gp0.steps[it.i].web_text, `${GP0}:${it.i}`)}</div>`;
     links.hidden = !segs.length;
     links.innerHTML = segs.length ? `<span class="lbl">Dans cette étape</span>` + segs.map(([g, a, b]) => {
@@ -291,22 +293,32 @@ async function render() {
     ctx.hidden = false;
     ctx.innerHTML = `<details><summary><span class="lbl">Consigne du guide principal</span><span>Étape ${it.i + 1} · ${esc(stepTitle(it.i))}</span></summary><div class="body gc">${enrich(gp0.steps[it.i].web_text, `${GP0}:${it.i}`)}</div></details>`;
     card.innerHTML = `<p class="loading">Chargement de ${esc(name)}…</p>`;
-    $('stepHead').innerHTML = `<div class="bignum">${it.i + 1}</div><span class="eyebrow">${esc(name)} · étape ${it.k + 1}</span><h2>${esc(stepTitle(it.i))}</h2>`;
+    $('stepHead').innerHTML = subHero(it, name, null);
     let g;
     try { g = await guide(it.g); } catch (e) { card.innerHTML = `<p class="empty">Impossible de charger ${esc(name)} : ${esc(e.message)}. Réessaie dans un instant.</p>`; return; }
     if (items[idx] !== it) return;               // user moved on while loading
     const st = g.steps[it.k];
     const { n, of, seg } = segInfo(it);
     if (!st) { it.gone = true; step(lastDir); return; }     // guide got shorter since route.json was built
-    $('stepHead').innerHTML = `<div class="bignum">${it.i + 1}</div><span class="eyebrow">${esc(name)} · étape ${it.k + 1} sur ${g.steps.length}</span><h2>${esc(st.name || stepTitle(it.i))}</h2>${summary(it, st)}`;
+    $('stepHead').innerHTML = subHero(it, name, g, st);
     card.innerHTML = `<div class="gc">${enrich(st.web_text, `${it.g}:${it.k}`)}</div>`;
     ui.html = st.web_text; renderAchPanel(it, ui.html);
-    links.hidden = false;
-    links.innerHTML = `<span class="lbl">Plage du GP0</span><span class="num">ét. ${seg ? seg[1] + 1 : '?'}→${seg ? seg[2] : '?'} · ${n}/${of}</span>`;
+    links.hidden = true;   // the range bar in the hero already says where we are
   }
   // warm the next guide so the next click is instant
   const nx = items.slice(idx + 1).find(x => x.g !== undefined && x.g !== it.g);
   if (nx) setTimeout(() => guide(nx.g).catch(() => {}), 800);
+}
+// Sub-guide page: a parent bar back to the GP0 step, the guide's code + page number, and the range progress.
+function subHero(it, name, g, st) {
+  const m = name.match(/^\[([^\]]+)\]\s*(.*)$/), code = m ? m[1] : 'Guide', label = m ? m[2] : name;
+  const { n, of } = segInfo(it);
+  return `<button class="parentbar" data-goto="${it.i}"><span class="up">↑</span><span>Étape <b>${it.i + 1}</b> du guide principal · ${esc(stepTitle(it.i))}</span></button>
+    <div class="bignum"><small>${esc(code)}</small>${it.k + 1}</div>
+    <span class="eyebrow">Sous-guide ${esc(code)} · page ${it.k + 1}${g ? ' sur ' + g.steps.length : ''}</span>
+    <h2>${esc(label)}${st?.name ? ` · ${esc(st.name)}` : ''}</h2>
+    <div class="rangebar" title="Pages de ce sous-guide à faire pour l'étape ${it.i + 1}"><div class="rfill" style="width:${(100 * n / of).toFixed(1)}%"></div><span>${n} / ${of} pages pour l'étape ${it.i + 1}</span></div>
+    ${st ? summary(it, st) : ''}`;
 }
 function summary(it, st) {
   const pills = [];

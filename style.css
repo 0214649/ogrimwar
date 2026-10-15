@@ -4,7 +4,7 @@
 :root{
   --bg:#050506; --bg-2:#0d0c10; --panel:#141218; --panel-2:#1d1a22; --ink:#f7eef3; --muted:#a8999f; --line:#2a2430;
   --accent:#ffb6d3; --accent-2:#ff8cbc; --accent-ink:#2b0d1b; --good:#9fe6b8; --start:#c3b8ff; --prog:#ffb6d3; --sug:#b8c6ff;
-  --glow:#ffb6d3;
+  --glow:#ffb6d3; --sub:#c3b8ff;
   --f-display:"Alegreya SC",Georgia,serif; --f-body:"Nunito Sans","Segoe UI",system-ui,sans-serif; --f-num:"IBM Plex Mono",ui-monospace,monospace;
   --radius:16px; --shadow:0 18px 40px -18px #000c,0 2px 0 #ffffff08 inset;
   color-scheme:dark;
@@ -59,6 +59,24 @@ h1{font:700 1.45rem/1.1 var(--f-display);margin:0;letter-spacing:.03em;color:var
 @keyframes turnNext{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
 @keyframes turnPrev{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
 
+.parentbar{grid-column:1 / -1;justify-self:start;display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:6px 16px 6px 8px;border-radius:999px;border:1px solid var(--line);
+  background:var(--panel);color:var(--muted);cursor:pointer;font-size:.95rem;transition:border-color .15s,color .15s}
+.parentbar:hover{border-color:var(--accent);color:var(--ink)}
+.parentbar b{color:var(--accent)}
+.parentbar .up{display:grid;place-content:center;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:900}
+.bignum small{display:block;font:800 .9rem/1 var(--f-body);letter-spacing:.14em;-webkit-text-fill-color:var(--muted);color:var(--muted);margin-bottom:6px}
+.hero>.summary,.hero>.rangebar,.hero>.heronote,.hero>.eyebrow,.hero>h2{grid-column:2}
+.stage.is-sub .bignum{grid-row:2 / span 4}
+.heronote{margin:6px 0 0;color:var(--muted);font-size:.95rem}
+.rangebar{position:relative;height:26px;max-width:520px;border-radius:999px;background:var(--panel-2);overflow:hidden;margin-top:6px;border:1px solid var(--line)}
+.rangebar .rfill{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#8f80ff55,#c3b8ffaa)}
+.rangebar span{position:relative;display:block;padding:0 14px;line-height:24px;font:700 .82rem var(--f-num);color:var(--ink)}
+/* sub-guide pages: lavender instead of pink, with a rail on the left, so "inside a sub-guide" is visible at a glance */
+.stage.is-sub{position:relative;padding-left:22px}
+.stage.is-sub::before{content:"";position:absolute;left:0;top:4px;bottom:0;width:5px;border-radius:3px;background:linear-gradient(180deg,var(--sub),transparent)}
+.stage.is-sub .bignum{background:linear-gradient(180deg,#f2efff,var(--sub) 45%,#8f80ff);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 6px 22px #c3b8ff44)}
+.stage.is-sub .eyebrow{color:var(--sub)}
+.stage.is-sub .sheet{border-color:color-mix(in srgb,var(--sub) 35%,var(--line))}
 .hero{display:grid;grid-template-columns:auto 1fr;gap:6px 28px;align-items:center;margin-bottom:28px}
 .bignum{grid-row:span 3;font:700 clamp(4.5rem,9vw,7.5rem)/.85 var(--f-display);color:transparent;
   background:linear-gradient(180deg,#fff0f6,var(--accent) 45%,var(--accent-2));-webkit-background-clip:text;background-clip:text;
@@ -268,6 +286,8 @@ dialog::backdrop{background:#000a;backdrop-filter:blur(3px)}
   .achcol{position:static;max-height:none;order:-1}
 }
 @media (max-width:700px){
+  .hero>.summary,.hero>.rangebar,.hero>.heronote,.hero>.eyebrow,.hero>h2{grid-column:1}
+  .stage.is-sub .bignum{grid-row:auto}
   body{font-size:18px}
   .meter,.keys{display:none}
   .profbtn{max-width:44px;padding:6px 10px}
