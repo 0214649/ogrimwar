@@ -256,10 +256,22 @@ async function openShopping(n = ui.shopN || 10) {
 // ---------- DPLN: their real page, shown in a side panel (never copied) ----------
 const slug = n => n.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/œ/g, 'oe').replace(/æ/g, 'ae').toLowerCase()
   .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+// DPLN's addresses are not consistent: older pages spell accents as entity names (é -> eacute, à -> agrave),
+// apostrophes become a dash or nothing. Offer every plausible spelling, the viewer picks.
+const ENT = { 'à': 'agrave', 'â': 'acirc', 'ä': 'auml', 'é': 'eacute', 'è': 'egrave', 'ê': 'ecirc', 'ë': 'euml', 'î': 'icirc', 'ï': 'iuml',
+  'ô': 'ocirc', 'ö': 'ouml', 'ù': 'ugrave', 'û': 'ucirc', 'ü': 'uuml', 'ç': 'ccedil', 'œ': 'oelig' };
+function slugs(n) {
+  const low = n.toLowerCase(), out = [slug(n)];
+  out.push(slug(low.replace(/['’]/g, '')));
+  out.push(low.replace(/[àâäéèêëîïôöùûüçœ]/g, c => ENT[c]).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''));
+  out.push(low.replace(/['’]/g, '').replace(/[àâäéèêëîïôöùûüçœ]/g, c => ENT[c]).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''));
+  return [...new Set(out)];
+}
 // A frame from another site can't be scrolled by this page (browser same-origin rule), so the panel shows
 // the page from the top; the "new tab" link adds a text fragment that jumps to and highlights the boss.
-function openDpln(name) {
-  const url = `https://www.dofuspourlesnoobs.com/${slug(name)}.html`;
+function openDpln(name, alt = 0) {
+  const all = slugs(name), url = `https://www.dofuspourlesnoobs.com/${all[alt] || all[0]}.html`;
+  $('dplnAlts').innerHTML = all.length > 1 ? 'Page introuvable ? Essayer : ' + all.map((s, i) => i === alt ? '' : `<button class="jump" data-dpln-alt="${i}" data-dpln-name="${esc(name)}">adresse ${i + 1}</button>`).filter(Boolean).join(' · ') : '';
   const boss = DJ[name]?.rooms.flatMap(r => r.m).find(m => m[2])?.[0];
   $('dplnTitle').textContent = name;
   $('dplnOpen').href = boss ? `${url}#:~:text=${encodeURIComponent(boss)}` : url;
@@ -611,6 +623,7 @@ document.addEventListener('click', e => {
   }
   if (e.target.closest('#shopBtn')) { openShopping(); return; }
   const dj = e.target.closest('[data-dungeon]'); if (dj) { openDungeon(dj.dataset.dungeon); return; }
+  const da = e.target.closest('[data-dpln-alt]'); if (da) { openDpln(da.dataset.dplnName, +da.dataset.dplnAlt); return; }
   const dp = e.target.closest('[data-dpln]'); if (dp) { if ($('djDlg').open) $('djDlg').close(); openDpln(dp.dataset.dpln); return; }
   const tag = e.target.closest('.gc [data-type=custom-tag]');
   if (tag) {

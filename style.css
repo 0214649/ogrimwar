@@ -218,6 +218,8 @@ dialog:has(.dlg.dj){max-width:min(860px,calc(100vw - 32px));width:100%}
 .dplnbar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:12px 14px;padding-top:calc(12px + env(safe-area-inset-top,0px));border-bottom:1px solid var(--line)}
 .dplnbar b{font:700 1.1rem var(--f-display);color:var(--accent);margin-right:auto}
 .dplnbar a{color:var(--muted);font-size:.85rem}
+.dplnbar .alts{color:var(--muted);font-size:.85rem}
+.dplnbar .alts .jump{font-size:.85rem}
 .zoom{display:flex;gap:4px;align-items:center}
 .zoom .num{min-width:3.5rem;text-align:center;color:var(--muted);font-size:.85rem}
 .dplnview{flex:1;position:relative;overflow:hidden;background:#fff}
