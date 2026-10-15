@@ -185,6 +185,74 @@ function addX4Badges(doc, root) {
   });
 }
 
+// ---------- shopping list: what the next GP0 steps ask you to bring, already ×4 ----------
+// Keys only for dungeons outside the "Tour du Monde" objective (its quests and the Tornade hand out the keys):
+// Divine Dimensions and the rest.
+const RUN_RE = /\b(Réalise[zr]|Effectue[zr]|Faites|Refaites|Termine[zr]|Vainque[zr])\b/i;
+const NOT_RE = /sans (faire|lancer)|plus tard|pour prendre la sauvegarde|il vous faudra|vous pourrez|qui vous demande|en parallèle|Atteindre|Une fois à/i;
+// dungeons whose key comes from the Tour du Monde (Maître des clefs) or the Tornade (Emma Tompouce), anywhere on the route
+let KEYED = null;
+async function keyedDungeons() {
+  if (KEYED) return KEYED;
+  try { const k = await (await fetch('keyed.json?v=1')).json(); KEYED = new Map(Object.entries(k)); return KEYED; } catch {}
+  KEYED = new Set();
+  const tag = /data-type="custom-tag"[^>]*?type="dungeon"[^>]*?name="([^"]*)"/g;
+  const clean = n => n.replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+  for (const it of items) {
+    let h;
+    if (it.g === undefined) h = gp0.steps[it.i].web_text;
+    else if (memo.has(it.g)) { try { h = (await guide(it.g)).steps[it.k]?.web_text; } catch { continue; } }
+    if (!h) continue;
+    const tdm = it.g === undefined && /Tour du Monde/.test(txt(h).split('.')[0]);
+    for (const chunk of h.split(/<\/p>|<\/li>|<br\s*\/?>/)) {
+      if (tdm || /Emma Tompouce|Tornade|Maître des clefs/i.test(chunk.replace(/<[^>]+>/g, ' ')))
+        for (const m of chunk.matchAll(tag)) KEYED.add(clean(m[1]));
+    }
+  }
+  return KEYED;
+}
+async function shoppingList(nSteps) {
+  const from = items[idx].i, to = from + nSteps;
+  const its = items.slice(idx).filter(it => it.i < to && visible(it) && !(it.g === undefined && (isIntro(it.i) || isBonus(it.i))));
+  const need = new Map(), keys = new Map(), runs = new Map(), keyed = await keyedDungeons();
+  for (const it of its) {
+    let h;
+    if (it.g === undefined) h = gp0.steps[it.i].web_text;
+    else { try { h = (await guide(it.g)).steps[it.k]?.web_text; } catch { continue; } }
+    if (!h) continue;
+    const doc = new DOMParser().parseFromString(`<div>${h}</div>`, 'text/html').body.firstChild;
+    doc.querySelectorAll('[data-type=custom-tag][type=item]').forEach(tag => {
+      const prev = tag.previousSibling, m = prev && prev.nodeType === 3 && prev.data.match(/(\d+)\s*$/);
+      if (!m || +m[1] <= 0) return;
+      const name = tag.getAttribute('name'), cur = need.get(name) || { n: 0, img: tag.querySelector('img')?.src, where: stepRef(it) };
+      cur.n += +m[1]; need.set(name, cur);
+    });
+    const covered = /Tour du Monde/.test(txt(gp0.steps[it.i].web_text).split('.')[0]) || /Emma Tompouce|Tornade|Maître des clefs/i.test(txt(h));
+    for (const chunk of h.split(/<\/p>|<\/li>|<br\s*\/?>/)) {
+      const t = chunk.replace(/<[^>]+>/g, ' ');
+      if (!RUN_RE.test(t) || NOT_RE.test(t)) continue;
+      for (const m of chunk.matchAll(/data-type="custom-tag"[^>]*?type="dungeon"[^>]*?name="([^"]*)"/g)) {
+        const name = m[1].replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+        if (!runs.has(name)) runs.set(name, { where: stepRef(it), key: it, provided: keyed instanceof Map ? keyed.get(name) : (covered || keyed.has(name)) ? 'quête' : null });
+      }
+    }
+  }
+  return { need, runs, steps: its.length, from, to: Math.min(to, gp0.steps.length) };
+}
+async function openShopping(n = ui.shopN || 10) {
+  ui.shopN = n;
+  $('shopBody').innerHTML = '<p class="loading">Je lis les prochaines étapes…</p>';
+  if (!$('shopDlg').open) $('shopDlg').showModal();
+  const r = await shoppingList(n);
+  const rows = [...r.need].sort((a, b) => a[0].localeCompare(b[0]));
+  $('shopBody').innerHTML = `<div class="shophead"><h2>Liste de courses</h2>
+      <label>Pour les <select id="shopN">${[5, 10, 20, 40].map(v => `<option${v === n ? ' selected' : ''}>${v}</option>`).join('')}</select> prochaines étapes du [GP0]</label></div>
+    <p class="note">De [GP0] étape ${r.from + 1} à ${r.to}, ${r.steps} étapes lues. Quantités déjà multipliées par 4 (une par perso).</p>
+    ${rows.length ? `<ul class="shop">${rows.map(([name, v]) => `<li>${v.img ? `<img src="${esc(v.img)}" alt="" loading="lazy" onerror="this.remove()">` : ''}<span class="sn">${esc(name)}</span><b class="num">×${v.n * 4}</b><span class="sw">${v.n} par perso · dès ${esc(v.where)}</span></li>`).join('')}</ul>` : '<p class="empty">Aucune ressource demandée sur ces étapes.</p>'}
+    <h3>Donjons à venir</h3>
+    ${r.runs.size ? `<ul class="shop">${[...r.runs].map(([name, v]) => `<li><span class="sn">${v.provided ? '✓' : '🗝'} ${esc(name)}${DJ[name] ? ` <span class="num">niv. ${esc(DJ[name].lvl)}</span>` : ''}</span><b class="num ${v.provided ? 'ok' : ''}">${v.provided ? 'clé fournie' : 'clé ×4'}</b><span class="sw">${v.provided ? `par ${esc(v.provided)}` : DJ[name]?.keyring ? 'à prévoir, ou le trousseau' : 'à prévoir'} · ${esc(v.where)}</span></li>`).join('')}</ul>` : '<p class="empty">Aucun donjon sur ces étapes.</p>'}`;
+}
+
 // ---------- DPLN: their real page, shown in a side panel (never copied) ----------
 const slug = n => n.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/œ/g, 'oe').replace(/æ/g, 'ae').toLowerCase()
   .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -541,6 +609,7 @@ document.addEventListener('click', e => {
     document.querySelectorAll(`[data-later="${CSS.escape(k)}"]`).forEach(b => { const on = !!S.l[k]; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); b.closest('li')?.classList.toggle('later', on && !S.a[k]); });
     toast(S.l[k] ? 'Reporté : à refaire au niveau 200 ou avec un passeur' : 'Plus reporté'); return;
   }
+  if (e.target.closest('#shopBtn')) { openShopping(); return; }
   const dj = e.target.closest('[data-dungeon]'); if (dj) { openDungeon(dj.dataset.dungeon); return; }
   const dp = e.target.closest('[data-dpln]'); if (dp) { if ($('djDlg').open) $('djDlg').close(); openDpln(dp.dataset.dpln); return; }
   const tag = e.target.closest('.gc [data-type=custom-tag]');
@@ -567,6 +636,7 @@ document.addEventListener('change', e => {
   }
   if (b.id === 'hideGot' || b.id === 'outOnly' || b.id === 'laterOnly') { ui[b.id] = b.checked; renderAchView(); return; }
   if (b.id === 'duoF') { ui.duoF = b.value; renderAchView(); return; }
+  if (b.id === 'shopN') { openShopping(+b.value); return; }
   if (b.dataset.task) { if (b.checked) S.t[b.dataset.task] = 1; else delete S.t[b.dataset.task]; save(); b.closest('li')?.classList.toggle('checked', b.checked); }
   if (b.name === 'align') { S.align = b.value; save(); if (!visible(items[idx])) step(1); else render(); return; }
 });

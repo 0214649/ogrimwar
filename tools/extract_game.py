@@ -17,4 +17,9 @@ achs = [{'id': a['id'], 'cat': a['categoryId'], 'pts': a.get('points'), 'lvl': a
          'fr': fr.get(a['nameId'], ''), 'en': en.get(a['nameId'], ''), 'dfr': fr.get(a['descriptionId'], ''), 'den': en.get(a['descriptionId'], '')}
         for a in rows('achievements')]
 json.dump({'cats': cats, 'achs': achs}, open(f'{G}/game_achievements.json', 'w'), ensure_ascii=False)
+mons = {m['id']: fr.get(m.get('nameId'), '') for m in rows('monsters')}
+dungeons = [{'id': d['id'], 'fr': fr.get(d['nameId'], ''), 'lvl': d.get('optimalPlayerLevel'), 'keyring': bool(d.get('availableOnKeyring')),
+             'bosses': [mons.get(b, '') for b in d.get('bosses') or []]} for d in rows('dungeons')]
+json.dump(dungeons, open(f'{G}/game_dungeons.json', 'w'), ensure_ascii=False)
+print(len(dungeons), 'dungeons')
 print(len(achs), 'achievements,', len(cats), 'categories')
