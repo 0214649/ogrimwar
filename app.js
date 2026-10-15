@@ -266,7 +266,7 @@ async function render() {
   const total = gp0.steps.length;
   $('fill').style.width = `${(100 * it.i / (total - 1)).toFixed(1)}%`;
   $('meter').textContent = `${it.i + 1}/${total}`;
-  $('pos').textContent = it.g === undefined ? `Guide principal · étape ${it.i + 1}` : `Étape ${it.i + 1} › ${(R.names[it.g] || '').match(/^\[([^\]]+)\]/)?.[1] || 'sous-guide'} page ${it.k + 1}`;
+  $('pos').textContent = stepRef(it);
   $('prev').disabled = !items.slice(0, idx).some(visible);
   $('next').disabled = !items.slice(idx + 1).some(visible);
   renderSide();
@@ -277,10 +277,10 @@ async function render() {
   $('stage').classList.toggle('is-sub', it.g !== undefined);
   if (it.g === undefined) {
     ctx.hidden = true;
-    $('crumb').textContent = `Guide principal · étape ${it.i + 1}`;
+    $('crumb').textContent = stepRef(it);
     const segs = (R.steps[it.i] || []);
     const pages = items.filter(x => x.i === it.i && x.g !== undefined).length;
-    $('stepHead').innerHTML = `<div class="bignum"><small>GP0</small>${it.i + 1}</div><span class="eyebrow">Guide principal · étape ${it.i + 1} sur ${gp0.steps.length}</span><h2>${esc(stepTitle(it.i))}</h2>${summary(it)}${pages ? `<p class="heronote">Cette étape t'envoie dans ${segs.length > 1 ? segs.length + ' sous-guides' : 'un sous-guide'} : ${pages} page${pages > 1 ? 's' : ''} à suivre, en appuyant sur Suivant.</p>` : ''}`;
+    $('stepHead').innerHTML = `<div class="bignum"><small>[GP0]</small>${it.i + 1}</div><span class="eyebrow">[GP0] ${esc(gp0.name.replace(/^\[[^\]]+\]\s*/, ''))} · étape ${it.i + 1} sur ${gp0.steps.length}</span><h2>${esc(stepTitle(it.i))}</h2>${summary(it)}${pages ? `<p class="heronote">Cette étape t'envoie dans ${[...new Set(segs.map(([g]) => codeOf(g)))].join(', ')} : ${pages} étape${pages > 1 ? 's' : ''} à suivre avec Suivant.</p>` : ''}`;
     card.innerHTML = `<div class="gc">${enrich(gp0.steps[it.i].web_text, `${GP0}:${it.i}`)}</div>`;
     links.hidden = !segs.length;
     links.innerHTML = segs.length ? `<span class="lbl">Dans cette étape</span>` + segs.map(([g, a, b]) => {
@@ -289,9 +289,9 @@ async function render() {
     }).join('') : '';
   } else {
     const name = R.names[it.g] || `Guide ${it.g}`;
-    $('crumb').textContent = `GP0 ${it.i + 1} › ${name} › étape ${it.k + 1}`;
+    $('crumb').textContent = stepRef(it);
     ctx.hidden = false;
-    ctx.innerHTML = `<details><summary><span class="lbl">Consigne du guide principal</span><span>Étape ${it.i + 1} · ${esc(stepTitle(it.i))}</span></summary><div class="body gc">${enrich(gp0.steps[it.i].web_text, `${GP0}:${it.i}`)}</div></details>`;
+    ctx.innerHTML = `<details><summary><span class="lbl">Consigne [GP0] étape ${it.i + 1}</span><span>${esc(stepTitle(it.i))}</span></summary><div class="body gc">${enrich(gp0.steps[it.i].web_text, `${GP0}:${it.i}`)}</div></details>`;
     card.innerHTML = `<p class="loading">Chargement de ${esc(name)}…</p>`;
     $('stepHead').innerHTML = subHero(it, name, null);
     let g;
@@ -309,15 +309,20 @@ async function render() {
   const nx = items.slice(idx + 1).find(x => x.g !== undefined && x.g !== it.g);
   if (nx) setTimeout(() => guide(nx.g).catch(() => {}), 800);
 }
+// One naming scheme everywhere: "[GP0] étape 5 › [GP1] étape 44"
+const codeOf = g => g === undefined ? '[GP0]' : ((R.names[g] || '').match(/^\[[^\]]+\]/)?.[0] || '[GP?]');
+const labelOf = g => (R.names[g] || '').replace(/^\[[^\]]+\]\s*/, '');
+const stepRef = it => `[GP0] étape ${it.i + 1}` + (it.g === undefined ? '' : ` › ${codeOf(it.g)} étape ${it.k + 1}`);
+
 // Sub-guide page: a parent bar back to the GP0 step, the guide's code + page number, and the range progress.
 function subHero(it, name, g, st) {
-  const m = name.match(/^\[([^\]]+)\]\s*(.*)$/), code = m ? m[1] : 'Guide', label = m ? m[2] : name;
+  const code = codeOf(it.g), label = labelOf(it.g) || name;
   const { n, of } = segInfo(it);
-  return `<button class="parentbar" data-goto="${it.i}"><span class="up">↑</span><span>Étape <b>${it.i + 1}</b> du guide principal · ${esc(stepTitle(it.i))}</span></button>
+  return `<button class="parentbar" data-goto="${it.i}"><span class="up">↑</span><span><b>[GP0] étape ${it.i + 1}</b> · ${esc(stepTitle(it.i))}</span></button>
     <div class="bignum"><small>${esc(code)}</small>${it.k + 1}</div>
-    <span class="eyebrow">Sous-guide ${esc(code)} · page ${it.k + 1}${g ? ' sur ' + g.steps.length : ''}</span>
-    <h2>${esc(label)}${st?.name ? ` · ${esc(st.name)}` : ''}</h2>
-    <div class="rangebar" title="Pages de ce sous-guide à faire pour l'étape ${it.i + 1}"><div class="rfill" style="width:${(100 * n / of).toFixed(1)}%"></div><span>${n} / ${of} pages pour l'étape ${it.i + 1}</span></div>
+    <span class="eyebrow">${esc(code)} ${esc(label)} · étape ${it.k + 1}${g ? ' sur ' + g.steps.length : ''}</span>
+    <h2>${esc(st?.name || stepTitle(it.i))}</h2>
+    <div class="rangebar" title="Étapes de ${esc(code)} à faire pour [GP0] étape ${it.i + 1}"><div class="rfill" style="width:${(100 * n / of).toFixed(1)}%"></div><span>${n} / ${of} étapes de ${esc(code)} pour [GP0] étape ${it.i + 1}</span></div>
     ${st ? summary(it, st) : ''}`;
 }
 function summary(it, st) {
@@ -375,7 +380,7 @@ function chips(a) { return (a.duo ? '<span class="chip duo">Duo</span>' : '') + 
 function where(p) {
   if (p < 0) return '<span class="todo">hors parcours</span>';
   const it = items[p];
-  return `<button class="jump" data-goto="${it.key}">étape ${it.i + 1}${it.g !== undefined ? ` · ${esc(R.names[it.g] || '')} ${it.k + 1}` : ''}</button>`;
+  return `<button class="jump" data-goto="${it.key}">${esc(stepRef(it))}</button>`;
 }
 function achLi(ai, here) {
   const a = ACH[ai];
@@ -631,7 +636,7 @@ function burst(el) {
   try {
     R = await (await fetch('route.json')).json();
     gp0 = await guide(GP0);
-  } catch (e) { $('card').innerHTML = `<p class="empty">Le guide principal n'a pas pu être chargé (${esc(e.message)}). Recharge la page dans un instant.</p>`; return; }
+  } catch (e) { $('card').innerHTML = `<p class="empty">Le [GP0] n'a pas pu être chargé (${esc(e.message)}). Recharge la page dans un instant.</p>`; return; }
   buildItems();
   try { indexAch(await (await fetch('ach.json?v=10')).json()); } catch (e) { console.warn('ach.json', e); }
   try { DJ = await (await fetch('dungeons.json?v=2')).json(); } catch (e) { console.warn('dungeons.json', e); }
