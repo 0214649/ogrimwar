@@ -93,18 +93,23 @@ let lastDir = 1;
 // ---------- sanitising + enriching Ganymède HTML ----------
 const COORD = /\[\s*(-?\d{1,3})\s*,\s*(-?\d{1,3})\s*\]/g;
 // images whose host refuses them (Gyazo answers 503): show a quiet note with the link instead of a broken icon
-// Fallback: a search restricted to Dofus pour les Noobs, whose quest pages carry their own screenshots.
+// Fallback for images their host refuses (Gyazo answers 503): jump straight to the quest's page on
+// Dofus pour les Noobs (DuckDuckGo "!ducky" opens the first result directly), or a quiet note when the
+// image belongs to no quest (decorative banners).
 function brokenImg(img) {
   const gc = img.closest('.gc');
   const quest = gc?.querySelector('[data-type=quest-block]')?.getAttribute('questname')
     || gc?.querySelector('[data-type=custom-tag][type=quest]')?.getAttribute('name');
-  const it = items[idx], topic = quest || (it && it.g !== undefined ? (R.names[it.g] || '').replace(/^\[[^\]]*\]\s*/, '') : '');
-  const a = document.createElement('a');
-  a.target = '_blank'; a.rel = 'noopener'; a.className = 'imgoff';
-  a.href = 'https://www.google.com/search?q=' + encodeURIComponent(`site:dofuspourlesnoobs.com ${topic}`);
-  a.innerHTML = `<b>Image du guide indisponible</b> (bloquée chez son hébergeur).<br>Voir les captures${topic ? ` de « ${esc(topic)} »` : ''} sur Dofus pour les Noobs →`;
-  img.replaceWith(a);
+  const el = document.createElement(quest ? 'a' : 'span');
+  el.className = quest ? 'imgoff' : 'imgoff quiet';
+  if (quest) {
+    el.target = '_blank'; el.rel = 'noopener';
+    el.href = 'https://duckduckgo.com/?q=' + encodeURIComponent(`!ducky site:dofuspourlesnoobs.com ${quest}`);
+    el.innerHTML = `<b>Image du guide indisponible</b> (bloquée chez son hébergeur).<br>Ouvrir la quête « ${esc(quest)} » sur Dofus pour les Noobs, avec ses captures →`;
+  } else el.textContent = 'Image décorative indisponible chez son hébergeur.';
+  img.replaceWith(el);
 }
+
 function enrich(html, scope) {
   const doc = new DOMParser().parseFromString(`<div>${html || ''}</div>`, 'text/html');
   const root = doc.body.firstChild;
