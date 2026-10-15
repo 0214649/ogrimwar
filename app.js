@@ -93,10 +93,16 @@ let lastDir = 1;
 // ---------- sanitising + enriching Ganymède HTML ----------
 const COORD = /\[\s*(-?\d{1,3})\s*,\s*(-?\d{1,3})\s*\]/g;
 // images whose host refuses them (Gyazo answers 503): show a quiet note with the link instead of a broken icon
+// Fallback: a search restricted to Dofus pour les Noobs, whose quest pages carry their own screenshots.
 function brokenImg(img) {
+  const gc = img.closest('.gc');
+  const quest = gc?.querySelector('[data-type=quest-block]')?.getAttribute('questname')
+    || gc?.querySelector('[data-type=custom-tag][type=quest]')?.getAttribute('name');
+  const it = items[idx], topic = quest || (it && it.g !== undefined ? (R.names[it.g] || '').replace(/^\[[^\]]*\]\s*/, '') : '');
   const a = document.createElement('a');
-  a.href = img.src; a.target = '_blank'; a.rel = 'noopener'; a.className = 'imgoff';
-  a.textContent = 'Image du guide indisponible chez son hébergeur (ouvrir le lien)';
+  a.target = '_blank'; a.rel = 'noopener'; a.className = 'imgoff';
+  a.href = 'https://www.google.com/search?q=' + encodeURIComponent(`site:dofuspourlesnoobs.com ${topic}`);
+  a.innerHTML = `<b>Image du guide indisponible</b> (bloquée chez son hébergeur).<br>Voir les captures${topic ? ` de « ${esc(topic)} »` : ''} sur Dofus pour les Noobs →`;
   img.replaceWith(a);
 }
 function enrich(html, scope) {
