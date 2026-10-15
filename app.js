@@ -1,5 +1,5 @@
 'use strict';
-// Carnet de la Team — walks Ganymède's GP0 step by step, expanding every sub-guide range it points to.
+// Éclosion — walks Ganymède's GP0 step by step, expanding every sub-guide range it points to.
 // Guides are fetched live from ganymede-app.com (CORS open) and kept in the browser's Cache API.
 const API = 'https://ganymede-app.com/api';
 const GP0 = 2747;
@@ -7,12 +7,23 @@ const $ = id => document.getElementById(id);
 const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 // ---------- state (browser storage + export code) ----------
-const KEY = 'carnet-team-v1';
-let S = { pos: '0', t: {}, a: {}, l: {}, align: 'bonta' };   // l: achievements put off until level 200 / a carry
+// Several profiles per browser (one per team / friend); each keeps its own progress. A fresh visitor gets one blank profile.
+const LEGACY = 'carnet-team-v1', PROFILES = 'eclosion-profiles-v1', PKEY = id => 'eclosion-p-' + id;
+const blank = () => ({ pos: '0', t: {}, a: {}, l: {}, align: 'bonta' });   // l: achievements put off until level 200 / a carry
 const ALIGN = { bonta: 516, brak: 773 };   // GP9 Bontarien / Brâkmarien
-try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch {}
-const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch {} };
-const encode = () => btoa(unescape(encodeURIComponent(JSON.stringify(S))));
+const lsGet = k => { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch { return null; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+let P = lsGet(PROFILES);
+if (!P || !P.list?.length) {
+  const id = Date.now().toString(36);
+  P = { cur: id, list: [{ id, name: 'Ma team' }] };
+  lsSet(PKEY(id), { ...blank(), ...(lsGet(LEGACY) || {}) });          // earlier progress becomes the first profile
+  lsSet(PROFILES, P);
+}
+let S = { ...blank(), ...(lsGet(PKEY(P.cur)) || {}) };
+const save = () => lsSet(PKEY(P.cur), S);
+const profName = () => P.list.find(p => p.id === P.cur)?.name || 'Profil';
+const encode = () => btoa(unescape(encodeURIComponent(JSON.stringify({ ...S, name: profName() }))));
 const decode = c => JSON.parse(decodeURIComponent(escape(atob(c.trim()))));
 
 // ---------- fetching with cache + polite retry (Ganymède rate-limits bursts) ----------
@@ -515,17 +526,59 @@ document.addEventListener('change', e => {
 });
 $('menuBtn').onclick = e => { e.stopPropagation(); const o = $('side').classList.toggle('open'); $('menuBtn').setAttribute('aria-expanded', o); };
 document.addEventListener('pointerdown', e => { if ($('side').classList.contains('open') && !e.target.closest('#side,#menuBtn')) { $('side').classList.remove('open'); $('menuBtn').setAttribute('aria-expanded', false); } });
-$('saveBtn').onclick = () => { $('code').value = encode(); $('importErr').hidden = true; $('saveDlg').showModal(); };
+// ---------- profiles ----------
+function renderProfiles() {
+  $('profName').textContent = profName();
+  $('profList').innerHTML = P.list.map(p => `<li class="${p.id === P.cur ? 'cur' : ''}">
+    <span class="pn">${esc(p.name)}</span>${p.id === P.cur ? '<span class="chip duo">actif</span>' : `<button type="button" class="btn small" data-prof="${p.id}">Utiliser</button>`}
+    <button type="button" class="btn small" data-rename="${p.id}">Renommer</button>
+    ${P.list.length > 1 ? `<button type="button" class="btn small danger" data-del="${p.id}">Supprimer</button>` : ''}</li>`).join('');
+  $('code').value = encode();
+}
+function switchProfile(id) {
+  P.cur = id; lsSet(PROFILES, P);
+  S = { ...blank(), ...(lsGet(PKEY(id)) || {}) };
+  idx = Math.max(0, items.findIndex(x => x.key === S.pos));
+  document.querySelector(`input[name=align][value=${S.align}]`).checked = true;
+  renderProfiles(); if (ui.view === 'route') render(); else renderAchView();
+  toast(`Profil « ${profName()} »`);
+}
+function addProfile(name, state) {
+  const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+  P.list.push({ id, name: name || `Profil ${P.list.length + 1}` }); lsSet(PKEY(id), state || blank());
+  switchProfile(id);
+}
+let pendingDel = null;
+$('profBtn').onclick = () => { renderProfiles(); $('importErr').hidden = true; pendingDel = null; $('saveDlg').showModal(); };
+$('addProf').onclick = () => { addProfile($('newProf').value.trim()); $('newProf').value = ''; };
+$('profList').onclick = e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.prof) switchProfile(b.dataset.prof);
+  if (b.dataset.rename) {
+    const li = b.closest('li'), p = P.list.find(x => x.id === b.dataset.rename);
+    li.querySelector('.pn').innerHTML = `<input type="text" maxlength="40" value="${esc(p.name)}" aria-label="Nouveau nom">`;
+    const inp = li.querySelector('input'); inp.focus(); inp.select();
+    const done = () => { p.name = inp.value.trim() || p.name; lsSet(PROFILES, P); renderProfiles(); };
+    inp.addEventListener('keydown', ev => { if (ev.key === 'Enter') { ev.preventDefault(); done(); } });
+    inp.addEventListener('blur', done);
+  }
+  if (b.dataset.del) {
+    if (pendingDel !== b.dataset.del) { pendingDel = b.dataset.del; b.textContent = 'Confirmer ?'; return; }   // no confirm() in some viewers: click twice
+    const id = b.dataset.del; P.list = P.list.filter(x => x.id !== id); try { localStorage.removeItem(PKEY(id)); } catch {}
+    pendingDel = null;
+    if (P.cur === id) switchProfile(P.list[0].id); else { lsSet(PROFILES, P); renderProfiles(); }
+  }
+};
 $('copyCode').onclick = () => { $('code').select(); copy(encode()).then(() => {}); };
 $('doImport').onclick = () => {
   try {
     const s = decode($('importCode').value);
     if (typeof s !== 'object' || !s.pos) throw 0;
-    S = { pos: '0', t: {}, a: {}, l: {}, align: 'bonta', ...s }; save();
-    idx = Math.max(0, items.findIndex(x => x.key === S.pos));
-    $('saveDlg').close(); render(); toast('Progression chargée');
+    addProfile(s.name || 'Profil importé', { ...blank(), ...s }); $('importCode').value = '';
+    toast('Profil importé');
   } catch { $('importErr').textContent = 'Ce code n\'est pas reconnu. Copie-le en entier depuis l\'autre PC.'; $('importErr').hidden = false; }
 };
+renderProfiles();
 
 // ---------- life: a little burst on success, slow amber motes in the background ----------
 function burst(el) {

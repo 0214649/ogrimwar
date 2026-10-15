@@ -122,6 +122,19 @@ ul.al{list-style:none;margin:0;padding:0;display:grid;gap:4px}
 .burst{position:fixed;pointer-events:none;z-index:50;width:8px;height:8px;border-radius:50%;animation:burst .7s ease-out forwards}
 @keyframes burst{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
 
+/* profiles */
+.profbtn{display:flex;align-items:center;gap:8px;max-width:220px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:800;color:var(--ink);transition:border-color .15s}
+.profbtn:hover{border-color:var(--accent)}
+.profbtn #profName{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.profs{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.profs li{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg-2)}
+.profs li.cur{border-color:var(--accent)}
+.profs .pn{flex:1;min-width:8rem;font-weight:800}
+.profs .pn input,.dlg input[type=text]{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font:inherit}
+.dlg .row input[type=text]{flex:1;min-width:10rem;width:auto}
+.dlg h3{font:700 1.05rem var(--f-display);margin:8px 0 0;color:var(--accent)}
+.btn.danger:hover{border-color:#ff8a8a;color:#ffb0b0}
+
 /* x4 reminders inside the guide text */
 .x4{display:inline-flex;align-items:center;gap:4px;font:800 .72rem var(--f-body);letter-spacing:.04em;padding:1px 8px;border-radius:999px;
   border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);color:var(--accent);background:#ffb6d312;vertical-align:2px;white-space:nowrap}
@@ -257,6 +270,8 @@ dialog::backdrop{background:#000a;backdrop-filter:blur(3px)}
 @media (max-width:700px){
   body{font-size:18px}
   .meter,.keys{display:none}
+  .profbtn{max-width:44px;padding:6px 10px}
+  .profbtn #profName{display:none}
   .main{padding:20px 16px 40px}
   .hero{grid-template-columns:1fr}
   .bignum{grid-row:auto;text-align:left;font-size:3.6rem}

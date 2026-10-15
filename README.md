@@ -1,6 +1,6 @@
-# Carnet de la Team
+# Éclosion
 
-Guide de progression Dofus 3.7 pour une team de 4, étape par étape dans l'ordre du **GP0 de Ganymède**, avec pour chaque étape les succès qu'elle termine ou fait avancer. Une seule progression pour toute la team.
+Guide de progression Dofus 3.7 pour faire tous les succès en team, étape par étape dans l'ordre du **GP0 de Ganymède** : pour chaque étape, les succès qu'elle termine ou fait avancer, les rappels « ×4 », les fiches de donjon et la page Dofus pour les Noobs en panneau. Profils multiples (un par team), progression gardée dans le navigateur, transférable par code.
 
 Site : https://0214649.github.io/carnet-team/
 
