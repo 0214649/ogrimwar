@@ -185,7 +185,18 @@ function openDpln(name) {
   $('dplnSearch').href = 'https://duckduckgo.com/?q=' + encodeURIComponent(`!ducky site:dofuspourlesnoobs.com ${name}`);
   $('dplnFrame').src = url;
   $('dpln').classList.add('open');
+  fitDpln();
 }
+// DPLN's layout needs ~1180px; on a narrower panel, render it at that width and scale it down instead of squeezing it
+const DPLN_W = 1180;
+function fitDpln() {
+  const v = $('dplnView'), f = $('dplnFrame');
+  const k = Math.min(1, v.clientWidth / DPLN_W);
+  f.style.width = (v.clientWidth / k) + 'px';
+  f.style.height = (v.clientHeight / k) + 'px';
+  f.style.transform = k < 1 ? `scale(${k})` : '';
+}
+addEventListener('resize', () => { if ($('dpln').classList.contains('open')) fitDpln(); });
 function closeDpln() { $('dpln').classList.remove('open'); }
 
 // ---------- dungeon sheet (DofusWiki facts) ----------
