@@ -368,7 +368,7 @@ $('doImport').onclick = () => {
 function burst(el) {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const r = el.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-  const colors = ['#86d17a', '#f0b44c', '#ffe2a8', '#7cc4ff'];
+  const colors = ['#9fe6b8', '#ffb6d3', '#fff0f6', '#c3b8ff'];
   for (let n = 0; n < 14; n++) {
     const d = document.createElement('i'); d.className = 'burst';
     const a = (n / 14) * Math.PI * 2, dist = 30 + Math.random() * 40;
@@ -390,7 +390,7 @@ function burst(el) {
         if (d.y < -10) { d.y = h + 10; d.x = Math.random() * w; }
         const a = .25 + .25 * Math.sin(t / 900 + d.p);
         ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 6.283);
-        ctx.fillStyle = `rgba(240,180,76,${a})`; ctx.shadowColor = '#f0b44c'; ctx.shadowBlur = 8; ctx.fill();
+        ctx.fillStyle = `rgba(255,182,211,${a})`; ctx.shadowColor = '#ffb6d3'; ctx.shadowBlur = 8; ctx.fill();
       }
     }
     requestAnimationFrame(frame);
