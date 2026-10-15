@@ -162,6 +162,17 @@ dialog:has(.shopdlg){max-width:min(760px,calc(100vw - 32px));width:100%}
 .shop li .sw{grid-column:2 / 4;color:var(--muted);font-size:.82rem}
 .note{color:var(--muted);font-size:.9rem;margin:0}
 
+/* notes on top of the guide */
+.sheet .note{border-radius:12px;padding:10px 14px;margin:0 0 14px;background:#ffb6d30f;border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line))}
+.sheet .note.fix{background:#b8c6ff12;border-color:color-mix(in srgb,var(--sug) 45%,var(--line))}
+.sheet .note.fix .lbl{color:var(--sug)}
+.sheet .note .lbl{color:var(--accent)}
+.sheet .note p{margin:4px 0 0;white-space:pre-wrap}
+.sheet .note textarea{width:100%;margin:6px 0;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit}
+.sheet .note .row{display:flex;gap:8px}
+.sheet .noteadd{margin:-6px 0 10px;text-align:right;font-size:.85rem}
+.sheet .noteadd .jump{color:var(--muted)}
+
 /* profiles */
 .profbtn{display:flex;align-items:center;gap:8px;max-width:220px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:800;color:var(--ink);transition:border-color .15s}
 .profbtn:hover{border-color:var(--accent)}

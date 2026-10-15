@@ -185,6 +185,25 @@ function addX4Badges(doc, root) {
   });
 }
 
+// ---------- notes on top of the guide: shared corrections (notes.json) + the viewer's own notes (per profile) ----------
+let FIXES = {};
+function noteKey(it) { return it.g === undefined ? `GP0:${it.i}` : `${it.g}:${it.k}`; }    // stable across route rebuilds
+function notesHtml(it) {
+  const k = noteKey(it), fix = FIXES[k], mine = (S.n || {})[k];
+  let h = '';
+  if (fix) h += `<div class="note fix"><span class="lbl">Correction</span><p>${esc(fix)}</p></div>`;
+  h += mine ? `<div class="note mine"><span class="lbl">Ma note</span><p>${esc(mine)}</p><button class="jump" data-note="${k}">modifier</button></div>`
+            : `<div class="noteadd"><button class="jump" data-note="${k}">✎ Ajouter une note à cette étape</button></div>`;
+  return h;
+}
+function editNote(k) {
+  const box = document.querySelector('#card .note.mine, #card .noteadd');
+  if (!box) return;
+  box.outerHTML = `<div class="note mine editing"><span class="lbl">Ma note</span><textarea id="noteText" rows="3" placeholder="Ce que le guide oublie, une astuce, une erreur…">${esc((S.n || {})[k] || '')}</textarea>
+    <div class="row"><button class="btn small primary" data-notesave="${k}">Enregistrer</button><button class="btn small" data-notecancel>Annuler</button></div></div>`;
+  $('noteText').focus();
+}
+
 // ---------- shopping list: what the next GP0 steps ask you to bring, already ×4 ----------
 // Keys only for dungeons outside the "Tour du Monde" objective (its quests and the Tornade hand out the keys):
 // Divine Dimensions and the rest.
@@ -363,7 +382,7 @@ async function render() {
     const segs = (R.steps[it.i] || []);
     const pages = items.filter(x => x.i === it.i && x.g !== undefined).length;
     $('stepHead').innerHTML = `<div class="bignum"><small>[GP0]</small>${it.i + 1}</div><span class="eyebrow">[GP0] ${esc(gp0.name.replace(/^\[[^\]]+\]\s*/, ''))} · étape ${it.i + 1} sur ${gp0.steps.length}</span><h2>${esc(stepTitle(it.i))}</h2>${summary(it)}${pages ? `<p class="heronote">Cette étape t'envoie dans ${[...new Set(segs.map(([g]) => codeOf(g)))].join(', ')} : ${pages} étape${pages > 1 ? 's' : ''} à suivre avec Suivant.</p>` : ''}`;
-    card.innerHTML = `<div class="gc">${enrich(gp0.steps[it.i].web_text, `${GP0}:${it.i}`)}</div>`;
+    card.innerHTML = notesHtml(it) + `<div class="gc">${enrich(gp0.steps[it.i].web_text, `${GP0}:${it.i}`)}</div>`;
     links.hidden = !segs.length;
     links.innerHTML = segs.length ? `<span class="lbl">Dans cette étape</span>` + segs.map(([g, a, b]) => {
       const first = items.find(x => x.i === it.i && x.g === g);
@@ -383,7 +402,7 @@ async function render() {
     const { n, of, seg } = segInfo(it);
     if (!st) { it.gone = true; step(lastDir); return; }     // guide got shorter since route.json was built
     $('stepHead').innerHTML = subHero(it, name, g, st);
-    card.innerHTML = `<div class="gc">${enrich(st.web_text, `${it.g}:${it.k}`)}</div>`;
+    card.innerHTML = notesHtml(it) + `<div class="gc">${enrich(st.web_text, `${it.g}:${it.k}`)}</div>`;
     ui.html = st.web_text; renderAchPanel(it, ui.html);
     links.hidden = true;   // the range bar in the hero already says where we are
   }
@@ -593,7 +612,7 @@ function undoFinish() {
   go(back); toast('Annulé');
 }
 document.addEventListener('keydown', e => {
-  if (e.target.closest('textarea,input[type=text],input[type=search],dialog') || ui.view !== 'route') return;
+  if (e.target.closest('textarea,input[type=text],input[type=search],dialog,.note.editing') || ui.view !== 'route') return;
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); undoFinish(); return; }
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   const k = e.key.toLowerCase();
@@ -622,6 +641,10 @@ document.addEventListener('click', e => {
     toast(S.l[k] ? 'Reporté : à refaire au niveau 200 ou avec un passeur' : 'Plus reporté'); return;
   }
   if (e.target.closest('#shopBtn')) { openShopping(); return; }
+  const nt = e.target.closest('[data-note]'); if (nt) { editNote(nt.dataset.note); return; }
+  const ns = e.target.closest('[data-notesave]');
+  if (ns) { S.n = S.n || {}; const v = $('noteText').value.trim(); if (v) S.n[ns.dataset.notesave] = v; else delete S.n[ns.dataset.notesave]; save(); render(); toast(v ? 'Note enregistrée' : 'Note supprimée'); return; }
+  if (e.target.closest('[data-notecancel]')) { render(); return; }
   const dj = e.target.closest('[data-dungeon]'); if (dj) { openDungeon(dj.dataset.dungeon); return; }
   const da = e.target.closest('[data-dpln-alt]'); if (da) { openDpln(da.dataset.dplnName, +da.dataset.dplnAlt); return; }
   const dp = e.target.closest('[data-dpln]'); if (dp) { if ($('djDlg').open) $('djDlg').close(); openDpln(dp.dataset.dpln); return; }
@@ -752,6 +775,7 @@ function burst(el) {
   try { indexAch(await (await fetch('ach.json?v=18')).json()); } catch (e) { console.warn('ach.json', e); }
   try { DJ = await (await fetch('dungeons.json?v=2')).json(); } catch (e) { console.warn('dungeons.json', e); }
   try { CATORD = await (await fetch('catorder.json?v=1')).json(); } catch (e) { console.warn('catorder.json', e); }
+  try { FIXES = await (await fetch('notes.json?v=' + Date.now())).json(); } catch (e) { console.warn('notes.json', e); }
   idx = Math.max(0, items.findIndex(x => x.key === S.pos));
   document.querySelector(`input[name=align][value=${S.align}]`).checked = true;
   if (!visible(items[idx])) { const j = items.findIndex((x, n) => n > idx && visible(x)); if (j >= 0) idx = j; }
