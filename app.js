@@ -60,11 +60,20 @@ function guide(id) {
 let R, gp0, items = [], idx = 0;
 const txt = h => { const d = document.createElement('div'); d.innerHTML = h || ''; return d.textContent.replace(/\s+/g, ' ').trim(); };
 const isBonus = i => /^[^A-Za-zÀ-ÿ]*Étape bonus/.test(txt(gp0.steps[i]?.web_text));
+// pages of the GP0 that are not game steps (credits, welcome, how to read a step, closing words)
+function introTitle(t) {
+  if (/Guide rédigé par/.test(t)) return 'Crédits du guide';
+  if (/Bienvenue/.test(t)) return 'Bienvenue : à quoi sert ce guide';
+  if (/IMPORTANT/.test(t)) return 'Important : à lire en entier';
+  if (/Lisez toujours/.test(t)) return 'Comment lire une étape';
+  if (/terminé/.test(t)) return 'Fin du guide';
+  return t.slice(0, 70);
+}
 function stepTitle(i) {
   const t = txt(gp0.steps[i]?.web_text);
-  if (/Étape bonus/.test(t)) return t.replace(/.*?Étape bonus\s*👈?\s*/, '').slice(0, 70) || 'Étape bonus';
-  const m = t.match(/Objectifs?\s*:\s*(.*?)\./);
-  return m ? m[1] : t.slice(0, 70);
+  if (isBonus(i)) return t.replace(/.*?Étape bonus\s*👈?\s*/, '').slice(0, 70) || 'Étape bonus';
+  const m = t.match(/^Objectifs?\s*:\s*(.*?)\./);
+  return m ? m[1] : introTitle(t);
 }
 function buildItems() {
   const seen = new Set(); items = [];
@@ -77,7 +86,7 @@ function buildItems() {
   });
 }
 const isIntro = i => !/^Objectifs?\s*:/.test(txt(gp0.steps[i]?.web_text)) && !isBonus(i);
-const visible = it => !(it.g === undefined && isIntro(it.i)) && !(S.skipBonus && it.g === undefined && isBonus(it.i)) && it.g !== ALIGN[S.align === 'bonta' ? 'brak' : 'bonta'] && !it.gone;
+const visible = it => !(S.skipBonus && it.g === undefined && isBonus(it.i)) && it.g !== ALIGN[S.align === 'bonta' ? 'brak' : 'bonta'] && !it.gone;
 let lastDir = 1;
 
 // ---------- sanitising + enriching Ganymède HTML ----------
@@ -123,7 +132,6 @@ function renderSide() {
   $('stepList').innerHTML = gp0.steps.map((_, i) => {
     const b = isBonus(i);
     const n = (doneByStep.get(i) || []).length + (sugByStep.get(i) || []).length;
-    if (isIntro(i)) return '';
     return `<li data-step="${i}" class=""${i < cur ? 'past' : ''}${i === cur ? ' cur' : ''}${b ? ' bonus' : ''}"${b && S.skipBonus ? ' hidden' : ''}><span class="num">${i + 1}</span><span>${esc(stepTitle(i))}</span>${n ? `<span class="ac">${n} succès</span>` : ''}</li>`;
   }).join('');
   $('stepList').querySelector('.cur')?.scrollIntoView({ block: 'nearest' });
